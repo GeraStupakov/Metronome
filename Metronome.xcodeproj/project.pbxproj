@@ -15,10 +15,13 @@
 		C201F3CA25F984AF005DAF73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C201F3C825F984AF005DAF73 /* LaunchScreen.storyboard */; };
 		C201F3D525F984B0005DAF73 /* MetronomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C201F3D425F984B0005DAF73 /* MetronomeTests.swift */; };
 		C201F3E025F984B0005DAF73 /* MetronomeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C201F3DF25F984B0005DAF73 /* MetronomeUITests.swift */; };
-		C20390D025FC25B100B79F09 /* Metranome.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20390CF25FC25B100B79F09 /* Metranome.swift */; };
+		C20390D025FC25B100B79F09 /* Metronome.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20390CF25FC25B100B79F09 /* Metronome.swift */; };
 		C23DA8FB2600099D00DE0E12 /* High.wav in Resources */ = {isa = PBXBuildFile; fileRef = C23DA8F92600099D00DE0E12 /* High.wav */; };
 		C23DA8FC2600099D00DE0E12 /* Low.wav in Resources */ = {isa = PBXBuildFile; fileRef = C23DA8FA2600099D00DE0E12 /* Low.wav */; };
+		C25377CF261751F900619BF6 /* TempoSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25377CE261751F900619BF6 /* TempoSlider.swift */; };
 		C288AE7E260DFE2E00DF1030 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288AE7D260DFE2E00DF1030 /* MainViewController.swift */; };
+		C2B43B86261D169D0087EF01 /* TempoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B43B84261D169D0087EF01 /* TempoCell.swift */; };
+		C2B43B87261D169D0087EF01 /* TempoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2B43B85261D169D0087EF01 /* TempoCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,10 +56,13 @@
 		C201F3DB25F984B0005DAF73 /* MetronomeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetronomeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C201F3DF25F984B0005DAF73 /* MetronomeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeUITests.swift; sourceTree = "<group>"; };
 		C201F3E125F984B0005DAF73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C20390CF25FC25B100B79F09 /* Metranome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metranome.swift; sourceTree = "<group>"; };
+		C20390CF25FC25B100B79F09 /* Metronome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metronome.swift; sourceTree = "<group>"; };
 		C23DA8F92600099D00DE0E12 /* High.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = High.wav; sourceTree = "<group>"; };
 		C23DA8FA2600099D00DE0E12 /* Low.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Low.wav; sourceTree = "<group>"; };
+		C25377CE261751F900619BF6 /* TempoSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoSlider.swift; sourceTree = "<group>"; };
 		C288AE7D260DFE2E00DF1030 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		C2B43B84261D169D0087EF01 /* TempoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoCell.swift; sourceTree = "<group>"; };
+		C2B43B85261D169D0087EF01 /* TempoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TempoCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +119,7 @@
 				C201F3BC25F984AC005DAF73 /* SceneDelegate.swift */,
 				C288AE82260DFE3500DF1030 /* ViewControllers */,
 				C288AE89260EA61D00DF1030 /* Model */,
-				C201F3C025F984AC005DAF73 /* Main.storyboard */,
+				C2B43B83261D15310087EF01 /* View */,
 				C201F3C625F984AF005DAF73 /* Assets.xcassets */,
 				C201F3C825F984AF005DAF73 /* LaunchScreen.storyboard */,
 				C201F3CB25F984AF005DAF73 /* Info.plist */,
@@ -151,9 +157,20 @@
 		C288AE89260EA61D00DF1030 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C20390CF25FC25B100B79F09 /* Metranome.swift */,
+				C20390CF25FC25B100B79F09 /* Metronome.swift */,
+				C25377CE261751F900619BF6 /* TempoSlider.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		C2B43B83261D15310087EF01 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C201F3C025F984AC005DAF73 /* Main.storyboard */,
+				C2B43B84261D169D0087EF01 /* TempoCell.swift */,
+				C2B43B85261D169D0087EF01 /* TempoCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +279,7 @@
 				C23DA8FB2600099D00DE0E12 /* High.wav in Resources */,
 				C201F3CA25F984AF005DAF73 /* LaunchScreen.storyboard in Resources */,
 				C201F3C725F984AF005DAF73 /* Assets.xcassets in Resources */,
+				C2B43B87261D169D0087EF01 /* TempoCell.xib in Resources */,
 				C201F3C225F984AC005DAF73 /* Main.storyboard in Resources */,
 				C23DA8FC2600099D00DE0E12 /* Low.wav in Resources */,
 			);
@@ -288,10 +306,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2B43B86261D169D0087EF01 /* TempoCell.swift in Sources */,
 				C201F3C525F984AC005DAF73 /* Metronome.xcdatamodeld in Sources */,
-				C20390D025FC25B100B79F09 /* Metranome.swift in Sources */,
+				C20390D025FC25B100B79F09 /* Metronome.swift in Sources */,
 				C288AE7E260DFE2E00DF1030 /* MainViewController.swift in Sources */,
 				C201F3BB25F984AC005DAF73 /* AppDelegate.swift in Sources */,
+				C25377CF261751F900619BF6 /* TempoSlider.swift in Sources */,
 				C201F3BD25F984AC005DAF73 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

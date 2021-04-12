@@ -8,7 +8,8 @@
 import Foundation
 import AVFoundation
 
-class Metranome {
+class Metronome {
+    
     var audioEngine: AVAudioEngine!
     var audioPlayerNode: AVAudioPlayerNode!
     var mainClickAudioFile: AVAudioFile!
@@ -30,7 +31,7 @@ class Metranome {
         }
     }
     
-    func generateBuffer(with bpm: Double, with countBeat: UInt32) -> AVAudioPCMBuffer {
+    func generateBuffer(with bpm: Double, with countBeat: UInt32, with timeSignature: UInt32) -> AVAudioPCMBuffer {
         //буффер - область памяти, используемая для временного хранения данных ввода-вывода
         //цифровой сигнал, полученный методом импульсно-кодовой модуляции (PCM)
         //Два основных параметра качества PCM сигнала — это частота и разрядность. Частота — это количество измерений за одну секунду, чем их больше — тем с большей точностью передаётся сигнал. Частота измеряется в герцах: 44100 Hz
@@ -53,7 +54,7 @@ class Metranome {
         //Пытаемся прочитать весь буфер, из которого следует читать файл. Его формат должен соответствовать формату обработки файла.
         //При последовательном чтении из свойства framePosition пытается заполнить буфер до его емкости. По возвращении свойство длины буфера указывает количество успешно прочитанных кадров выборки.
         
-        bufferOfMainClick.frameLength = lengthOfClick //устанавливаем количество семплов в буфере MainClick
+        bufferOfMainClick.frameLength = lengthOfClick / timeSignature //устанавливаем количество семплов в буфере MainClick
         //frameLength - The current number of valid sample frames in the buffer.
         //Текущее количество допустимых семплов фрейма в буфере.
 
@@ -66,12 +67,11 @@ class Metranome {
         } catch {
             print("Error read buffer\(error)")
         }
-        bufferOfAccentClick.frameLength = lengthOfClick
+        bufferOfAccentClick.frameLength = lengthOfClick / timeSignature
         
         if countBeat != 0 {
-            //Создаем bufferBar для того чтобы добавить акценты
+            //Создаем и инициилизируем bufferBar для того чтобы добавить акценты
             let bufferBar = AVAudioPCMBuffer(pcmFormat: mainClickAudioFile.processingFormat, frameCapacity: countBeat * lengthOfClick)!
-            //Инициилизируем bufferBar
             
             bufferBar.frameLength = countBeat * lengthOfClick
             //устанавливаем количество семплов в bufferBar
@@ -81,17 +81,17 @@ class Metranome {
             
             let accentedClickArray = Array(
                 UnsafeBufferPointer(start: bufferOfAccentClick.floatChannelData![0],
-                                    count: channelCount * Int(lengthOfClick)))
+                                    count: channelCount * Int(lengthOfClick / timeSignature)))
             //Коллекция элементов буфера, непрерывно хранящихся в памяти.
             //Создаем новый указатель буфера на указанное количество непрерывных экземпляров, начиная с первого аудиосемпла буфера, колличестом lengthOfClick
             
-            let mainClickArray = Array(UnsafeBufferPointer(start: bufferOfMainClick.floatChannelData![0], count: channelCount * Int(lengthOfClick)))
+            let mainClickArray = Array(UnsafeBufferPointer(start: bufferOfMainClick.floatChannelData![0], count: channelCount * Int(lengthOfClick / timeSignature)))
             
             var barArray = [Float]() //создаем массив для bufferBar
             
             barArray.append(contentsOf: accentedClickArray)
             
-            for _ in 1...8 {
+            for _ in 1...36 {
                 barArray.append(contentsOf: mainClickArray)
             }
             
@@ -110,9 +110,9 @@ class Metranome {
         return audioPlayerNode.isPlaying
     }
     
-    func playMetranome(bpm: Double, countBeat: UInt32){
+    func playMetronome(bpm: Int32, countBeat: Int32, timeSignature: Int32) {
         
-        let metranomeBuffer = generateBuffer(with: bpm, with: countBeat) //создаем буфер из наших аудиофайлов
+        let metranomeBuffer = generateBuffer(with: Double(bpm), with: UInt32(countBeat), with: UInt32(timeSignature)) //создаем буфер из наших аудиофайлов
         
         if audioPlayerNode.isPlaying {
             audioPlayerNode.scheduleBuffer(metranomeBuffer, at: nil, options: .interruptsAtLoop, completionHandler: nil)

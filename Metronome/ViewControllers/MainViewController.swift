@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MainViewController: UIViewController {
 
@@ -13,45 +14,66 @@ class MainViewController: UIViewController {
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var tempoLabel: UILabel!
     @IBOutlet weak var tempoSlider: UISlider!
-    @IBOutlet weak var beatMetranomePicker: UIPickerView!
-    @IBOutlet weak var valueMetranomePicker: UIPickerView!
+    @IBOutlet weak var beatMetronomePicker: UIPickerView!
+    @IBOutlet weak var valueMetronomePicker: UIPickerView!
+    @IBOutlet weak var tableView: UITableView!
     
-    let metranome: Metranome = {
+    var tempoLisrArray = [TempoItem]()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    let metronome: Metronome = {
         let mainClickFile = Bundle.main.url(forResource: "Low", withExtension: "wav")!
         let accentedClickFile = Bundle.main.url(forResource: "High", withExtension: "wav")!
-        return Metranome(mainClick: mainClickFile, accentClick: accentedClickFile)
+        return Metronome(mainClick: mainClickFile, accentClick: accentedClickFile)
     }()
     
     let countBeatArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    let valueArray = ["1", "2", "3", "4"]
-    var countBeat: UInt32 = 0
-    var tempo: Double = 180.0 {
+    let valueTimeSignatureArray: [Int32] = [1, 2, 3, 4]
+    let imageTimeSignatureArray = ["4", "8", "3", "16"]
+    
+    var selectedRowSignature: Int16 = 0
+    var selectedRowBeat: Int16 = 0
+    
+    var countBeat: Int32 = 0
+    var timeSignature: Int32 = 1
+    var tempo: Int32 = 180 {
         didSet {
-            tempoLabel.text = String(Int(tempo))
+            tempoLabel.text = String(tempo)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tempoLabel.text = "180"
-        tempoSlider.value = 180
+        tempoSlider.value = 180.0
         tempoSlider.minimumValue = 30
         tempoSlider.maximumValue = 360
+    
+        beatMetronomePicker.dataSource = self
+        beatMetronomePicker.delegate = self
+        beatMetronomePicker.setValue(UIColor.white, forKey: "textColor")
         
-        beatMetranomePicker.dataSource = self
-        beatMetranomePicker.delegate = self
-        beatMetranomePicker.setValue(UIColor.white, forKey: "textColor")
-        valueMetranomePicker.dataSource = self
-        valueMetranomePicker.delegate = self
-        valueMetranomePicker.setValue(UIColor.white, forKey: "textColor")
+        valueMetronomePicker.dataSource = self
+        valueMetronomePicker.delegate = self
+        valueMetronomePicker.setValue(UIColor.white, forKey: "textColor")
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UINib(nibName: "TempoCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
+        tableView.reloadData()
+        loadTempoItems()
         
         stopButton.isHidden = true
     }
     
     
+// MARK: - @IBActions
     @IBAction func pressedPlayButton(_ sender: UIButton) {
-        metranome.playMetranome(bpm: tempo, countBeat: countBeat)
+        metronome.playMetronome(bpm: tempo, countBeat: countBeat, timeSignature: timeSignature)
         playButton.isHidden = true
         stopButton.isHidden = false
     }
@@ -59,71 +81,217 @@ class MainViewController: UIViewController {
     @IBAction func pressedStopButton(_ sender: UIButton) {
         playButton.isHidden = false
         stopButton.isHidden = true
-        metranome.stopMetranome()
+        metronome.stopMetranome()
     }
     
     @IBAction func pressedPlusButton(_ sender: UIButton) {
         if tempo < 360 {
-            tempo += 1.0
+            tempo += 1
         }
-        tempoSlider.value += 1.0
-        if metranome.isPlay {
-            metranome.playMetranome(bpm: tempo, countBeat: countBeat)
-        }
+        tempoSlider.value += 1
+        ifPlayMertonome()
     }
     
     @IBAction func pressedMinusButton(_ sender: UIButton) {
         if tempo > 30 {
-            tempo -= 1.0
+            tempo -= 1
         }
-        tempoSlider.value -= 1.0
-        if metranome.isPlay {
-            metranome.playMetranome(bpm: tempo, countBeat: countBeat)
-        }
+        tempoSlider.value -= 1
+        ifPlayMertonome()
     }
     
     @IBAction func changedTempoSlider(_ sender: UISlider) {
-        tempo = Double(tempoSlider.value)
-        if metranome.isPlay {
-            metranome.playMetranome(bpm: tempo, countBeat: countBeat)
-        }
+        tempo = Int32(tempoSlider.value)
+        ifPlayMertonome()
     }
 
+//MARK: - AlertController
+    @IBAction func addTempoInTableView(_ sender: UIButton) {
+        
+        let alert = UIAlertController(title: "Add tempo to the list?", message: "", preferredStyle: .alert)
+        alert.view.tintColor = UIColor.black
+        
+        var textField = UITextField()
+        
+        let alertActionAdd = UIAlertAction(title: "Add", style: .default) { (alertAction) in
+            
+            let newTempoItem = TempoItem(context: self.context)
+            
+            if textField.text != "" {
+                newTempoItem.name = textField.text
+            } else {
+                newTempoItem.name = "Unnamed"
+            }
+            newTempoItem.tempo = self.tempo
+            newTempoItem.beat = self.countBeat
+            newTempoItem.value = self.timeSignature
+            newTempoItem.rowValue = self.selectedRowSignature
+            newTempoItem.rowBeat = self.selectedRowBeat
+            
+            self.tempoLisrArray.append(newTempoItem)
+            self.saveTempoItems()
+            self.tableView.reloadData()
+            
+        }
+        
+        let alertActionCancel = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Enter name"
+            textField = alertTextField
+        }
+        
+        alert.addAction(alertActionCancel)
+        DispatchQueue.main.async {
+            alert.addAction(alertActionAdd)
+        }
+        present(alert, animated: true, completion: nil)
+    }
+    
+//MARK: - Functions
+    
+    func ifPlayMertonome() {
+        if metronome.isPlay {
+            metronome.playMetronome(bpm: tempo, countBeat: countBeat, timeSignature: timeSignature)
+        }
+    }
+    
+    func saveTempoItems() {
+        do {
+            try context.save()
+        } catch {
+            print("Error save context: \(error)")
+        }
+    }
+    
+    func loadTempoItems() {
+        let request: NSFetchRequest<TempoItem> = TempoItem.fetchRequest()
+        
+        do {
+            tempoLisrArray = try context.fetch(request)
+        } catch {
+            print("Error load context: \(error)")
+        }
+    }
+    
 }
 
+// MARK: - CUSTOM UIPickerViews, UIPickerViewDataSource and UIPickerViewDelegate
 extension MainViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     //определяем сколько столбцов мы хотим в нашем сборщике
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
+    
     //определяем сколько строк должно быть у этого средства выбора
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == beatMetranomePicker { return countBeatArray.count }
-        if pickerView == valueMetranomePicker { return valueArray.count }
+        if pickerView == beatMetronomePicker { return countBeatArray.count }
+        if pickerView == valueMetronomePicker { return valueTimeSignatureArray.count }
         return 0
     }
-    //Этот метод ожидает на выходе строку. Строка - это заголовок данной строки. Когда PickerView загружается, он запрашивает у своего делегата заголовок строки и вызывает вышеуказанный метод один раз для каждой строки. Поэтому, когда он пытается получить заголовок для первой строки, он передает значение строки 0 и значение компонента (столбца) 0.
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == beatMetranomePicker { return countBeatArray[row] }
-        if pickerView == valueMetranomePicker { return valueArray[row] }
-        return ""
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 60
     }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        if pickerView == beatMetronomePicker {
+            let customBeatPickerView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+            let pickerBeatLabel = UILabel(frame: CGRect(x: 5, y: 5, width: 50, height: 50))
+            pickerBeatLabel.textColor = .white
+            pickerBeatLabel.font = UIFont.systemFont(ofSize: 40, weight: .light)
+            pickerBeatLabel.textAlignment = .center
+            pickerBeatLabel.text = countBeatArray[row]
+            customBeatPickerView.addSubview(pickerBeatLabel)
+    
+            return customBeatPickerView
+        }
+        
+        let customValuePickerView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+        let pickerImageView = UIImageView(frame: CGRect(x: 5, y: 5, width: 50, height: 50))
+        pickerImageView.contentMode = .scaleAspectFill
+        pickerImageView.image = UIImage(named: imageTimeSignatureArray[row])
+        customValuePickerView.addSubview(pickerImageView)
+
+        return customValuePickerView
+    }
+    
     
     //Это будет вызываться каждый раз, когда пользователь прокручивает средство выбора
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        if pickerView == beatMetranomePicker {
-            if let selectBeat = UInt32(countBeatArray[row]) {
+        if pickerView == beatMetronomePicker {
+            if let selectBeat = Int32(countBeatArray[row]) {
                 countBeat = selectBeat
             }
-            if metranome.isPlay {
-                metranome.playMetranome(bpm: tempo, countBeat: countBeat)
-            }
+            selectedRowBeat = Int16(row)
+            ifPlayMertonome()
         }
         
-        if pickerView == valueMetranomePicker {
-            print(valueArray[row])
+        if pickerView == valueMetronomePicker {
+            timeSignature = valueTimeSignatureArray[row]
+            ifPlayMertonome()
+            selectedRowSignature = Int16(row)
+        }
+    }
+    
+}
+
+//MARK: - UITableViewDelegate and UITableViewDataSource
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tempoLisrArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! TempoCell
+        
+        cell.nameLabel.text = "\(tempoLisrArray[indexPath.row].name!)"
+        cell.tempoLabel.text = "\(tempoLisrArray[indexPath.row].tempo)"
+        cell.beatLabel.text = "\(tempoLisrArray[indexPath.row].beat)"
+        cell.valueLabel.text = "\(tempoLisrArray[indexPath.row].value)"
+    
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let bpmList = tempoLisrArray[indexPath.row].tempo
+        let beatList = tempoLisrArray[indexPath.row].beat
+        let valueList = tempoLisrArray[indexPath.row].value
+        let rowValue = Int(tempoLisrArray[indexPath.row].rowValue)
+        let rowBeat = Int(tempoLisrArray[indexPath.row].rowBeat)
+        metronome.playMetronome(bpm: bpmList, countBeat: beatList, timeSignature: valueList)
+        
+        playButton.isHidden = true
+        stopButton.isHidden = false
+        tempoSlider.value = Float(bpmList)
+        timeSignature = valueList
+        countBeat = beatList
+        tempo = bpmList
+        beatMetronomePicker.selectRow(rowBeat, inComponent: 0, animated: true)
+        valueMetronomePicker.selectRow(rowValue, inComponent: 0, animated: true)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            context.delete(tempoLisrArray[indexPath.row])
+            do {
+                try context.save()
+                tempoLisrArray.remove(at: indexPath.row)
+                tableView.reloadData()
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
     
