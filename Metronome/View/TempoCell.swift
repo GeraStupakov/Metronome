@@ -18,11 +18,20 @@ class TempoCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        if selected {
+            contentView.backgroundColor = #colorLiteral(red: 0.3197718231, green: 0.3197718231, blue: 0.3197718231, alpha: 1)
+        } else {
+            contentView.backgroundColor = #colorLiteral(red: 0.1882151961, green: 0.1882481873, blue: 0.188207984, alpha: 1)
+        }
     }
     
 }

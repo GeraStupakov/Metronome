@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "minus.png",
+      "filename" : "plus-tempo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "plus-tempo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "plus-tempo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

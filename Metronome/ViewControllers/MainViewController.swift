@@ -113,7 +113,7 @@ class MainViewController: UIViewController {
         
         var textField = UITextField()
         
-        let alertActionAdd = UIAlertAction(title: "Add", style: .default) { (alertAction) in
+        let alertActionAdd = UIAlertAction(title: "Add", style: .default) { alertAction in
             
             let newTempoItem = TempoItem(context: self.context)
             
@@ -128,15 +128,17 @@ class MainViewController: UIViewController {
             newTempoItem.rowValue = self.selectedRowSignature
             newTempoItem.rowBeat = self.selectedRowBeat
             
-            self.tempoLisrArray.append(newTempoItem)
+            self.tempoLisrArray.insert(newTempoItem, at: 0)
             self.saveTempoItems()
-            self.tableView.reloadData()
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .automatic)
+            self.tableView.endUpdates()
             
         }
         
         let alertActionCancel = UIAlertAction(title: "Cancel", style: .cancel)
         
-        alert.addTextField { (alertTextField) in
+        alert.addTextField { alertTextField in
             alertTextField.placeholder = "Enter name"
             textField = alertTextField
         }
@@ -218,7 +220,6 @@ extension MainViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         return customValuePickerView
     }
     
-    
     //Это будет вызываться каждый раз, когда пользователь прокручивает средство выбора
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
@@ -280,19 +281,60 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+  
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        if editingStyle == .delete {
-            context.delete(tempoLisrArray[indexPath.row])
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+            
+            self.context.delete(self.tempoLisrArray[indexPath.row])
             do {
-                try context.save()
-                tempoLisrArray.remove(at: indexPath.row)
+                try self.context.save()
+                self.tempoLisrArray.remove(at: indexPath.row)
                 tableView.reloadData()
             } catch {
                 print(error.localizedDescription)
             }
+            
+            completionHandler(true)
         }
+        
+        delete.backgroundColor = #colorLiteral(red: 0.828065514, green: 0.2325353666, blue: 0.275209091, alpha: 1)
+        
+        let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completionHandler) in
+            
+            var textField = UITextField()
+            
+            let editAlert = UIAlertController(title: "", message: "Edit name?", preferredStyle: .alert)
+            editAlert.view.tintColor = UIColor.black
+            
+            editAlert.addTextField { editTextField in
+                editTextField.placeholder = "Enter name"
+                textField = editTextField
+            }
+            
+            editAlert.addAction(UIAlertAction(title: "Update", style: .default, handler: { alertAction in
+                if textField.text == "" {
+                    self.tempoLisrArray[indexPath.row].name = self.tempoLisrArray[indexPath.row].name
+                } else {
+                    self.tempoLisrArray[indexPath.row].name = textField.text
+                    self.tempoLisrArray[indexPath.row].setValue(textField.text, forKey: "name")
+                    self.saveTempoItems()
+                }
+                self.tableView.reloadRows(at: [indexPath], with: .fade)
+            }))
+            
+            editAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            DispatchQueue.main.async {
+                self.present(editAlert, animated: true)
+            }
+            
+            completionHandler(true)
+        }
+
+        edit.backgroundColor = #colorLiteral(red: 0.4314813942, green: 0.4314813942, blue: 0.4314813942, alpha: 1)
+        
+        let swipe = UISwipeActionsConfiguration(actions: [delete, edit])
+        return swipe
     }
     
 }
