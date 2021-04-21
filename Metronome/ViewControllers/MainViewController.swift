@@ -11,12 +11,12 @@ import CoreData
 class MainViewController: UIViewController {
 
     @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var tempoLabel: UILabel!
     @IBOutlet weak var tempoSlider: UISlider!
     @IBOutlet weak var beatMetronomePicker: UIPickerView!
     @IBOutlet weak var valueMetronomePicker: UIPickerView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var selectedAudioButton: UIButton!
     
     var tempoLisrArray = [TempoItem]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -49,9 +49,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         tempoLabel.text = "180"
-        tempoSlider.value = 180.0
-        tempoSlider.minimumValue = 30
-        tempoSlider.maximumValue = 360
+        playButton.setImage(UIImage(named: "play"), for: .normal)
     
         beatMetronomePicker.dataSource = self
         beatMetronomePicker.delegate = self
@@ -66,22 +64,21 @@ class MainViewController: UIViewController {
         tableView.register(UINib(nibName: "TempoCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
         tableView.reloadData()
         loadTempoItems()
-        
-        stopButton.isHidden = true
+
     }
     
     
 // MARK: - @IBActions
     @IBAction func pressedPlayButton(_ sender: UIButton) {
-        metronome.playMetronome(bpm: tempo, countBeat: countBeat, timeSignature: timeSignature)
-        playButton.isHidden = true
-        stopButton.isHidden = false
-    }
-    
-    @IBAction func pressedStopButton(_ sender: UIButton) {
-        playButton.isHidden = false
-        stopButton.isHidden = true
-        metronome.stopMetranome()
+        
+        if playButton.currentImage == UIImage(named: "play") {
+            playButton.setImage(UIImage(named: "stop"), for: .normal)
+            metronome.playMetronome(bpm: tempo, countBeat: countBeat, timeSignature: timeSignature)
+        } else {
+            playButton.setImage(UIImage(named: "play"), for: .normal)
+            metronome.stopMetranome()
+        }
+        
     }
     
     @IBAction func pressedPlusButton(_ sender: UIButton) {
@@ -104,12 +101,18 @@ class MainViewController: UIViewController {
         tempo = Int32(tempoSlider.value)
         ifPlayMertonome()
     }
+    
+    @IBAction func changedAudio(_ sender: UIButton) {
+        
+    }
+    
 
 //MARK: - AlertController
     @IBAction func addTempoInTableView(_ sender: UIButton) {
         
         let alert = UIAlertController(title: "Add tempo to the list?", message: "", preferredStyle: .alert)
-        alert.view.tintColor = UIColor.black
+        
+        alert.view.tintColor = UIColor(named: "TextColor")
         
         var textField = UITextField()
         
@@ -144,13 +147,21 @@ class MainViewController: UIViewController {
         }
         
         alert.addAction(alertActionCancel)
-        DispatchQueue.main.async {
-            alert.addAction(alertActionAdd)
+        alert.addAction(alertActionAdd)
+        
+        present(alert, animated: true) {
+            alert.view.superview?.isUserInteractionEnabled = true
+            alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
         }
-        present(alert, animated: true, completion: nil)
+        
     }
     
 //MARK: - Functions
+    
+    @objc func alertControllerBackgroundTapped()
+    {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     func ifPlayMertonome() {
         if metronome.isPlay {
@@ -200,10 +211,10 @@ extension MainViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
         if pickerView == beatMetronomePicker {
-            let customBeatPickerView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-            let pickerBeatLabel = UILabel(frame: CGRect(x: 5, y: 5, width: 50, height: 50))
-            pickerBeatLabel.textColor = .white
-            pickerBeatLabel.font = UIFont.systemFont(ofSize: 40, weight: .light)
+            let customBeatPickerView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+            let pickerBeatLabel = UILabel(frame: CGRect(x: 5, y: 5, width: 40, height: 40))
+            pickerBeatLabel.textColor = UIColor(named: "TextColor")
+            pickerBeatLabel.font = UIFont.systemFont(ofSize: 35, weight: .light)
             pickerBeatLabel.textAlignment = .center
             pickerBeatLabel.text = countBeatArray[row]
             customBeatPickerView.addSubview(pickerBeatLabel)
@@ -211,8 +222,8 @@ extension MainViewController: UIPickerViewDataSource, UIPickerViewDelegate {
             return customBeatPickerView
         }
         
-        let customValuePickerView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        let pickerImageView = UIImageView(frame: CGRect(x: 5, y: 5, width: 50, height: 50))
+        let customValuePickerView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        let pickerImageView = UIImageView(frame: CGRect(x: 5, y: 5, width: 40, height: 40))
         pickerImageView.contentMode = .scaleAspectFill
         pickerImageView.image = UIImage(named: imageTimeSignatureArray[row])
         customValuePickerView.addSubview(pickerImageView)
@@ -254,7 +265,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.nameLabel.text = "\(tempoLisrArray[indexPath.row].name!)"
         cell.tempoLabel.text = "\(tempoLisrArray[indexPath.row].tempo)"
         cell.beatLabel.text = "\(tempoLisrArray[indexPath.row].beat)"
-        cell.valueLabel.text = "\(tempoLisrArray[indexPath.row].value)"
+        cell.valueImage.image = UIImage(named: imageTimeSignatureArray[Int(tempoLisrArray[indexPath.row].rowValue)])
     
         return cell
     }
@@ -267,8 +278,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let rowBeat = Int(tempoLisrArray[indexPath.row].rowBeat)
         metronome.playMetronome(bpm: bpmList, countBeat: beatList, timeSignature: valueList)
         
-        playButton.isHidden = true
-        stopButton.isHidden = false
+        playButton.setImage(UIImage(named: "stop"), for: .normal)
         tempoSlider.value = Float(bpmList)
         timeSignature = valueList
         countBeat = beatList
@@ -298,14 +308,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             completionHandler(true)
         }
         
-        delete.backgroundColor = #colorLiteral(red: 0.828065514, green: 0.2325353666, blue: 0.275209091, alpha: 1)
+        delete.backgroundColor = UIColor(named: "DeleteColor")
         
         let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completionHandler) in
             
             var textField = UITextField()
             
             let editAlert = UIAlertController(title: "", message: "Edit name?", preferredStyle: .alert)
-            editAlert.view.tintColor = UIColor.black
+            editAlert.view.tintColor = UIColor(named: "TextColor")
             
             editAlert.addTextField { editTextField in
                 editTextField.placeholder = "Enter name"
@@ -324,14 +334,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             }))
             
             editAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            DispatchQueue.main.async {
-                self.present(editAlert, animated: true)
+            
+            self.present(editAlert, animated: true) {
+                editAlert.view.superview?.isUserInteractionEnabled = true
+                editAlert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
             }
             
             completionHandler(true)
         }
 
-        edit.backgroundColor = #colorLiteral(red: 0.4314813942, green: 0.4314813942, blue: 0.4314813942, alpha: 1)
+        edit.backgroundColor = UIColor(named: "EditColor")
         
         let swipe = UISwipeActionsConfiguration(actions: [delete, edit])
         return swipe

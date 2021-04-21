@@ -10,8 +10,14 @@ import Foundation
 
 class TempoSlider: UISlider {
     
-    @IBInspectable var trackHeight: CGFloat = 1.6
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.value = 180.0
+        self.minimumValue = 30
+        self.maximumValue = 360
+    }
     
+    @IBInspectable var trackHeight: CGFloat = 1.6
     var bigImage = UIImageView()
     var indicatorSize: CGSize? = nil
     
@@ -21,17 +27,17 @@ class TempoSlider: UISlider {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        let imageTrackSmall = UIImage.circleSlider(diametr: 10, color: .white)
-        self.setThumbImage(imageTrackSmall, for: .normal)
-        //Назначает изображение нажатия на слайдер с указанным состояниям элемента управления.
-        let imageTrackBig = UIImage.circleSlider(diametr: 20, color: .white)
-        bigImage.contentMode = .scaleAspectFill
-        bigImage.clipsToBounds = false //Логическое значение, определяющее, ограничены ли вложенные представления пределами представления
-        bigImage.image = imageTrackBig
-        
-        self.addSubview(bigImage)
-        self.bringSubviewToFront(bigImage)
+//
+//        let imageTrackSmall = UIImage.circleSlider(diametr: 20, color: .white)
+//        self.setThumbImage(imageTrackSmall, for: .normal)
+//        //Назначает изображение нажатия на слайдер с указанным состояниям элемента управления.
+//        let imageTrackBig = UIImage.circleSlider(diametr: 40, color: UIColor(named: "TextColor")!)
+//        bigImage.contentMode = .scaleAspectFill
+//        bigImage.clipsToBounds = false //Логическое значение, определяющее, ограничены ли вложенные представления пределами представления
+//        bigImage.image = imageTrackBig
+//
+//        self.addSubview(bigImage)
+//        self.bringSubviewToFront(bigImage)
     }
     
     //метод UISlider, который считает размеры для изображения индикатора позиции
@@ -64,9 +70,9 @@ class TempoSlider: UISlider {
             // avoid situation when indicator size didn't count yet
             guard indicatorSize != nil else { return }
             
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.4) {
                 if self.isHighlighted == true {
-                    self.bigImage.transform = CGAffineTransform(scaleX: 2, y: 2)
+                    self.bigImage.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
                 } else {
                     self.bigImage.transform = CGAffineTransform(scaleX: 1, y: 1)
                 }

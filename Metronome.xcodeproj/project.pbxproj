@@ -19,6 +19,8 @@
 		C23DA8FB2600099D00DE0E12 /* High.wav in Resources */ = {isa = PBXBuildFile; fileRef = C23DA8F92600099D00DE0E12 /* High.wav */; };
 		C23DA8FC2600099D00DE0E12 /* Low.wav in Resources */ = {isa = PBXBuildFile; fileRef = C23DA8FA2600099D00DE0E12 /* Low.wav */; };
 		C25377CF261751F900619BF6 /* TempoSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25377CE261751F900619BF6 /* TempoSlider.swift */; };
+		C268EB24262906BF007DDBB2 /* AudioDropDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268EB23262906BF007DDBB2 /* AudioDropDownButton.swift */; };
+		C268EB2C2629C262007DDBB2 /* TempoListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268EB2B2629C262007DDBB2 /* TempoListTableView.swift */; };
 		C288AE7E260DFE2E00DF1030 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288AE7D260DFE2E00DF1030 /* MainViewController.swift */; };
 		C2B43B86261D169D0087EF01 /* TempoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B43B84261D169D0087EF01 /* TempoCell.swift */; };
 		C2B43B87261D169D0087EF01 /* TempoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2B43B85261D169D0087EF01 /* TempoCell.xib */; };
@@ -60,6 +62,8 @@
 		C23DA8F92600099D00DE0E12 /* High.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = High.wav; sourceTree = "<group>"; };
 		C23DA8FA2600099D00DE0E12 /* Low.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Low.wav; sourceTree = "<group>"; };
 		C25377CE261751F900619BF6 /* TempoSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoSlider.swift; sourceTree = "<group>"; };
+		C268EB23262906BF007DDBB2 /* AudioDropDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDropDownButton.swift; sourceTree = "<group>"; };
+		C268EB2B2629C262007DDBB2 /* TempoListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoListTableView.swift; sourceTree = "<group>"; };
 		C288AE7D260DFE2E00DF1030 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C2B43B84261D169D0087EF01 /* TempoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoCell.swift; sourceTree = "<group>"; };
 		C2B43B85261D169D0087EF01 /* TempoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TempoCell.xib; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				C288AE7D260DFE2E00DF1030 /* MainViewController.swift */,
+				C2B43B84261D169D0087EF01 /* TempoCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -159,6 +164,8 @@
 			children = (
 				C20390CF25FC25B100B79F09 /* Metronome.swift */,
 				C25377CE261751F900619BF6 /* TempoSlider.swift */,
+				C268EB23262906BF007DDBB2 /* AudioDropDownButton.swift */,
+				C268EB2B2629C262007DDBB2 /* TempoListTableView.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -167,7 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				C201F3C025F984AC005DAF73 /* Main.storyboard */,
-				C2B43B84261D169D0087EF01 /* TempoCell.swift */,
 				C2B43B85261D169D0087EF01 /* TempoCell.xib */,
 			);
 			path = View;
@@ -307,12 +313,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2B43B86261D169D0087EF01 /* TempoCell.swift in Sources */,
+				C268EB2C2629C262007DDBB2 /* TempoListTableView.swift in Sources */,
 				C201F3C525F984AC005DAF73 /* Metronome.xcdatamodeld in Sources */,
 				C20390D025FC25B100B79F09 /* Metronome.swift in Sources */,
 				C288AE7E260DFE2E00DF1030 /* MainViewController.swift in Sources */,
 				C201F3BB25F984AC005DAF73 /* AppDelegate.swift in Sources */,
 				C25377CF261751F900619BF6 /* TempoSlider.swift in Sources */,
 				C201F3BD25F984AC005DAF73 /* SceneDelegate.swift in Sources */,
+				C268EB24262906BF007DDBB2 /* AudioDropDownButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
