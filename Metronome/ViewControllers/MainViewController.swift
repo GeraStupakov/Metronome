@@ -48,6 +48,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        selectedAudioButton.setTitle("Audio 1", for: .normal)
+        
         tempoLabel.text = "180"
         playButton.setImage(UIImage(named: "play"), for: .normal)
     
@@ -103,7 +105,16 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func changedAudio(_ sender: UIButton) {
+        guard let popAudioVC = storyboard?.instantiateViewController(identifier: "popAudioVC") as? AudioTableViewController else { return }
+        popAudioVC.delegate = self
+        popAudioVC.modalPresentationStyle = .popover
+        let popOverVC = popAudioVC.popoverPresentationController
+        popOverVC?.delegate = self
+        popOverVC?.sourceView = self.selectedAudioButton
+        popOverVC?.sourceRect = CGRect(x: self.selectedAudioButton.bounds.midX, y: self.selectedAudioButton.bounds.maxY, width: 0, height: 0)
+        popAudioVC.preferredContentSize = CGSize(width: 130, height: 130)
         
+        self.present(popAudioVC, animated: true, completion: nil)
     }
     
 
@@ -347,6 +358,19 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let swipe = UISwipeActionsConfiguration(actions: [delete, edit])
         return swipe
+    }
+    
+}
+
+extension MainViewController: UIPopoverPresentationControllerDelegate,  AudioListDelegate {
+
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    func fetchAudioToMainVC(audioName: String) {
+        print("name - \(audioName)")
+        selectedAudioButton.setTitle(audioName, for: .normal)
     }
     
 }

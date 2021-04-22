@@ -32,7 +32,7 @@
                                 <color key="sectionIndexBackgroundColor" name="CellColor"/>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pyC-5F-ECB" userLabel="Picker Stack View">
-                                <rect key="frame" x="10" y="99" width="394" height="138"/>
+                                <rect key="frame" x="20" y="99" width="374" height="138"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Vd6-x1-1eW">
                                         <rect key="frame" x="0.0" y="0.0" width="90" height="138"/>
@@ -54,7 +54,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KGw-TC-6Ml">
-                                        <rect key="frame" x="147" y="0.0" width="100" height="138"/>
+                                        <rect key="frame" x="137" y="0.0" width="100" height="138"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LG1-Fn-JAu" userLabel="TempLabel">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="120"/>
@@ -76,7 +76,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Glf-18-EOS">
-                                        <rect key="frame" x="304" y="0.0" width="90" height="138"/>
+                                        <rect key="frame" x="284" y="0.0" width="90" height="138"/>
                                         <subviews>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xWK-rA-vSy">
                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="120"/>
@@ -183,8 +183,8 @@
                             <constraint firstItem="T8h-bx-uQZ" firstAttribute="trailing" secondItem="glu-8y-kW0" secondAttribute="trailing" id="1z2-bl-9t5"/>
                             <constraint firstItem="pyC-5F-ECB" firstAttribute="top" secondItem="TEj-Ra-9Nk" secondAttribute="bottom" constant="5" id="4kr-1Y-PPd"/>
                             <constraint firstItem="glu-8y-kW0" firstAttribute="trailing" secondItem="tbn-Z8-yOO" secondAttribute="trailing" constant="20" id="4yu-7R-z1C"/>
-                            <constraint firstItem="pyC-5F-ECB" firstAttribute="leading" secondItem="glu-8y-kW0" secondAttribute="leading" constant="10" id="8fJ-Sw-acx"/>
-                            <constraint firstItem="glu-8y-kW0" firstAttribute="trailing" secondItem="pyC-5F-ECB" secondAttribute="trailing" constant="10" id="Cm3-Zb-vBy"/>
+                            <constraint firstItem="pyC-5F-ECB" firstAttribute="leading" secondItem="glu-8y-kW0" secondAttribute="leading" constant="20" id="8fJ-Sw-acx"/>
+                            <constraint firstItem="glu-8y-kW0" firstAttribute="trailing" secondItem="pyC-5F-ECB" secondAttribute="trailing" constant="20" id="Cm3-Zb-vBy"/>
                             <constraint firstItem="glu-8y-kW0" firstAttribute="trailing" secondItem="TEj-Ra-9Nk" secondAttribute="trailing" constant="35" id="DDb-g3-L2S"/>
                             <constraint firstItem="TEj-Ra-9Nk" firstAttribute="top" secondItem="glu-8y-kW0" secondAttribute="top" constant="10" id="DlO-C0-djT"/>
                             <constraint firstItem="tbn-Z8-yOO" firstAttribute="leading" secondItem="glu-8y-kW0" secondAttribute="leading" constant="20" id="PkQ-6O-QwG"/>
@@ -211,6 +211,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gkM-hA-PLD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1555.072463768116" y="70.3125"/>
+        </scene>
+        <!--Audio Table View Controller-->
+        <scene sceneID="p5Z-jv-aic">
+            <objects>
+                <tableViewController storyboardIdentifier="popAudioVC" id="fyL-yw-XI1" customClass="AudioTableViewController" customModule="Metronome" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZTa-bq-Pbz">
+                        <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" name="CellColor"/>
+                        <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <color key="sectionIndexBackgroundColor" name="CellColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="fyL-yw-XI1" id="eMh-J9-Fyw"/>
+                            <outlet property="delegate" destination="fyL-yw-XI1" id="Sef-ol-RBI"/>
+                        </connections>
+                    </tableView>
+                    <size key="freeformSize" width="130" height="130"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XW7-fU-7pV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2117" y="-187"/>
         </scene>
     </scenes>
     <resources>
