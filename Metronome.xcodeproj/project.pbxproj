@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C200EFAF2631E27E00EEBF05 /* MetronomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200EFAE2631E27E00EEBF05 /* MetronomeManager.swift */; };
+		C200EFBB2631E76B00EEBF05 /* Logic_accent.wav in Resources */ = {isa = PBXBuildFile; fileRef = C200EFB92631E76B00EEBF05 /* Logic_accent.wav */; };
+		C200EFBC2631E76B00EEBF05 /* Logic_main.wav in Resources */ = {isa = PBXBuildFile; fileRef = C200EFBA2631E76B00EEBF05 /* Logic_main.wav */; };
 		C201F3BB25F984AC005DAF73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C201F3BA25F984AC005DAF73 /* AppDelegate.swift */; };
 		C201F3BD25F984AC005DAF73 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C201F3BC25F984AC005DAF73 /* SceneDelegate.swift */; };
 		C201F3C225F984AC005DAF73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C201F3C025F984AC005DAF73 /* Main.storyboard */; };
@@ -16,17 +19,23 @@
 		C201F3D525F984B0005DAF73 /* MetronomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C201F3D425F984B0005DAF73 /* MetronomeTests.swift */; };
 		C201F3E025F984B0005DAF73 /* MetronomeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C201F3DF25F984B0005DAF73 /* MetronomeUITests.swift */; };
 		C20390D025FC25B100B79F09 /* Metronome.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20390CF25FC25B100B79F09 /* Metronome.swift */; };
-		C23DA8FB2600099D00DE0E12 /* High.wav in Resources */ = {isa = PBXBuildFile; fileRef = C23DA8F92600099D00DE0E12 /* High.wav */; };
-		C23DA8FC2600099D00DE0E12 /* Low.wav in Resources */ = {isa = PBXBuildFile; fileRef = C23DA8FA2600099D00DE0E12 /* Low.wav */; };
+		C23DA8FB2600099D00DE0E12 /* Classic_accent.wav in Resources */ = {isa = PBXBuildFile; fileRef = C23DA8F92600099D00DE0E12 /* Classic_accent.wav */; };
+		C23DA8FC2600099D00DE0E12 /* Classic_main.wav in Resources */ = {isa = PBXBuildFile; fileRef = C23DA8FA2600099D00DE0E12 /* Classic_main.wav */; };
 		C25377CF261751F900619BF6 /* TempoSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25377CE261751F900619BF6 /* TempoSlider.swift */; };
 		C268EB2C2629C262007DDBB2 /* TempoListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268EB2B2629C262007DDBB2 /* TempoListTableView.swift */; };
 		C288AE7E260DFE2E00DF1030 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288AE7D260DFE2E00DF1030 /* MainViewController.swift */; };
-		C29CD54B263040C00022ED43 /* AudioTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29CD54A263040C00022ED43 /* AudioTableViewController.swift */; };
 		C29CD55426304A960022ED43 /* AudioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29CD55226304A960022ED43 /* AudioCell.swift */; };
 		C29CD55526304A960022ED43 /* AudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C29CD55326304A960022ED43 /* AudioCell.xib */; };
 		C29CD5702630DAAD0022ED43 /* AudioFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29CD56F2630DAAD0022ED43 /* AudioFiles.swift */; };
 		C2B43B86261D169D0087EF01 /* TempoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B43B84261D169D0087EF01 /* TempoCell.swift */; };
 		C2B43B87261D169D0087EF01 /* TempoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2B43B85261D169D0087EF01 /* TempoCell.xib */; };
+		C2C524FC2631E7FA00BB5C08 /* AudioTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C524FB2631E7FA00BB5C08 /* AudioTableViewController.swift */; };
+		C2F32A702631947100E4A0D7 /* Sonar_accent.wav in Resources */ = {isa = PBXBuildFile; fileRef = C2F32A5E2631946F00E4A0D7 /* Sonar_accent.wav */; };
+		C2F32A742631947100E4A0D7 /* Sonar_main.wav in Resources */ = {isa = PBXBuildFile; fileRef = C2F32A622631947000E4A0D7 /* Sonar_main.wav */; };
+		C2F32A752631947100E4A0D7 /* Ableton_main.wav in Resources */ = {isa = PBXBuildFile; fileRef = C2F32A632631947000E4A0D7 /* Ableton_main.wav */; };
+		C2F32A772631947100E4A0D7 /* Ableton_accent.wav in Resources */ = {isa = PBXBuildFile; fileRef = C2F32A652631947000E4A0D7 /* Ableton_accent.wav */; };
+		C2F32A792631947100E4A0D7 /* Cubase_accent.wav in Resources */ = {isa = PBXBuildFile; fileRef = C2F32A672631947000E4A0D7 /* Cubase_accent.wav */; };
+		C2F32A7E2631947100E4A0D7 /* Cubase_main.wav in Resources */ = {isa = PBXBuildFile; fileRef = C2F32A6C2631947100E4A0D7 /* Cubase_main.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +56,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C200EFAE2631E27E00EEBF05 /* MetronomeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeManager.swift; sourceTree = "<group>"; };
+		C200EFB92631E76B00EEBF05 /* Logic_accent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Logic_accent.wav; sourceTree = "<group>"; };
+		C200EFBA2631E76B00EEBF05 /* Logic_main.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Logic_main.wav; sourceTree = "<group>"; };
 		C201F3B725F984AC005DAF73 /* Metronome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Metronome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C201F3BA25F984AC005DAF73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C201F3BC25F984AC005DAF73 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,17 +74,23 @@
 		C201F3DF25F984B0005DAF73 /* MetronomeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeUITests.swift; sourceTree = "<group>"; };
 		C201F3E125F984B0005DAF73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C20390CF25FC25B100B79F09 /* Metronome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metronome.swift; sourceTree = "<group>"; };
-		C23DA8F92600099D00DE0E12 /* High.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = High.wav; sourceTree = "<group>"; };
-		C23DA8FA2600099D00DE0E12 /* Low.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Low.wav; sourceTree = "<group>"; };
+		C23DA8F92600099D00DE0E12 /* Classic_accent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Classic_accent.wav; sourceTree = "<group>"; };
+		C23DA8FA2600099D00DE0E12 /* Classic_main.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Classic_main.wav; sourceTree = "<group>"; };
 		C25377CE261751F900619BF6 /* TempoSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoSlider.swift; sourceTree = "<group>"; };
 		C268EB2B2629C262007DDBB2 /* TempoListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoListTableView.swift; sourceTree = "<group>"; };
 		C288AE7D260DFE2E00DF1030 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		C29CD54A263040C00022ED43 /* AudioTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTableViewController.swift; sourceTree = "<group>"; };
 		C29CD55226304A960022ED43 /* AudioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCell.swift; sourceTree = "<group>"; };
 		C29CD55326304A960022ED43 /* AudioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioCell.xib; sourceTree = "<group>"; };
 		C29CD56F2630DAAD0022ED43 /* AudioFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFiles.swift; sourceTree = "<group>"; };
 		C2B43B84261D169D0087EF01 /* TempoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoCell.swift; sourceTree = "<group>"; };
 		C2B43B85261D169D0087EF01 /* TempoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TempoCell.xib; sourceTree = "<group>"; };
+		C2C524FB2631E7FA00BB5C08 /* AudioTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioTableViewController.swift; sourceTree = "<group>"; };
+		C2F32A5E2631946F00E4A0D7 /* Sonar_accent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sonar_accent.wav; sourceTree = "<group>"; };
+		C2F32A622631947000E4A0D7 /* Sonar_main.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sonar_main.wav; sourceTree = "<group>"; };
+		C2F32A632631947000E4A0D7 /* Ableton_main.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Ableton_main.wav; sourceTree = "<group>"; };
+		C2F32A652631947000E4A0D7 /* Ableton_accent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Ableton_accent.wav; sourceTree = "<group>"; };
+		C2F32A672631947000E4A0D7 /* Cubase_accent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Cubase_accent.wav; sourceTree = "<group>"; };
+		C2F32A6C2631947100E4A0D7 /* Cubase_main.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Cubase_main.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,7 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				C288AE7D260DFE2E00DF1030 /* MainViewController.swift */,
-				C29CD54A263040C00022ED43 /* AudioTableViewController.swift */,
+				C2C524FB2631E7FA00BB5C08 /* AudioTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -167,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				C20390CF25FC25B100B79F09 /* Metronome.swift */,
+				C200EFAE2631E27E00EEBF05 /* MetronomeManager.swift */,
 				C29CD56F2630DAAD0022ED43 /* AudioFiles.swift */,
 				C29CD55226304A960022ED43 /* AudioCell.swift */,
 				C2B43B84261D169D0087EF01 /* TempoCell.swift */,
@@ -190,8 +209,16 @@
 		C2F32A5526318EA700E4A0D7 /* MetronomeSamples */ = {
 			isa = PBXGroup;
 			children = (
-				C23DA8F92600099D00DE0E12 /* High.wav */,
-				C23DA8FA2600099D00DE0E12 /* Low.wav */,
+				C23DA8F92600099D00DE0E12 /* Classic_accent.wav */,
+				C23DA8FA2600099D00DE0E12 /* Classic_main.wav */,
+				C2F32A652631947000E4A0D7 /* Ableton_accent.wav */,
+				C2F32A632631947000E4A0D7 /* Ableton_main.wav */,
+				C2F32A672631947000E4A0D7 /* Cubase_accent.wav */,
+				C2F32A6C2631947100E4A0D7 /* Cubase_main.wav */,
+				C200EFB92631E76B00EEBF05 /* Logic_accent.wav */,
+				C200EFBA2631E76B00EEBF05 /* Logic_main.wav */,
+				C2F32A5E2631946F00E4A0D7 /* Sonar_accent.wav */,
+				C2F32A622631947000E4A0D7 /* Sonar_main.wav */,
 			);
 			path = MetronomeSamples;
 			sourceTree = "<group>";
@@ -299,13 +326,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C23DA8FB2600099D00DE0E12 /* High.wav in Resources */,
+				C200EFBC2631E76B00EEBF05 /* Logic_main.wav in Resources */,
+				C23DA8FB2600099D00DE0E12 /* Classic_accent.wav in Resources */,
 				C201F3CA25F984AF005DAF73 /* LaunchScreen.storyboard in Resources */,
 				C29CD55526304A960022ED43 /* AudioCell.xib in Resources */,
+				C2F32A752631947100E4A0D7 /* Ableton_main.wav in Resources */,
 				C201F3C725F984AF005DAF73 /* Assets.xcassets in Resources */,
+				C2F32A7E2631947100E4A0D7 /* Cubase_main.wav in Resources */,
+				C2F32A702631947100E4A0D7 /* Sonar_accent.wav in Resources */,
+				C200EFBB2631E76B00EEBF05 /* Logic_accent.wav in Resources */,
+				C2F32A792631947100E4A0D7 /* Cubase_accent.wav in Resources */,
 				C2B43B87261D169D0087EF01 /* TempoCell.xib in Resources */,
+				C2F32A742631947100E4A0D7 /* Sonar_main.wav in Resources */,
 				C201F3C225F984AC005DAF73 /* Main.storyboard in Resources */,
-				C23DA8FC2600099D00DE0E12 /* Low.wav in Resources */,
+				C2F32A772631947100E4A0D7 /* Ableton_accent.wav in Resources */,
+				C23DA8FC2600099D00DE0E12 /* Classic_main.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,12 +369,13 @@
 				C29CD5702630DAAD0022ED43 /* AudioFiles.swift in Sources */,
 				C268EB2C2629C262007DDBB2 /* TempoListTableView.swift in Sources */,
 				C201F3C525F984AC005DAF73 /* Metronome.xcdatamodeld in Sources */,
-				C29CD54B263040C00022ED43 /* AudioTableViewController.swift in Sources */,
 				C20390D025FC25B100B79F09 /* Metronome.swift in Sources */,
 				C288AE7E260DFE2E00DF1030 /* MainViewController.swift in Sources */,
 				C201F3BB25F984AC005DAF73 /* AppDelegate.swift in Sources */,
 				C25377CF261751F900619BF6 /* TempoSlider.swift in Sources */,
 				C201F3BD25F984AC005DAF73 /* SceneDelegate.swift in Sources */,
+				C200EFAF2631E27E00EEBF05 /* MetronomeManager.swift in Sources */,
+				C2C524FC2631E7FA00BB5C08 /* AudioTableViewController.swift in Sources */,
 				C29CD55426304A960022ED43 /* AudioCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

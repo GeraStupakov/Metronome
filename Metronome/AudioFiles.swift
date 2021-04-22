@@ -7,21 +7,42 @@
 
 import Foundation
 
-class AudioFiles {
+struct AudioFiles {
     
-    var mainClickFile: URL = Bundle.main.url(forResource: "Low", withExtension: "wav")!
-    var accentedClickFile: URL = Bundle.main.url(forResource: "High", withExtension: "wav")!
-        
-    func audio(nameAudio: String) {
-        
-        switch nameAudio {
-        case "Audio 1":
-            mainClickFile = Bundle.main.url(forResource: "Low", withExtension: "wav")!
-            accentedClickFile = Bundle.main.url(forResource: "High", withExtension: "wav")!
-        case "Audio 2":
-            mainClickFile = Bundle.main.url(forResource: "Low2", withExtension: "wav")!
-            accentedClickFile = Bundle.main.url(forResource: "High2", withExtension: "wav")!
-        default: break
+    let name: String
+    
+    var audioMainClick: URL {
+        switch name {
+        case "Classic":
+            return Bundle.main.url(forResource: "Classic_main", withExtension: "wav")!
+        case "Ableton":
+            return Bundle.main.url(forResource: "Ableton_main", withExtension: "wav")!
+        case "Cubase":
+            return Bundle.main.url(forResource: "Cubase_main", withExtension: "wav")!
+        case "Logic":
+            return Bundle.main.url(forResource: "Logic_main", withExtension: "wav")!
+        case "Sonar":
+            return Bundle.main.url(forResource: "Sonar_main", withExtension: "wav")!
+        default:
+            return Bundle.main.url(forResource: "Classic_main", withExtension: "wav")!
         }
     }
+    
+    var audioAccentClick: URL {
+        switch name {
+        case "Classic":
+            return Bundle.main.url(forResource: "Classic_accent", withExtension: "wav")!
+        case "Ableton":
+            return Bundle.main.url(forResource: "Ableton_accent", withExtension: "wav")!
+        case "Cubase":
+            return Bundle.main.url(forResource: "Cubase_accent", withExtension: "wav")!
+        case "Logic":
+            return Bundle.main.url(forResource: "Logic_accent", withExtension: "wav")!
+        case "Sonar":
+            return Bundle.main.url(forResource: "Sonar_accent", withExtension: "wav")!
+        default:
+            return Bundle.main.url(forResource: "Classic_accent", withExtension: "wav")!
+        }
+    }
+    
 }

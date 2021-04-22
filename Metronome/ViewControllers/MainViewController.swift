@@ -17,19 +17,13 @@ class MainViewController: UIViewController {
     @IBOutlet weak var valueMetronomePicker: UIPickerView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectedAudioButton: UIButton!
-    
+
     var tempoLisrArray = [TempoItem]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    let metronome: Metronome = {
-        let mainClickFile = Bundle.main.url(forResource: "Low", withExtension: "wav")!
-        let accentedClickFile = Bundle.main.url(forResource: "High", withExtension: "wav")!
-        return Metronome(mainClick: mainClickFile, accentClick: accentedClickFile)
-    }()
-    
-    let countBeatArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    let valueTimeSignatureArray: [Int32] = [1, 2, 3, 4]
-    let imageTimeSignatureArray = ["4", "8", "3", "16"]
+    var audio: AudioFiles!
+    var metronome: Metronome!
+    let metronomeManager = MetronomeManager()
     
     var selectedRowSignature: Int16 = 0
     var selectedRowBeat: Int16 = 0
@@ -42,16 +36,12 @@ class MainViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        selectedAudioButton.setTitle("Audio 1", for: .normal)
-        
         tempoLabel.text = "180"
         playButton.setImage(UIImage(named: "play"), for: .normal)
+        selectedAudioButton.setTitle("Classic", for: .normal)
     
         beatMetronomePicker.dataSource = self
         beatMetronomePicker.delegate = self
@@ -66,6 +56,11 @@ class MainViewController: UIViewController {
         tableView.register(UINib(nibName: "TempoCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
         tableView.reloadData()
         loadTempoItems()
+        
+        audio = AudioFiles(name: "Classic")
+        let mainClickFile = audio.audioMainClick
+        let accentedClickFile = audio.audioAccentClick
+        metronome = Metronome(mainClick: mainClickFile, accentClick: accentedClickFile)
 
     }
     
@@ -122,7 +117,6 @@ class MainViewController: UIViewController {
     @IBAction func addTempoInTableView(_ sender: UIButton) {
         
         let alert = UIAlertController(title: "Add tempo to the list?", message: "", preferredStyle: .alert)
-        
         alert.view.tintColor = UIColor(named: "TextColor")
         
         var textField = UITextField()
@@ -210,8 +204,8 @@ extension MainViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     //определяем сколько строк должно быть у этого средства выбора
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == beatMetronomePicker { return countBeatArray.count }
-        if pickerView == valueMetronomePicker { return valueTimeSignatureArray.count }
+        if pickerView == beatMetronomePicker { return metronomeManager.countBeatArray.count }
+        if pickerView == valueMetronomePicker { return metronomeManager.valueTimeSignatureArray.count }
         return 0
     }
     
@@ -227,7 +221,7 @@ extension MainViewController: UIPickerViewDataSource, UIPickerViewDelegate {
             pickerBeatLabel.textColor = UIColor(named: "TextColor")
             pickerBeatLabel.font = UIFont.systemFont(ofSize: 35, weight: .light)
             pickerBeatLabel.textAlignment = .center
-            pickerBeatLabel.text = countBeatArray[row]
+            pickerBeatLabel.text = metronomeManager.countBeatArray[row]
             customBeatPickerView.addSubview(pickerBeatLabel)
     
             return customBeatPickerView
@@ -236,7 +230,7 @@ extension MainViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         let customValuePickerView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         let pickerImageView = UIImageView(frame: CGRect(x: 5, y: 5, width: 40, height: 40))
         pickerImageView.contentMode = .scaleAspectFill
-        pickerImageView.image = UIImage(named: imageTimeSignatureArray[row])
+        pickerImageView.image = UIImage(named: metronomeManager.imageTimeSignatureArray[row])
         customValuePickerView.addSubview(pickerImageView)
 
         return customValuePickerView
@@ -246,7 +240,7 @@ extension MainViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         if pickerView == beatMetronomePicker {
-            if let selectBeat = Int32(countBeatArray[row]) {
+            if let selectBeat = Int32(metronomeManager.countBeatArray[row]) {
                 countBeat = selectBeat
             }
             selectedRowBeat = Int16(row)
@@ -254,7 +248,7 @@ extension MainViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         }
         
         if pickerView == valueMetronomePicker {
-            timeSignature = valueTimeSignatureArray[row]
+            timeSignature = metronomeManager.valueTimeSignatureArray[row]
             ifPlayMertonome()
             selectedRowSignature = Int16(row)
         }
@@ -276,7 +270,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.nameLabel.text = "\(tempoLisrArray[indexPath.row].name!)"
         cell.tempoLabel.text = "\(tempoLisrArray[indexPath.row].tempo)"
         cell.beatLabel.text = "\(tempoLisrArray[indexPath.row].beat)"
-        cell.valueImage.image = UIImage(named: imageTimeSignatureArray[Int(tempoLisrArray[indexPath.row].rowValue)])
+        cell.valueImage.image = UIImage(named: metronomeManager.imageTimeSignatureArray[Int(tempoLisrArray[indexPath.row].rowValue)])
     
         return cell
     }
@@ -362,6 +356,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+// MARK: - AudioListDelegate
 extension MainViewController: UIPopoverPresentationControllerDelegate,  AudioListDelegate {
 
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -369,8 +364,14 @@ extension MainViewController: UIPopoverPresentationControllerDelegate,  AudioLis
     }
     
     func fetchAudioToMainVC(audioName: String) {
-        print("name - \(audioName)")
         selectedAudioButton.setTitle(audioName, for: .normal)
+        metronome.stopMetranome()
+        audio = AudioFiles(name: audioName)
+        metronome = Metronome(mainClick: audio.audioMainClick, accentClick: audio.audioAccentClick)
+        
+        if playButton.currentImage == UIImage(named: "stop") {
+            metronome.playMetronome(bpm: tempo, countBeat: countBeat, timeSignature: timeSignature)
+        }
     }
     
 }
