@@ -8,20 +8,115 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="ybr-up-Eze">
             <objects>
-                <viewController id="byH-Sn-7Ef" sceneMemberID="viewController">
+                <viewController id="byH-Sn-7Ef" userLabel="Settings View Controller" customClass="SettingsViewController" customModule="Metronome" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p1J-vK-bda">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="J6L-5Y-d1D">
+                                <rect key="frame" x="87" y="308.5" width="240" height="125"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="qfz-Rh-wUJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="63"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YyC-Ff-dxI">
+                                                <rect key="frame" x="78.5" y="0.0" width="83" height="23"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                <color key="textColor" name="TextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="X2g-Te-cX5">
+                                                <rect key="frame" x="0.0" y="28" width="240" height="36"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="0nE-c2-ogz"/>
+                                                    <constraint firstAttribute="height" constant="35" id="Wxc-W4-Ksd"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="Light"/>
+                                                    <segment title="Dark"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="changedThemeControl:" destination="byH-Sn-7Ef" eventType="valueChanged" id="Cav-cu-a97"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3aw-sz-oOU">
+                                        <rect key="frame" x="0.0" y="90" width="240" height="35"/>
+                                        <color key="backgroundColor" name="TapCellColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="406-Bb-DXy"/>
+                                            <constraint firstAttribute="height" constant="35" id="yPD-aR-Qsq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                        <state key="normal" title=" Remove ads">
+                                            <color key="titleColor" name="TextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pressedAdsButton:" destination="byH-Sn-7Ef" eventType="touchUpInside" id="KUx-Yo-9IQ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="o9S-SZ-qkj">
+                                <rect key="frame" x="144.5" y="759" width="125" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="METRONOME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOi-Qj-ywJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="125" height="24"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" name="TextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ⓒ Gera Stupakov" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2N-tE-bFT">
+                                        <rect key="frame" x="4.5" y="26" width="116" height="18"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                        <color key="textColor" name="TextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Otg-pL-Re2">
+                                <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R62-Z5-6Il">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="PFP-K8-6ej"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Q30-PS-lRa"/>
+                                        </constraints>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" name="TextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pressedBackButton:" destination="byH-Sn-7Ef" eventType="touchUpInside" id="iqO-0g-pTx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="rg7-ZA-UPf"/>
                         <color key="backgroundColor" name="BackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="rg7-ZA-UPf" firstAttribute="bottom" secondItem="o9S-SZ-qkj" secondAttribute="bottom" constant="5" id="1SB-ez-fYe"/>
+                            <constraint firstItem="J6L-5Y-d1D" firstAttribute="centerX" secondItem="p1J-vK-bda" secondAttribute="centerX" id="IMp-1o-rN3"/>
+                            <constraint firstItem="o9S-SZ-qkj" firstAttribute="centerX" secondItem="p1J-vK-bda" secondAttribute="centerX" id="OgI-tZ-BXi"/>
+                            <constraint firstItem="J6L-5Y-d1D" firstAttribute="centerY" secondItem="p1J-vK-bda" secondAttribute="centerY" constant="-50" id="WqZ-aO-5bp"/>
+                            <constraint firstItem="Otg-pL-Re2" firstAttribute="leading" secondItem="rg7-ZA-UPf" secondAttribute="leading" constant="20" id="dCK-7G-PPT"/>
+                            <constraint firstItem="Otg-pL-Re2" firstAttribute="top" secondItem="rg7-ZA-UPf" secondAttribute="top" constant="20" id="jVd-MG-Osc"/>
+                            <constraint firstItem="rg7-ZA-UPf" firstAttribute="trailing" secondItem="Otg-pL-Re2" secondAttribute="trailing" constant="20" id="yqI-iP-84C"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="adsButton" destination="3aw-sz-oOU" id="oWq-ej-P35"/>
+                        <outlet property="themeControl" destination="X2g-Te-cX5" id="z1v-cc-6g3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RKp-ci-zQU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2322" y="70"/>
+            <point key="canvasLocation" x="2321.739130434783" y="69.642857142857139"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="CKA-5q-uIL">
@@ -114,7 +209,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ay7-3s-ap2" userLabel="Button Stack View">
                                 <rect key="frame" x="40" y="267" width="334" height="90"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UdF-3w-Nhv" userLabel="MinusButton">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UdF-3w-Nhv" userLabel="MinusButton" customClass="CustomButton" customModule="Metronome" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="10" width="70" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="Axq-xH-yrF"/>
@@ -137,7 +232,7 @@
                                             <action selector="pressedPlayButton:" destination="W6A-fW-K85" eventType="touchUpInside" id="7Rv-ux-wAx"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wDW-jO-n5E" userLabel="PlusButton">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wDW-jO-n5E" userLabel="PlusButton" customClass="CustomButton" customModule="Metronome" customModuleProvider="target">
                                         <rect key="frame" x="264" y="10" width="70" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="bjo-zc-n0c"/>
@@ -154,7 +249,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="TEj-Ra-9Nk" userLabel="Menu Stack View">
                                 <rect key="frame" x="35" y="54" width="344" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ei-hC-TdU" userLabel="InfoButton">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ei-hC-TdU" userLabel="InfoButton" customClass="CustomButton" customModule="Metronome" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="36h-RT-B0r"/>
@@ -166,21 +261,31 @@
                                             <segue destination="byH-Sn-7Ef" kind="presentation" id="cwn-aT-FYp"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="muj-da-vlf">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="FBz-jL-Ib9">
                                         <rect key="frame" x="92" y="0.0" width="160" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="goO-uu-sqT"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="oVw-Cp-1dO"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
-                                        <state key="normal" title="Classic">
-                                            <color key="titleColor" name="TextColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="changedAudio:" destination="W6A-fW-K85" eventType="touchUpInside" id="wSZ-hH-vrb"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7HC-rJ-rbN" userLabel="AddButton">
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="audio click" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wv-gG-FL8">
+                                                <rect key="frame" x="44" y="0.0" width="72" height="13"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                <color key="textColor" name="TextColor"/>
+                                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="muj-da-vlf">
+                                                <rect key="frame" x="0.0" y="15" width="160" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="oVw-Cp-1dO"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                                <state key="normal" title="Default">
+                                                    <color key="titleColor" name="TextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="changedAudio:" destination="W6A-fW-K85" eventType="touchUpInside" id="wSZ-hH-vrb"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7HC-rJ-rbN" userLabel="AddButton" customClass="CustomButton" customModule="Metronome" customModuleProvider="target">
                                         <rect key="frame" x="304" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="nCs-l7-KRF"/>
@@ -250,7 +355,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XW7-fU-7pV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1555" y="-319"/>
+            <point key="canvasLocation" x="1555" y="-365"/>
         </scene>
     </scenes>
     <resources>
@@ -264,6 +369,9 @@
         </namedColor>
         <namedColor name="CellColor">
             <color red="0.80000001192092896" green="0.80000001192092896" blue="0.80000001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TapCellColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

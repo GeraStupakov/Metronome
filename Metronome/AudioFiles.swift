@@ -13,7 +13,7 @@ struct AudioFiles {
     
     var audioMainClick: URL {
         switch name {
-        case "Classic":
+        case "Default":
             return Bundle.main.url(forResource: "Classic_main", withExtension: "wav")!
         case "Ableton":
             return Bundle.main.url(forResource: "Ableton_main", withExtension: "wav")!
@@ -30,7 +30,7 @@ struct AudioFiles {
     
     var audioAccentClick: URL {
         switch name {
-        case "Classic":
+        case "Default":
             return Bundle.main.url(forResource: "Classic_accent", withExtension: "wav")!
         case "Ableton":
             return Bundle.main.url(forResource: "Ableton_accent", withExtension: "wav")!

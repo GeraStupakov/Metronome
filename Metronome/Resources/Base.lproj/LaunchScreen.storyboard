@@ -13,20 +13,20 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backLogo-black" translatesAutoresizingMaskIntoConstraints="NO" id="sAc-tY-3ts">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backLogo" translatesAutoresizingMaskIntoConstraints="NO" id="hLr-Je-f0E">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="sAc-tY-3ts" secondAttribute="bottom" id="7If-d0-NN7"/>
-                            <constraint firstItem="sAc-tY-3ts" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="MjA-WS-PcU"/>
-                            <constraint firstItem="sAc-tY-3ts" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="o15-6I-hxb"/>
-                            <constraint firstItem="sAc-tY-3ts" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="wA9-8e-I2N"/>
+                            <constraint firstItem="hLr-Je-f0E" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="HGH-oY-xZD"/>
+                            <constraint firstItem="hLr-Je-f0E" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YnA-ME-4Jd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hLr-Je-f0E" secondAttribute="trailing" id="boV-SC-zmL"/>
+                            <constraint firstAttribute="bottom" secondItem="hLr-Je-f0E" secondAttribute="bottom" id="pC4-kg-b4w"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -36,7 +36,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backLogo-black" width="414" height="896"/>
+        <image name="backLogo" width="414" height="896"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

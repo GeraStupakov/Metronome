@@ -19,14 +19,21 @@
 		C201F3D525F984B0005DAF73 /* MetronomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C201F3D425F984B0005DAF73 /* MetronomeTests.swift */; };
 		C201F3E025F984B0005DAF73 /* MetronomeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C201F3DF25F984B0005DAF73 /* MetronomeUITests.swift */; };
 		C20390D025FC25B100B79F09 /* Metronome.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20390CF25FC25B100B79F09 /* Metronome.swift */; };
+		C220BDA0277C8F8C007135A8 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C220BD9F277C8F8C007135A8 /* CoreDataManager.swift */; };
+		C225CD0A265E63110089D6CB /* MetronomeMediaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C225CD09265E63110089D6CB /* MetronomeMediaPlayer.swift */; };
+		C23CF40F2632320E00D249AE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23CF40E2632320E00D249AE /* SettingsViewController.swift */; };
 		C23DA8FB2600099D00DE0E12 /* Classic_accent.wav in Resources */ = {isa = PBXBuildFile; fileRef = C23DA8F92600099D00DE0E12 /* Classic_accent.wav */; };
 		C23DA8FC2600099D00DE0E12 /* Classic_main.wav in Resources */ = {isa = PBXBuildFile; fileRef = C23DA8FA2600099D00DE0E12 /* Classic_main.wav */; };
 		C25377CF261751F900619BF6 /* TempoSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25377CE261751F900619BF6 /* TempoSlider.swift */; };
+		C254701626664B7D00BCDB7D /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C254701526664B7D00BCDB7D /* CustomButton.swift */; };
 		C268EB2C2629C262007DDBB2 /* TempoListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268EB2B2629C262007DDBB2 /* TempoListTableView.swift */; };
 		C288AE7E260DFE2E00DF1030 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288AE7D260DFE2E00DF1030 /* MainViewController.swift */; };
+		C29AF7152655207200E18C49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29AF7142655207200E18C49 /* AudioToolbox.framework */; };
 		C29CD55426304A960022ED43 /* AudioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29CD55226304A960022ED43 /* AudioCell.swift */; };
 		C29CD55526304A960022ED43 /* AudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C29CD55326304A960022ED43 /* AudioCell.xib */; };
 		C29CD5702630DAAD0022ED43 /* AudioFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29CD56F2630DAAD0022ED43 /* AudioFiles.swift */; };
+		C2AEA0BD263B660C0093ADC1 /* ThemeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AEA0BC263B660C0093ADC1 /* ThemeApp.swift */; };
+		C2AEA0C3263B71070093ADC1 /* Persist.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AEA0C2263B71070093ADC1 /* Persist.swift */; };
 		C2B43B86261D169D0087EF01 /* TempoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B43B84261D169D0087EF01 /* TempoCell.swift */; };
 		C2B43B87261D169D0087EF01 /* TempoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2B43B85261D169D0087EF01 /* TempoCell.xib */; };
 		C2C524FC2631E7FA00BB5C08 /* AudioTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C524FB2631E7FA00BB5C08 /* AudioTableViewController.swift */; };
@@ -74,14 +81,22 @@
 		C201F3DF25F984B0005DAF73 /* MetronomeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeUITests.swift; sourceTree = "<group>"; };
 		C201F3E125F984B0005DAF73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C20390CF25FC25B100B79F09 /* Metronome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metronome.swift; sourceTree = "<group>"; };
+		C20BB54E26553D8D00019D36 /* Metronome.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Metronome.entitlements; sourceTree = "<group>"; };
+		C220BD9F277C8F8C007135A8 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		C225CD09265E63110089D6CB /* MetronomeMediaPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeMediaPlayer.swift; sourceTree = "<group>"; };
+		C23CF40E2632320E00D249AE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C23DA8F92600099D00DE0E12 /* Classic_accent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Classic_accent.wav; sourceTree = "<group>"; };
 		C23DA8FA2600099D00DE0E12 /* Classic_main.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Classic_main.wav; sourceTree = "<group>"; };
 		C25377CE261751F900619BF6 /* TempoSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoSlider.swift; sourceTree = "<group>"; };
+		C254701526664B7D00BCDB7D /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		C268EB2B2629C262007DDBB2 /* TempoListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoListTableView.swift; sourceTree = "<group>"; };
 		C288AE7D260DFE2E00DF1030 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		C29AF7142655207200E18C49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C29CD55226304A960022ED43 /* AudioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCell.swift; sourceTree = "<group>"; };
 		C29CD55326304A960022ED43 /* AudioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioCell.xib; sourceTree = "<group>"; };
 		C29CD56F2630DAAD0022ED43 /* AudioFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFiles.swift; sourceTree = "<group>"; };
+		C2AEA0BC263B660C0093ADC1 /* ThemeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeApp.swift; sourceTree = "<group>"; };
+		C2AEA0C2263B71070093ADC1 /* Persist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persist.swift; sourceTree = "<group>"; };
 		C2B43B84261D169D0087EF01 /* TempoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoCell.swift; sourceTree = "<group>"; };
 		C2B43B85261D169D0087EF01 /* TempoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TempoCell.xib; sourceTree = "<group>"; };
 		C2C524FB2631E7FA00BB5C08 /* AudioTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioTableViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C29AF7152655207200E18C49 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +141,7 @@
 				C201F3D325F984B0005DAF73 /* MetronomeTests */,
 				C201F3DE25F984B0005DAF73 /* MetronomeUITests */,
 				C201F3B825F984AC005DAF73 /* Products */,
+				C29AF7132655207200E18C49 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,15 +158,16 @@
 		C201F3B925F984AC005DAF73 /* Metronome */ = {
 			isa = PBXGroup;
 			children = (
+				C201F3C325F984AC005DAF73 /* Metronome.xcdatamodeld */,
+				C20BB54E26553D8D00019D36 /* Metronome.entitlements */,
+				C201F3CB25F984AF005DAF73 /* Info.plist */,
 				C201F3BA25F984AC005DAF73 /* AppDelegate.swift */,
 				C201F3BC25F984AC005DAF73 /* SceneDelegate.swift */,
-				C288AE82260DFE3500DF1030 /* ViewControllers */,
 				C288AE89260EA61D00DF1030 /* Model */,
-				C2B43B83261D15310087EF01 /* View */,
-				C201F3C625F984AF005DAF73 /* Assets.xcassets */,
-				C2F32A5526318EA700E4A0D7 /* MetronomeSamples */,
-				C201F3CB25F984AF005DAF73 /* Info.plist */,
-				C201F3C325F984AC005DAF73 /* Metronome.xcdatamodeld */,
+				C288AE82260DFE3500DF1030 /* ViewControllers */,
+				C220BD90277C845B007135A8 /* Views */,
+				C201F3C025F984AC005DAF73 /* Main.storyboard */,
+				C28DA86F26375F0500765DE6 /* Resources */,
 			);
 			path = Metronome;
 			sourceTree = "<group>";
@@ -172,11 +190,43 @@
 			path = MetronomeUITests;
 			sourceTree = "<group>";
 		};
+		C220BD90277C845B007135A8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C2C524FB2631E7FA00BB5C08 /* AudioTableViewController.swift */,
+				C268EB2B2629C262007DDBB2 /* TempoListTableView.swift */,
+				C2B43B84261D169D0087EF01 /* TempoCell.swift */,
+				C2B43B85261D169D0087EF01 /* TempoCell.xib */,
+				C29CD55226304A960022ED43 /* AudioCell.swift */,
+				C29CD55326304A960022ED43 /* AudioCell.xib */,
+				C25377CE261751F900619BF6 /* TempoSlider.swift */,
+				C254701526664B7D00BCDB7D /* CustomButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C220BD91277C8551007135A8 /* MetronomeMenager */ = {
+			isa = PBXGroup;
+			children = (
+				C20390CF25FC25B100B79F09 /* Metronome.swift */,
+				C200EFAE2631E27E00EEBF05 /* MetronomeManager.swift */,
+			);
+			path = MetronomeMenager;
+			sourceTree = "<group>";
+		};
+		C220BD9E277C8F5C007135A8 /* CoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				C220BD9F277C8F8C007135A8 /* CoreDataManager.swift */,
+			);
+			path = CoreDataManager;
+			sourceTree = "<group>";
+		};
 		C288AE82260DFE3500DF1030 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				C288AE7D260DFE2E00DF1030 /* MainViewController.swift */,
-				C2C524FB2631E7FA00BB5C08 /* AudioTableViewController.swift */,
+				C23CF40E2632320E00D249AE /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -184,26 +234,40 @@
 		C288AE89260EA61D00DF1030 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C20390CF25FC25B100B79F09 /* Metronome.swift */,
-				C200EFAE2631E27E00EEBF05 /* MetronomeManager.swift */,
+				C220BD91277C8551007135A8 /* MetronomeMenager */,
+				C220BD9E277C8F5C007135A8 /* CoreDataManager */,
+				C225CD09265E63110089D6CB /* MetronomeMediaPlayer.swift */,
 				C29CD56F2630DAAD0022ED43 /* AudioFiles.swift */,
-				C29CD55226304A960022ED43 /* AudioCell.swift */,
-				C2B43B84261D169D0087EF01 /* TempoCell.swift */,
-				C25377CE261751F900619BF6 /* TempoSlider.swift */,
-				C268EB2B2629C262007DDBB2 /* TempoListTableView.swift */,
+				C2AEA0C1263B70DD0093ADC1 /* ThemeApp */,
 			);
 			name = Model;
 			sourceTree = "<group>";
 		};
-		C2B43B83261D15310087EF01 /* View */ = {
+		C28DA86F26375F0500765DE6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C201F3C025F984AC005DAF73 /* Main.storyboard */,
-				C2B43B85261D169D0087EF01 /* TempoCell.xib */,
-				C29CD55326304A960022ED43 /* AudioCell.xib */,
+				C2F32A5526318EA700E4A0D7 /* MetronomeSamples */,
+				C201F3C625F984AF005DAF73 /* Assets.xcassets */,
 				C201F3C825F984AF005DAF73 /* LaunchScreen.storyboard */,
 			);
-			path = View;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C29AF7132655207200E18C49 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C29AF7142655207200E18C49 /* AudioToolbox.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C2AEA0C1263B70DD0093ADC1 /* ThemeApp */ = {
+			isa = PBXGroup;
+			children = (
+				C2AEA0C2263B71070093ADC1 /* Persist.swift */,
+				C2AEA0BC263B660C0093ADC1 /* ThemeApp.swift */,
+			);
+			path = ThemeApp;
 			sourceTree = "<group>";
 		};
 		C2F32A5526318EA700E4A0D7 /* MetronomeSamples */ = {
@@ -370,11 +434,17 @@
 				C268EB2C2629C262007DDBB2 /* TempoListTableView.swift in Sources */,
 				C201F3C525F984AC005DAF73 /* Metronome.xcdatamodeld in Sources */,
 				C20390D025FC25B100B79F09 /* Metronome.swift in Sources */,
+				C2AEA0C3263B71070093ADC1 /* Persist.swift in Sources */,
+				C220BDA0277C8F8C007135A8 /* CoreDataManager.swift in Sources */,
 				C288AE7E260DFE2E00DF1030 /* MainViewController.swift in Sources */,
 				C201F3BB25F984AC005DAF73 /* AppDelegate.swift in Sources */,
+				C225CD0A265E63110089D6CB /* MetronomeMediaPlayer.swift in Sources */,
+				C2AEA0BD263B660C0093ADC1 /* ThemeApp.swift in Sources */,
 				C25377CF261751F900619BF6 /* TempoSlider.swift in Sources */,
 				C201F3BD25F984AC005DAF73 /* SceneDelegate.swift in Sources */,
 				C200EFAF2631E27E00EEBF05 /* MetronomeManager.swift in Sources */,
+				C254701626664B7D00BCDB7D /* CustomButton.swift in Sources */,
+				C23CF40F2632320E00D249AE /* SettingsViewController.swift in Sources */,
 				C2C524FC2631E7FA00BB5C08 /* AudioTableViewController.swift in Sources */,
 				C29CD55426304A960022ED43 /* AudioCell.swift in Sources */,
 			);
@@ -552,6 +622,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Metronome/Metronome.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8D448H496X;
 				INFOPLIST_FILE = Metronome/Info.plist;
@@ -571,6 +642,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Metronome/Metronome.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8D448H496X;
 				INFOPLIST_FILE = Metronome/Info.plist;

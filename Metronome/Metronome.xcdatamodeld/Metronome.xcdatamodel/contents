@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H114" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H1519" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="TempoItem" representedClassName=".TempoItem" syncable="YES" codeGenerationType="class">
         <attribute name="beat" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="index" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="rowBeat" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="rowValue" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -9,6 +10,6 @@
         <attribute name="value" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="TempoItem" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="TempoItem" positionX="-63" positionY="-18" width="128" height="148"/>
     </elements>
 </model>

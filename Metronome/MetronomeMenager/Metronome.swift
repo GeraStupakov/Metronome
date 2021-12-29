@@ -16,6 +16,7 @@ class Metronome {
     var accentClickAudioFile: AVAudioFile!
     
     init(mainClick: URL, accentClick: URL) {
+        print("init metronome")
         mainClickAudioFile = try! AVAudioFile(forReading: mainClick)
         accentClickAudioFile = try! AVAudioFile(forReading: accentClick)
         
@@ -24,6 +25,7 @@ class Metronome {
         
         audioEngine.attach(audioPlayerNode)
         audioEngine.connect(audioPlayerNode, to: audioEngine.mainMixerNode, format: mainClickAudioFile.processingFormat)
+        
         do {
             try audioEngine.start()
         } catch {
@@ -31,11 +33,15 @@ class Metronome {
         }
     }
     
+    deinit {
+        print("deinit metronome object")
+    }
+    
     func generateBuffer(with bpm: Double, with countBeat: UInt32, with timeSignature: UInt32) -> AVAudioPCMBuffer {
         //буффер - область памяти, используемая для временного хранения данных ввода-вывода
         //цифровой сигнал, полученный методом импульсно-кодовой модуляции (PCM)
         //Два основных параметра качества PCM сигнала — это частота и разрядность. Частота — это количество измерений за одну секунду, чем их больше — тем с большей точностью передаётся сигнал. Частота измеряется в герцах: 44100 Hz
-        mainClickAudioFile.framePosition = 0 // устанавливаем нулевую позицию в аудиофайле, в которой произойдет следующая операция чтения или записи
+        mainClickAudioFile.framePosition = 0 //устанавливаем нулевую позицию в аудиофайле, в которой произойдет следующая операция чтения или записи
         accentClickAudioFile.framePosition = 0
         
         let lengthOfClick = AVAudioFrameCount(mainClickAudioFile.processingFormat.sampleRate * 60 / bpm)
@@ -82,6 +88,7 @@ class Metronome {
             let accentedClickArray = Array(
                 UnsafeBufferPointer(start: bufferOfAccentClick.floatChannelData![0],
                                     count: channelCount * Int(lengthOfClick / timeSignature)))
+            
             //Коллекция элементов буфера, непрерывно хранящихся в памяти.
             //Создаем новый указатель буфера на указанное количество непрерывных экземпляров, начиная с первого аудиосемпла буфера, колличестом lengthOfClick
             
@@ -96,7 +103,7 @@ class Metronome {
             }
             
             bufferBar.floatChannelData!.pointee.assign(from: barArray, count: channelCount * Int(bufferBar.frameLength))
-            //заменяем инициализированную память bufferBar на укзанноеколичество экземпляров из barArray.
+            //заменяем инициализированную память bufferBar на укзанное количество экземпляров из barArray.
             //Свойство floatChannelData возвращает указатели на аудиосемплы буфера, если формат буфера - 32-битное с плавающей точкой.
             //Число экземпляров для копирования из памяти, на которую ссылается источник, в память этого указателя.
             
@@ -111,7 +118,7 @@ class Metronome {
     }
     
     func playMetronome(bpm: Int32, countBeat: Int32, timeSignature: Int32) {
-        
+        print("start session")
         let metranomeBuffer = generateBuffer(with: Double(bpm), with: UInt32(countBeat), with: UInt32(timeSignature)) //создаем буфер из наших аудиофайлов
         
         if audioPlayerNode.isPlaying {
@@ -119,13 +126,21 @@ class Metronome {
         } else {
             audioPlayerNode.play()
         }
-        
+
         audioPlayerNode.scheduleBuffer(metranomeBuffer, at: nil, options: .loops, completionHandler: nil)
-        //Планирует воспроизведение сэмплов из аудиобуфера в указанное время и с указанными параметрами воспроизведения.
+       // Планирует воспроизведение сэмплов из аудиобуфера в указанное время и с указанными параметрами воспроизведения.
     }
     
     func stopMetranome() {
         audioPlayerNode.stop()
+        print("stop session")
+        //        do {
+        //            print("deinit session")
+        //            try AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        //            //MPNowPlayingInfoCenter.default().nowPlayingInfo = [:]
+        //        } catch {
+        //            print(error.localizedDescription)
+        //        }
     }
     
 }

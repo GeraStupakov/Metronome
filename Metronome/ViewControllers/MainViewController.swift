@@ -7,6 +7,8 @@
 
 import UIKit
 import CoreData
+import MediaPlayer
+import AVFoundation
 
 class MainViewController: UIViewController {
 
@@ -17,13 +19,13 @@ class MainViewController: UIViewController {
     @IBOutlet weak var valueMetronomePicker: UIPickerView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectedAudioButton: UIButton!
-
+    
     var tempoLisrArray = [TempoItem]()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var audio: AudioFiles!
     var metronome: Metronome!
     let metronomeManager = MetronomeManager()
+    let coreManager = CoreDataManager()
     
     var selectedRowSignature: Int16 = 0
     var selectedRowBeat: Int16 = 0
@@ -33,7 +35,16 @@ class MainViewController: UIViewController {
     var tempo: Int32 = 180 {
         didSet {
             tempoLabel.text = String(tempo)
+            setupNotificationView(tempo: tempo)
         }
+    }
+    
+    @Persist(key: "audioName", defaultValue: "Default")
+    private var audioName: String
+    
+    override func viewWillAppear(_ animated: Bool) {
+        UIApplication.shared.windows
+            .forEach { $0.initTheme() }
     }
     
     override func viewDidLoad() {
@@ -41,7 +52,7 @@ class MainViewController: UIViewController {
         
         tempoLabel.text = "180"
         playButton.setImage(UIImage(named: "play"), for: .normal)
-        selectedAudioButton.setTitle("Classic", for: .normal)
+        selectedAudioButton.setTitle(audioName, for: .normal)
     
         beatMetronomePicker.dataSource = self
         beatMetronomePicker.delegate = self
@@ -55,27 +66,31 @@ class MainViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(UINib(nibName: "TempoCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
         tableView.reloadData()
-        loadTempoItems()
+        coreManager.loadTempoItems(array: &tempoLisrArray)
         
-        audio = AudioFiles(name: "Classic")
+        audio = AudioFiles(name: audioName)
         let mainClickFile = audio.audioMainClick
         let accentedClickFile = audio.audioAccentClick
         metronome = Metronome(mainClick: mainClickFile, accentClick: accentedClickFile)
-
+        
+        setupNotificationView(tempo: tempo)
+        setupMediaPlayerNotifacationView()
     }
     
     
 // MARK: - @IBActions
     @IBAction func pressedPlayButton(_ sender: UIButton) {
-        
-        if playButton.currentImage == UIImage(named: "play") {
-            playButton.setImage(UIImage(named: "stop"), for: .normal)
-            metronome.playMetronome(bpm: tempo, countBeat: countBeat, timeSignature: timeSignature)
-        } else {
-            playButton.setImage(UIImage(named: "play"), for: .normal)
-            metronome.stopMetranome()
+    
+        DispatchQueue.main.async {
+            if self.playButton.currentImage == UIImage(named: "play") {
+                self.playButton.setImage(UIImage(named: "stop"), for: .normal)
+                self.metronome.playMetronome(bpm: self.tempo, countBeat: self.countBeat, timeSignature: self.timeSignature)
+            } else {
+                self.playButton.setImage(UIImage(named: "play"), for: .normal)
+                self.metronome.stopMetranome()
+            }
         }
-        
+
     }
     
     @IBAction func pressedPlusButton(_ sender: UIButton) {
@@ -123,7 +138,7 @@ class MainViewController: UIViewController {
         
         let alertActionAdd = UIAlertAction(title: "Add", style: .default) { alertAction in
             
-            let newTempoItem = TempoItem(context: self.context)
+            let newTempoItem = TempoItem(context: self.coreManager.context)
             
             if textField.text != "" {
                 newTempoItem.name = textField.text
@@ -137,9 +152,10 @@ class MainViewController: UIViewController {
             newTempoItem.rowBeat = self.selectedRowBeat
             
             self.tempoLisrArray.insert(newTempoItem, at: 0)
-            self.saveTempoItems()
+            self.coreManager.saveTempoItems()
             self.tableView.beginUpdates()
             self.tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .automatic)
+            self.reindex()
             self.tableView.endUpdates()
             
         }
@@ -174,24 +190,14 @@ class MainViewController: UIViewController {
         }
     }
     
-    func saveTempoItems() {
-        do {
-            try context.save()
-        } catch {
-            print("Error save context: \(error)")
+    func reindex()
+    {
+        for (index, item) in tempoLisrArray.enumerated() {
+            item.index = Int32(index)
         }
-    }
-    
-    func loadTempoItems() {
-        let request: NSFetchRequest<TempoItem> = TempoItem.fetchRequest()
+        coreManager.saveTempoItems()
+     }
         
-        do {
-            tempoLisrArray = try context.fetch(request)
-        } catch {
-            print("Error load context: \(error)")
-        }
-    }
-    
 }
 
 // MARK: - CUSTOM UIPickerViews, UIPickerViewDataSource and UIPickerViewDelegate
@@ -301,10 +307,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
             
-            self.context.delete(self.tempoLisrArray[indexPath.row])
+            self.coreManager.context.delete(self.tempoLisrArray[indexPath.row])
             do {
-                try self.context.save()
+                try self.coreManager.context.save()
                 self.tempoLisrArray.remove(at: indexPath.row)
+                self.reindex()
                 tableView.reloadData()
             } catch {
                 print(error.localizedDescription)
@@ -333,7 +340,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 } else {
                     self.tempoLisrArray[indexPath.row].name = textField.text
                     self.tempoLisrArray[indexPath.row].setValue(textField.text, forKey: "name")
-                    self.saveTempoItems()
+                    self.coreManager.saveTempoItems()
                 }
                 self.tableView.reloadRows(at: [indexPath], with: .fade)
             }))
@@ -347,7 +354,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             
             completionHandler(true)
         }
-
+        
         edit.backgroundColor = UIColor(named: "EditColor")
         
         let swipe = UISwipeActionsConfiguration(actions: [delete, edit])
@@ -357,21 +364,84 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 // MARK: - AudioListDelegate
-extension MainViewController: UIPopoverPresentationControllerDelegate,  AudioListDelegate {
+extension MainViewController: UIPopoverPresentationControllerDelegate, AudioListDelegate {
 
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
     
-    func fetchAudioToMainVC(audioName: String) {
-        selectedAudioButton.setTitle(audioName, for: .normal)
-        metronome.stopMetranome()
-        audio = AudioFiles(name: audioName)
-        metronome = Metronome(mainClick: audio.audioMainClick, accentClick: audio.audioAccentClick)
+    func fetchAudioToMainVC(newAudioName: String) {
+        selectedAudioButton.setTitle(newAudioName, for: .normal)
         
+        metronome.stopMetranome()
+        
+        audio = AudioFiles(name: newAudioName)
+        audioName = newAudioName
+        
+        metronome = Metronome(mainClick: audio.audioMainClick, accentClick: audio.audioAccentClick)
         if playButton.currentImage == UIImage(named: "stop") {
             metronome.playMetronome(bpm: tempo, countBeat: countBeat, timeSignature: timeSignature)
         }
     }
     
 }
+
+
+extension MainViewController {
+
+    func setupNotificationView(tempo: Int32) {
+
+        var nowPlayingInfo = [String : Any]()
+        nowPlayingInfo[MPMediaItemPropertyTitle] = "BPM: \(tempo)"
+        nowPlayingInfo[MPMediaItemPropertyArtist] = "Metronome"
+
+        if let image = UIImage(named: "sqrLogo") {
+            nowPlayingInfo[MPMediaItemPropertyArtwork] =
+                MPMediaItemArtwork(boundsSize: image.size) { size in
+                    return image
+            }
+        }
+
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+    }
+
+    func setupMediaPlayerNotifacationView() {
+        
+        let commandCenter = MPRemoteCommandCenter.shared()
+        
+        commandCenter.playCommand.addTarget { [unowned self] event in
+            self.metronome.playMetronome(bpm: self.tempo, countBeat: self.countBeat, timeSignature: self.timeSignature)
+            self.playButton.setImage(UIImage(named: "stop"), for: .normal)
+            return .success
+        }
+        
+        commandCenter.pauseCommand.addTarget { [unowned self] event in
+            self.metronome.stopMetranome()
+            self.playButton.setImage(UIImage(named: "play"), for: .normal)
+            return .success
+        }
+        
+        commandCenter.previousTrackCommand.addTarget { [unowned self] event in
+            print("-1")
+            if tempo > 30 {
+                tempo -= 1
+            }
+            tempoSlider.value -= 1
+            ifPlayMertonome()
+            return .success
+        }
+        
+        commandCenter.nextTrackCommand.addTarget { [unowned self] event in
+            print("+1")
+            if tempo < 360 {
+                tempo += 1
+            }
+            tempoSlider.value += 1
+            ifPlayMertonome()
+            return .success
+        }
+        
+    }
+
+}
+                    
