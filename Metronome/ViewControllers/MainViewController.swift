@@ -13,12 +13,12 @@ import AVFoundation
 class MainViewController: UIViewController {
 
     @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var tempoLabel: UILabel!
     @IBOutlet weak var tempoSlider: UISlider!
     @IBOutlet weak var beatMetronomePicker: UIPickerView!
     @IBOutlet weak var valueMetronomePicker: UIPickerView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectedAudioButton: UIButton!
+    @IBOutlet weak var tempoField: UITextField!
     
     var tempoLisrArray = [TempoItem]()
     
@@ -34,7 +34,7 @@ class MainViewController: UIViewController {
     var timeSignature: Int32 = 1
     var tempo: Int32 = 180 {
         didSet {
-            tempoLabel.text = String(tempo)
+            tempoField.text = String(tempo)
             setupNotificationView(tempo: tempo)
         }
     }
@@ -50,7 +50,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tempoLabel.text = "180"
+        tempoField.text = "180"
+        tempoField.delegate = self
         playButton.setImage(UIImage(named: "play"), for: .normal)
         selectedAudioButton.setTitle(audioName, for: .normal)
     
@@ -75,8 +76,9 @@ class MainViewController: UIViewController {
         
         setupNotificationView(tempo: tempo)
         setupMediaPlayerNotifacationView()
+        
+        self.setupToHideKeyboardOnTapOnView()
     }
-    
     
 // MARK: - @IBActions
     @IBAction func pressedPlayButton(_ sender: UIButton) {
@@ -85,6 +87,7 @@ class MainViewController: UIViewController {
             if self.playButton.currentImage == UIImage(named: "play") {
                 self.playButton.setImage(UIImage(named: "stop"), for: .normal)
                 self.metronome.playMetronome(bpm: self.tempo, countBeat: self.countBeat, timeSignature: self.timeSignature)
+                print("tempo = \(self.tempo)")
             } else {
                 self.playButton.setImage(UIImage(named: "play"), for: .normal)
                 self.metronome.stopMetranome()
@@ -126,7 +129,6 @@ class MainViewController: UIViewController {
         
         self.present(popAudioVC, animated: true, completion: nil)
     }
-    
 
 //MARK: - AlertController
     @IBAction func addTempoInTableView(_ sender: UIButton) {
@@ -386,7 +388,62 @@ extension MainViewController: UIPopoverPresentationControllerDelegate, AudioList
     
 }
 
+// MARK: - UITextFieldDelegate
+extension MainViewController: UITextFieldDelegate {
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
 
+        if tempoField.text == "" {
+            tempoField.text = String(tempo)
+        } else {
+            let textfieldValue = Int(textField.text ?? "180")
+            tempo = Int32(textfieldValue!)
+        }
+
+        if tempo > 360 {
+            tempoField.text = String("360")
+            tempo = 360
+        }
+
+        if tempo < 30 {
+            textField.text = String("30")
+            tempo = 30
+        }
+
+        ifPlayMertonome()
+
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        let numberLimit = 3
+        
+        let startingLength = tempoField.text?.count ?? 0
+        let lengthToAdd = string.count
+        let lengthToReplace = range.length
+        let newLength = startingLength + lengthToAdd - lengthToReplace
+        
+        return newLength <= numberLimit
+    }
+    
+    func setupToHideKeyboardOnTapOnView()
+    {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(MainViewController.dismissKeyboard))
+
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard()
+    {
+        view.endEditing(true)
+    }
+}
+
+//MARK: - Надо переделать плейер
 extension MainViewController {
 
     func setupNotificationView(tempo: Int32) {
