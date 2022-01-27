@@ -14,7 +14,6 @@ class TempoCell: UITableViewCell {
     @IBOutlet weak var beatLabel: UILabel!
     @IBOutlet weak var valueImage: UIImageView!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -26,7 +25,6 @@ class TempoCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         if selected {
             contentView.backgroundColor = UIColor(named: "TapCellColor")
         } else {

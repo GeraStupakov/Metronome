@@ -16,7 +16,6 @@ class Metronome {
     var accentClickAudioFile: AVAudioFile!
     
     init(mainClick: URL, accentClick: URL) {
-        print("init metronome")
         mainClickAudioFile = try! AVAudioFile(forReading: mainClick)
         accentClickAudioFile = try! AVAudioFile(forReading: accentClick)
         
@@ -31,10 +30,6 @@ class Metronome {
         } catch {
             print("Error audioEngine start with \(error)")
         }
-    }
-    
-    deinit {
-        print("deinit metronome object")
     }
     
     func generateBuffer(with bpm: Double, with countBeat: UInt32, with timeSignature: UInt32) -> AVAudioPCMBuffer {
@@ -63,7 +58,7 @@ class Metronome {
         bufferOfMainClick.frameLength = lengthOfClick / timeSignature //устанавливаем количество семплов в буфере MainClick
         //frameLength - The current number of valid sample frames in the buffer.
         //Текущее количество допустимых семплов фрейма в буфере.
-
+        
         //По умолчанию свойство frameLength не инициализируется полезным значением; вы должны установить это свойство перед использованием буфера. Длина должна быть меньше или равна frameCapacity буфера. В случае форматов с обратным чередованием frameCapacity относится к размеру аудиосэмплов одного канала.
         
         //тоже самое для AccentClick
@@ -118,7 +113,7 @@ class Metronome {
     }
     
     func playMetronome(bpm: Int32, countBeat: Int32, timeSignature: Int32) {
-        print("start session")
+        
         let metranomeBuffer = generateBuffer(with: Double(bpm), with: UInt32(countBeat), with: UInt32(timeSignature)) //создаем буфер из наших аудиофайлов
         
         if audioPlayerNode.isPlaying {
@@ -126,23 +121,15 @@ class Metronome {
         } else {
             audioPlayerNode.play()
         }
-
-        audioPlayerNode.scheduleBuffer(metranomeBuffer, at: nil, options: .loops, completionHandler: nil)
-       // Планирует воспроизведение сэмплов из аудиобуфера в указанное время и с указанными параметрами воспроизведения.
+        
+        audioPlayerNode.scheduleBuffer(metranomeBuffer, at: nil, options: .loops)
+        // Планирует воспроизведение сэмплов из аудиобуфера в указанное время и с указанными параметрами воспроизведения.
     }
     
     func stopMetranome() {
         audioPlayerNode.stop()
-        print("stop session")
-        //        do {
-        //            print("deinit session")
-        //            try AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
-        //            //MPNowPlayingInfoCenter.default().nowPlayingInfo = [:]
-        //        } catch {
-        //            print(error.localizedDescription)
-        //        }
     }
-    
+        
 }
 
 

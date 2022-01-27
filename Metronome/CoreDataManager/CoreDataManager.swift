@@ -8,9 +8,15 @@
 import UIKit
 import CoreData
 
-class CoreDataManager {
+struct CoreDataManager {
+    
+    var firstItems = [TempoItem]()
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    static let shared = CoreDataManager()
+    
+    private init() { }
     
     func saveTempoItems() {
         do {
@@ -32,7 +38,5 @@ class CoreDataManager {
             print("Error load context: \(error)")
         }
     }
-    
-    
-    
+
 }

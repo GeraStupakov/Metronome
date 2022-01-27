@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7604D75CBF9352EEC90C3043 /* Pods_Metronome_MetronomeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFE2EEC2C6717044BD35ACF7 /* Pods_Metronome_MetronomeUITests.framework */; };
+		C200576C278DABE900C47DC9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C200576B278DABE900C47DC9 /* StoreKit.framework */; };
 		C200EFAF2631E27E00EEBF05 /* MetronomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200EFAE2631E27E00EEBF05 /* MetronomeManager.swift */; };
 		C200EFBB2631E76B00EEBF05 /* Logic_accent.wav in Resources */ = {isa = PBXBuildFile; fileRef = C200EFB92631E76B00EEBF05 /* Logic_accent.wav */; };
 		C200EFBC2631E76B00EEBF05 /* Logic_main.wav in Resources */ = {isa = PBXBuildFile; fileRef = C200EFBA2631E76B00EEBF05 /* Logic_main.wav */; };
@@ -20,10 +22,11 @@
 		C201F3E025F984B0005DAF73 /* MetronomeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C201F3DF25F984B0005DAF73 /* MetronomeUITests.swift */; };
 		C20390D025FC25B100B79F09 /* Metronome.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20390CF25FC25B100B79F09 /* Metronome.swift */; };
 		C220BDA0277C8F8C007135A8 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C220BD9F277C8F8C007135A8 /* CoreDataManager.swift */; };
-		C225CD0A265E63110089D6CB /* MetronomeMediaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C225CD09265E63110089D6CB /* MetronomeMediaPlayer.swift */; };
+		C2366B3D2784430C008D3384 /* TapTempo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2366B3C2784430C008D3384 /* TapTempo.swift */; };
 		C23CF40F2632320E00D249AE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23CF40E2632320E00D249AE /* SettingsViewController.swift */; };
 		C23DA8FB2600099D00DE0E12 /* Classic_accent.wav in Resources */ = {isa = PBXBuildFile; fileRef = C23DA8F92600099D00DE0E12 /* Classic_accent.wav */; };
 		C23DA8FC2600099D00DE0E12 /* Classic_main.wav in Resources */ = {isa = PBXBuildFile; fileRef = C23DA8FA2600099D00DE0E12 /* Classic_main.wav */; };
+		C24D2A84278EFE2D003FC358 /* Metronome.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = C24D2A83278EFE2D003FC358 /* Metronome.sqlite */; };
 		C25377CF261751F900619BF6 /* TempoSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25377CE261751F900619BF6 /* TempoSlider.swift */; };
 		C254701626664B7D00BCDB7D /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C254701526664B7D00BCDB7D /* CustomButton.swift */; };
 		C268EB2C2629C262007DDBB2 /* TempoListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268EB2B2629C262007DDBB2 /* TempoListTableView.swift */; };
@@ -43,6 +46,8 @@
 		C2F32A772631947100E4A0D7 /* Ableton_accent.wav in Resources */ = {isa = PBXBuildFile; fileRef = C2F32A652631947000E4A0D7 /* Ableton_accent.wav */; };
 		C2F32A792631947100E4A0D7 /* Cubase_accent.wav in Resources */ = {isa = PBXBuildFile; fileRef = C2F32A672631947000E4A0D7 /* Cubase_accent.wav */; };
 		C2F32A7E2631947100E4A0D7 /* Cubase_main.wav in Resources */ = {isa = PBXBuildFile; fileRef = C2F32A6C2631947100E4A0D7 /* Cubase_main.wav */; };
+		E655DD45F9732511506600D7 /* Pods_MetronomeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 810626F1B735F7BD8B4C3289 /* Pods_MetronomeTests.framework */; };
+		FEB2EBDE1FFB65F721968000 /* Pods_Metronome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BFEE3B2B7DEAFB7768D4885 /* Pods_Metronome.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +68,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0ED400914613617355BFBC0D /* Pods-Metronome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Metronome.debug.xcconfig"; path = "Target Support Files/Pods-Metronome/Pods-Metronome.debug.xcconfig"; sourceTree = "<group>"; };
+		33D7D44217A38E0C228E975C /* Pods-MetronomeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MetronomeTests.release.xcconfig"; path = "Target Support Files/Pods-MetronomeTests/Pods-MetronomeTests.release.xcconfig"; sourceTree = "<group>"; };
+		55B4A3E3D4F9362A455AE43B /* Pods-Metronome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Metronome.release.xcconfig"; path = "Target Support Files/Pods-Metronome/Pods-Metronome.release.xcconfig"; sourceTree = "<group>"; };
+		810626F1B735F7BD8B4C3289 /* Pods_MetronomeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MetronomeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BFEE3B2B7DEAFB7768D4885 /* Pods_Metronome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Metronome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A984D75CAA95F96FFE60258B /* Pods-Metronome-MetronomeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Metronome-MetronomeUITests.release.xcconfig"; path = "Target Support Files/Pods-Metronome-MetronomeUITests/Pods-Metronome-MetronomeUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C200576B278DABE900C47DC9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C200EFAE2631E27E00EEBF05 /* MetronomeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeManager.swift; sourceTree = "<group>"; };
 		C200EFB92631E76B00EEBF05 /* Logic_accent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Logic_accent.wav; sourceTree = "<group>"; };
 		C200EFBA2631E76B00EEBF05 /* Logic_main.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Logic_main.wav; sourceTree = "<group>"; };
@@ -83,10 +95,11 @@
 		C20390CF25FC25B100B79F09 /* Metronome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metronome.swift; sourceTree = "<group>"; };
 		C20BB54E26553D8D00019D36 /* Metronome.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Metronome.entitlements; sourceTree = "<group>"; };
 		C220BD9F277C8F8C007135A8 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		C225CD09265E63110089D6CB /* MetronomeMediaPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeMediaPlayer.swift; sourceTree = "<group>"; };
+		C2366B3C2784430C008D3384 /* TapTempo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTempo.swift; sourceTree = "<group>"; };
 		C23CF40E2632320E00D249AE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C23DA8F92600099D00DE0E12 /* Classic_accent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Classic_accent.wav; sourceTree = "<group>"; };
 		C23DA8FA2600099D00DE0E12 /* Classic_main.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Classic_main.wav; sourceTree = "<group>"; };
+		C24D2A83278EFE2D003FC358 /* Metronome.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Metronome.sqlite; sourceTree = "<group>"; };
 		C25377CE261751F900619BF6 /* TempoSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoSlider.swift; sourceTree = "<group>"; };
 		C254701526664B7D00BCDB7D /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		C268EB2B2629C262007DDBB2 /* TempoListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoListTableView.swift; sourceTree = "<group>"; };
@@ -106,6 +119,9 @@
 		C2F32A652631947000E4A0D7 /* Ableton_accent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Ableton_accent.wav; sourceTree = "<group>"; };
 		C2F32A672631947000E4A0D7 /* Cubase_accent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Cubase_accent.wav; sourceTree = "<group>"; };
 		C2F32A6C2631947100E4A0D7 /* Cubase_main.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Cubase_main.wav; sourceTree = "<group>"; };
+		DFE2EEC2C6717044BD35ACF7 /* Pods_Metronome_MetronomeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Metronome_MetronomeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E12AC23E68A008249D62A15C /* Pods-MetronomeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MetronomeTests.debug.xcconfig"; path = "Target Support Files/Pods-MetronomeTests/Pods-MetronomeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E492974705722EA85DD71CFB /* Pods-Metronome-MetronomeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Metronome-MetronomeUITests.debug.xcconfig"; path = "Target Support Files/Pods-Metronome-MetronomeUITests/Pods-Metronome-MetronomeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +129,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C200576C278DABE900C47DC9 /* StoreKit.framework in Frameworks */,
 				C29AF7152655207200E18C49 /* AudioToolbox.framework in Frameworks */,
+				FEB2EBDE1FFB65F721968000 /* Pods_Metronome.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E655DD45F9732511506600D7 /* Pods_MetronomeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,12 +147,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7604D75CBF9352EEC90C3043 /* Pods_Metronome_MetronomeUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A04C59FEFAFC83604D53CC83 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0ED400914613617355BFBC0D /* Pods-Metronome.debug.xcconfig */,
+				55B4A3E3D4F9362A455AE43B /* Pods-Metronome.release.xcconfig */,
+				E492974705722EA85DD71CFB /* Pods-Metronome-MetronomeUITests.debug.xcconfig */,
+				A984D75CAA95F96FFE60258B /* Pods-Metronome-MetronomeUITests.release.xcconfig */,
+				E12AC23E68A008249D62A15C /* Pods-MetronomeTests.debug.xcconfig */,
+				33D7D44217A38E0C228E975C /* Pods-MetronomeTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		C201F3AE25F984AC005DAF73 = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +175,7 @@
 				C201F3DE25F984B0005DAF73 /* MetronomeUITests */,
 				C201F3B825F984AC005DAF73 /* Products */,
 				C29AF7132655207200E18C49 /* Frameworks */,
+				A04C59FEFAFC83604D53CC83 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -158,16 +192,16 @@
 		C201F3B925F984AC005DAF73 /* Metronome */ = {
 			isa = PBXGroup;
 			children = (
-				C201F3C325F984AC005DAF73 /* Metronome.xcdatamodeld */,
-				C20BB54E26553D8D00019D36 /* Metronome.entitlements */,
 				C201F3CB25F984AF005DAF73 /* Info.plist */,
 				C201F3BA25F984AC005DAF73 /* AppDelegate.swift */,
 				C201F3BC25F984AC005DAF73 /* SceneDelegate.swift */,
+				C20BB54E26553D8D00019D36 /* Metronome.entitlements */,
+				C24D2A4A278EEDCC003FC358 /* CoreData */,
 				C288AE89260EA61D00DF1030 /* Model */,
-				C288AE82260DFE3500DF1030 /* ViewControllers */,
+				C288AE82260DFE3500DF1030 /* Controllers */,
 				C220BD90277C845B007135A8 /* Views */,
-				C201F3C025F984AC005DAF73 /* Main.storyboard */,
 				C28DA86F26375F0500765DE6 /* Resources */,
+				C201F3C025F984AC005DAF73 /* Main.storyboard */,
 			);
 			path = Metronome;
 			sourceTree = "<group>";
@@ -205,13 +239,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		C220BD91277C8551007135A8 /* MetronomeMenager */ = {
+		C220BD91277C8551007135A8 /* MetronomeManager */ = {
 			isa = PBXGroup;
 			children = (
 				C20390CF25FC25B100B79F09 /* Metronome.swift */,
 				C200EFAE2631E27E00EEBF05 /* MetronomeManager.swift */,
 			);
-			path = MetronomeMenager;
+			path = MetronomeManager;
 			sourceTree = "<group>";
 		};
 		C220BD9E277C8F5C007135A8 /* CoreDataManager */ = {
@@ -222,23 +256,32 @@
 			path = CoreDataManager;
 			sourceTree = "<group>";
 		};
-		C288AE82260DFE3500DF1030 /* ViewControllers */ = {
+		C24D2A4A278EEDCC003FC358 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				C201F3C325F984AC005DAF73 /* Metronome.xcdatamodeld */,
+				C24D2A83278EFE2D003FC358 /* Metronome.sqlite */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		C288AE82260DFE3500DF1030 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				C288AE7D260DFE2E00DF1030 /* MainViewController.swift */,
 				C23CF40E2632320E00D249AE /* SettingsViewController.swift */,
 			);
-			path = ViewControllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		C288AE89260EA61D00DF1030 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C220BD91277C8551007135A8 /* MetronomeMenager */,
+				C220BD91277C8551007135A8 /* MetronomeManager */,
 				C220BD9E277C8F5C007135A8 /* CoreDataManager */,
-				C225CD09265E63110089D6CB /* MetronomeMediaPlayer.swift */,
+				C2AEA0C1263B70DD0093ADC1 /* ThemeAppManager */,
 				C29CD56F2630DAAD0022ED43 /* AudioFiles.swift */,
-				C2AEA0C1263B70DD0093ADC1 /* ThemeApp */,
+				C2366B3C2784430C008D3384 /* TapTempo.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -256,18 +299,22 @@
 		C29AF7132655207200E18C49 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C200576B278DABE900C47DC9 /* StoreKit.framework */,
 				C29AF7142655207200E18C49 /* AudioToolbox.framework */,
+				9BFEE3B2B7DEAFB7768D4885 /* Pods_Metronome.framework */,
+				DFE2EEC2C6717044BD35ACF7 /* Pods_Metronome_MetronomeUITests.framework */,
+				810626F1B735F7BD8B4C3289 /* Pods_MetronomeTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C2AEA0C1263B70DD0093ADC1 /* ThemeApp */ = {
+		C2AEA0C1263B70DD0093ADC1 /* ThemeAppManager */ = {
 			isa = PBXGroup;
 			children = (
 				C2AEA0C2263B71070093ADC1 /* Persist.swift */,
 				C2AEA0BC263B660C0093ADC1 /* ThemeApp.swift */,
 			);
-			path = ThemeApp;
+			path = ThemeAppManager;
 			sourceTree = "<group>";
 		};
 		C2F32A5526318EA700E4A0D7 /* MetronomeSamples */ = {
@@ -294,9 +341,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C201F3E425F984B0005DAF73 /* Build configuration list for PBXNativeTarget "Metronome" */;
 			buildPhases = (
+				5CA4768684B6C2B14DDCAC12 /* [CP] Check Pods Manifest.lock */,
 				C201F3B325F984AC005DAF73 /* Sources */,
 				C201F3B425F984AC005DAF73 /* Frameworks */,
 				C201F3B525F984AC005DAF73 /* Resources */,
+				B5DFC57E255D040912634941 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -311,6 +360,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C201F3E725F984B0005DAF73 /* Build configuration list for PBXNativeTarget "MetronomeTests" */;
 			buildPhases = (
+				46D5F0EFB1C9E2791F802862 /* [CP] Check Pods Manifest.lock */,
 				C201F3CC25F984B0005DAF73 /* Sources */,
 				C201F3CD25F984B0005DAF73 /* Frameworks */,
 				C201F3CE25F984B0005DAF73 /* Resources */,
@@ -329,9 +379,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C201F3EA25F984B0005DAF73 /* Build configuration list for PBXNativeTarget "MetronomeUITests" */;
 			buildPhases = (
+				BDB566B0F7A5DBAB651F67C3 /* [CP] Check Pods Manifest.lock */,
 				C201F3D725F984B0005DAF73 /* Sources */,
 				C201F3D825F984B0005DAF73 /* Frameworks */,
 				C201F3D925F984B0005DAF73 /* Resources */,
+				B48507B90EE1E8206742E0C7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -396,6 +448,7 @@
 				C29CD55526304A960022ED43 /* AudioCell.xib in Resources */,
 				C2F32A752631947100E4A0D7 /* Ableton_main.wav in Resources */,
 				C201F3C725F984AF005DAF73 /* Assets.xcassets in Resources */,
+				C24D2A84278EFE2D003FC358 /* Metronome.sqlite in Resources */,
 				C2F32A7E2631947100E4A0D7 /* Cubase_main.wav in Resources */,
 				C2F32A702631947100E4A0D7 /* Sonar_accent.wav in Resources */,
 				C200EFBB2631E76B00EEBF05 /* Logic_accent.wav in Resources */,
@@ -424,6 +477,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		46D5F0EFB1C9E2791F802862 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MetronomeTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5CA4768684B6C2B14DDCAC12 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Metronome-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B48507B90EE1E8206742E0C7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Metronome-MetronomeUITests/Pods-Metronome-MetronomeUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Metronome-MetronomeUITests/Pods-Metronome-MetronomeUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Metronome-MetronomeUITests/Pods-Metronome-MetronomeUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5DFC57E255D040912634941 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Metronome/Pods-Metronome-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Metronome/Pods-Metronome-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Metronome/Pods-Metronome-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BDB566B0F7A5DBAB651F67C3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Metronome-MetronomeUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C201F3B325F984AC005DAF73 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -434,11 +590,11 @@
 				C268EB2C2629C262007DDBB2 /* TempoListTableView.swift in Sources */,
 				C201F3C525F984AC005DAF73 /* Metronome.xcdatamodeld in Sources */,
 				C20390D025FC25B100B79F09 /* Metronome.swift in Sources */,
+				C2366B3D2784430C008D3384 /* TapTempo.swift in Sources */,
 				C2AEA0C3263B71070093ADC1 /* Persist.swift in Sources */,
 				C220BDA0277C8F8C007135A8 /* CoreDataManager.swift in Sources */,
 				C288AE7E260DFE2E00DF1030 /* MainViewController.swift in Sources */,
 				C201F3BB25F984AC005DAF73 /* AppDelegate.swift in Sources */,
-				C225CD0A265E63110089D6CB /* MetronomeMediaPlayer.swift in Sources */,
 				C2AEA0BD263B660C0093ADC1 /* ThemeApp.swift in Sources */,
 				C25377CF261751F900619BF6 /* TempoSlider.swift in Sources */,
 				C201F3BD25F984AC005DAF73 /* SceneDelegate.swift in Sources */,
@@ -552,7 +708,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -607,7 +763,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -619,18 +775,21 @@
 		};
 		C201F3E525F984B0005DAF73 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0ED400914613617355BFBC0D /* Pods-Metronome.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Metronome/Metronome.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = 8D448H496X;
 				INFOPLIST_FILE = Metronome/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = gerastupakov.Metronome;
+				MARKETING_VERSION = 0.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gerastupakov.Metronome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -639,18 +798,21 @@
 		};
 		C201F3E625F984B0005DAF73 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55B4A3E3D4F9362A455AE43B /* Pods-Metronome.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Metronome/Metronome.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = 8D448H496X;
 				INFOPLIST_FILE = Metronome/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = gerastupakov.Metronome;
+				MARKETING_VERSION = 0.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gerastupakov.Metronome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -659,6 +821,7 @@
 		};
 		C201F3E825F984B0005DAF73 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E12AC23E68A008249D62A15C /* Pods-MetronomeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -681,6 +844,7 @@
 		};
 		C201F3E925F984B0005DAF73 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33D7D44217A38E0C228E975C /* Pods-MetronomeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -703,6 +867,7 @@
 		};
 		C201F3EB25F984B0005DAF73 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E492974705722EA85DD71CFB /* Pods-Metronome-MetronomeUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -723,6 +888,7 @@
 		};
 		C201F3EC25F984B0005DAF73 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A984D75CAA95F96FFE60258B /* Pods-Metronome-MetronomeUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

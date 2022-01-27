@@ -3,15 +3,20 @@
 //  Metronome
 //
 //  Created by Георгий Ступаков on 3/26/21.
+
+// AdMob
+// APP ID: ca-app-pub-5666834342456165~7584229016
 //
+// BANNER ID: ca-app-pub-5666834342456165/3414077384
 
 import UIKit
 import CoreData
-import MediaPlayer
 import AVFoundation
+import GoogleMobileAds
 
-class MainViewController: UIViewController {
-
+class MainViewController: UIViewController, SettingsViewControllerDelegate {
+    
+    //MARK: - IBOutlets
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var tempoSlider: UISlider!
     @IBOutlet weak var beatMetronomePicker: UIPickerView!
@@ -19,13 +24,14 @@ class MainViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectedAudioButton: UIButton!
     @IBOutlet weak var tempoField: UITextField!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     var tempoLisrArray = [TempoItem]()
     
     var audio: AudioFiles!
     var metronome: Metronome!
     let metronomeManager = MetronomeManager()
-    let coreManager = CoreDataManager()
+    let tempoTap = TapTempo()
     
     var selectedRowSignature: Int16 = 0
     var selectedRowBeat: Int16 = 0
@@ -35,26 +41,23 @@ class MainViewController: UIViewController {
     var tempo: Int32 = 180 {
         didSet {
             tempoField.text = String(tempo)
-            setupNotificationView(tempo: tempo)
         }
     }
     
     @Persist(key: "audioName", defaultValue: "Default")
     private var audioName: String
     
-    override func viewWillAppear(_ animated: Bool) {
-        UIApplication.shared.windows
-            .forEach { $0.initTheme() }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UIApplication.shared.windows.forEach { $0.initTheme() }
+        
         tempoField.text = "180"
         tempoField.delegate = self
+        tempoField.clearsOnBeginEditing = true
         playButton.setImage(UIImage(named: "play"), for: .normal)
         selectedAudioButton.setTitle(audioName, for: .normal)
-    
+        
         beatMetronomePicker.dataSource = self
         beatMetronomePicker.delegate = self
         beatMetronomePicker.setValue(UIColor.white, forKey: "textColor")
@@ -65,35 +68,63 @@ class MainViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "TempoCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
-        tableView.reloadData()
-        coreManager.loadTempoItems(array: &tempoLisrArray)
+        CoreDataManager.shared.loadTempoItems(array: &tempoLisrArray)
         
         audio = AudioFiles(name: audioName)
         let mainClickFile = audio.audioMainClick
         let accentedClickFile = audio.audioAccentClick
         metronome = Metronome(mainClick: mainClickFile, accentClick: accentedClickFile)
         
-        setupNotificationView(tempo: tempo)
-        setupMediaPlayerNotifacationView()
+        bannerView.adUnitID = "ca-app-pub-5666834342456165/3414077384"
+        //GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["D7599159-EEAA-42EC-B531-486E597A9145"]
         
-        self.setupToHideKeyboardOnTapOnView()
+        bannerView.rootViewController = self
+        bannerView.delegate = self
+        bannerView.isHidden = true
+        
+        if !UserDefaults.standard.bool(forKey: "ads_removed") {
+            //bannerView.load(GADRequest())
+        } else {
+            bannerView.removeFromSuperview()
+        }
+        
+        setupToHideKeyboardOnTapOnView()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleInterruption(notification:)), name: AVAudioSession.interruptionNotification, object: nil)
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, options: [.mixWithOthers, .allowAirPlay])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
-// MARK: - @IBActions
+    //MARK: - @IBActions
     @IBAction func pressedPlayButton(_ sender: UIButton) {
-    
-        DispatchQueue.main.async {
-            if self.playButton.currentImage == UIImage(named: "play") {
-                self.playButton.setImage(UIImage(named: "stop"), for: .normal)
-                self.metronome.playMetronome(bpm: self.tempo, countBeat: self.countBeat, timeSignature: self.timeSignature)
-                print("tempo = \(self.tempo)")
-            } else {
-                self.playButton.setImage(UIImage(named: "play"), for: .normal)
-                self.metronome.stopMetranome()
-            }
+        
+        if self.playButton.currentImage == UIImage(named: "play") {
+            self.playButton.setImage(UIImage(named: "stop"), for: .normal)
+            self.metronome.playMetronome(bpm: self.tempo, countBeat: self.countBeat, timeSignature: self.timeSignature)
+        } else {
+            self.playButton.setImage(UIImage(named: "play"), for: .normal)
+            self.metronome.stopMetranome()
         }
-
+        
+    }
+    
+    @IBAction func tapButton(_ sender: UIButton) {
+        tempo = Int32(tempoTap.tap())
+        
+        if tempo < 30 {
+            tempo = 30
+        }
+        if tempo > 360 {
+            tempo = 360
+        }
+        
+        tempoSlider.value = Float(tempo)
+        ifPlayMertonome()
     }
     
     @IBAction func pressedPlusButton(_ sender: UIButton) {
@@ -125,22 +156,22 @@ class MainViewController: UIViewController {
         popOverVC?.delegate = self
         popOverVC?.sourceView = self.selectedAudioButton
         popOverVC?.sourceRect = CGRect(x: self.selectedAudioButton.bounds.midX, y: self.selectedAudioButton.bounds.maxY, width: 0, height: 0)
-        popAudioVC.preferredContentSize = CGSize(width: 130, height: 130)
+        popAudioVC.preferredContentSize = CGSize(width: 130, height: 220)
         
         self.present(popAudioVC, animated: true, completion: nil)
     }
-
-//MARK: - AlertController
+    
+    //MARK: - AlertController
     @IBAction func addTempoInTableView(_ sender: UIButton) {
         
-        let alert = UIAlertController(title: "Add tempo to the list?", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add tempo to the list?", message: nil, preferredStyle: .alert)
         alert.view.tintColor = UIColor(named: "TextColor")
         
         var textField = UITextField()
         
         let alertActionAdd = UIAlertAction(title: "Add", style: .default) { alertAction in
             
-            let newTempoItem = TempoItem(context: self.coreManager.context)
+            let newTempoItem = TempoItem(context: CoreDataManager.shared.context)
             
             if textField.text != "" {
                 newTempoItem.name = textField.text
@@ -154,7 +185,7 @@ class MainViewController: UIViewController {
             newTempoItem.rowBeat = self.selectedRowBeat
             
             self.tempoLisrArray.insert(newTempoItem, at: 0)
-            self.coreManager.saveTempoItems()
+            CoreDataManager.shared.saveTempoItems()
             self.tableView.beginUpdates()
             self.tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .automatic)
             self.reindex()
@@ -179,7 +210,40 @@ class MainViewController: UIViewController {
         
     }
     
-//MARK: - Functions
+    //MARK: - Functions
+    @objc func handleInterruption(notification: Notification) {
+        guard let info = notification.userInfo,
+              let typeValue = info[AVAudioSessionInterruptionTypeKey] as? UInt,
+              let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
+            return
+        }
+        if type == .began {
+            // Interruption began, take appropriate actions (save state, update user interface)
+            playButton.setImage(UIImage(named: "play"), for: .normal)
+        } else if type == .ended {
+            guard let optionsValue =
+                    info[AVAudioSessionInterruptionOptionKey] as? UInt else { return }
+            let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
+            if options.contains(.shouldResume) {
+                // Interruption Ended - playback should resume
+                playButton.setImage(UIImage(named: "stop"), for: .normal)
+                do {
+                    try metronome.audioEngine.start()
+                } catch {
+                    print("Error audioEngine start with \(error)")
+                }
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! SettingsViewController
+        destinationVC.delegate = self
+    }
+    
+    func fetchSettingsToMainVC() {
+        bannerView.removeFromSuperview()
+    }
     
     @objc func alertControllerBackgroundTapped()
     {
@@ -197,9 +261,8 @@ class MainViewController: UIViewController {
         for (index, item) in tempoLisrArray.enumerated() {
             item.index = Int32(index)
         }
-        coreManager.saveTempoItems()
-     }
-        
+        CoreDataManager.shared.saveTempoItems()
+    }
 }
 
 // MARK: - CUSTOM UIPickerViews, UIPickerViewDataSource and UIPickerViewDelegate
@@ -231,7 +294,7 @@ extension MainViewController: UIPickerViewDataSource, UIPickerViewDelegate {
             pickerBeatLabel.textAlignment = .center
             pickerBeatLabel.text = metronomeManager.countBeatArray[row]
             customBeatPickerView.addSubview(pickerBeatLabel)
-    
+            
             return customBeatPickerView
         }
         
@@ -240,7 +303,7 @@ extension MainViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         pickerImageView.contentMode = .scaleAspectFill
         pickerImageView.image = UIImage(named: metronomeManager.imageTimeSignatureArray[row])
         customValuePickerView.addSubview(pickerImageView)
-
+        
         return customValuePickerView
     }
     
@@ -279,7 +342,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.tempoLabel.text = "\(tempoLisrArray[indexPath.row].tempo)"
         cell.beatLabel.text = "\(tempoLisrArray[indexPath.row].beat)"
         cell.valueImage.image = UIImage(named: metronomeManager.imageTimeSignatureArray[Int(tempoLisrArray[indexPath.row].rowValue)])
-    
+        
         return cell
     }
     
@@ -304,14 +367,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-  
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
             
-            self.coreManager.context.delete(self.tempoLisrArray[indexPath.row])
+            CoreDataManager.shared.context.delete(self.tempoLisrArray[indexPath.row])
             do {
-                try self.coreManager.context.save()
+                try CoreDataManager.shared.context.save()
                 self.tempoLisrArray.remove(at: indexPath.row)
                 self.reindex()
                 tableView.reloadData()
@@ -328,7 +391,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             
             var textField = UITextField()
             
-            let editAlert = UIAlertController(title: "", message: "Edit name?", preferredStyle: .alert)
+            let editAlert = UIAlertController(title: "Edit name?", message: nil, preferredStyle: .alert)
             editAlert.view.tintColor = UIColor(named: "TextColor")
             
             editAlert.addTextField { editTextField in
@@ -342,7 +405,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 } else {
                     self.tempoLisrArray[indexPath.row].name = textField.text
                     self.tempoLisrArray[indexPath.row].setValue(textField.text, forKey: "name")
-                    self.coreManager.saveTempoItems()
+                    CoreDataManager.shared.saveTempoItems()
                 }
                 self.tableView.reloadRows(at: [indexPath], with: .fade)
             }))
@@ -363,11 +426,22 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return swipe
     }
     
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        let mover = tempoLisrArray.remove(at: sourceIndexPath.row)
+        tempoLisrArray.insert(mover, at: destinationIndexPath.row)
+        self.reindex()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
 }
 
 // MARK: - AudioListDelegate
 extension MainViewController: UIPopoverPresentationControllerDelegate, AudioListDelegate {
-
+    
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
@@ -392,31 +466,32 @@ extension MainViewController: UIPopoverPresentationControllerDelegate, AudioList
 extension MainViewController: UITextFieldDelegate {
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-
+        
         if tempoField.text == "" {
             tempoField.text = String(tempo)
         } else {
             let textfieldValue = Int(textField.text ?? "180")
             tempo = Int32(textfieldValue!)
         }
-
+        
         if tempo > 360 {
             tempoField.text = String("360")
             tempo = 360
         }
-
+        
         if tempo < 30 {
             textField.text = String("30")
             tempo = 30
         }
-
+        
+        tempoSlider.value = Float(tempo)
         ifPlayMertonome()
-
+        
         return true
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-
+        
         let numberLimit = 3
         
         let startingLength = tempoField.text?.count ?? 0
@@ -432,73 +507,32 @@ extension MainViewController: UITextFieldDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(MainViewController.dismissKeyboard))
-
+        
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
-
+    
     @objc func dismissKeyboard()
     {
         view.endEditing(true)
     }
 }
 
-//MARK: - Надо переделать плейер
-extension MainViewController {
-
-    func setupNotificationView(tempo: Int32) {
-
-        var nowPlayingInfo = [String : Any]()
-        nowPlayingInfo[MPMediaItemPropertyTitle] = "BPM: \(tempo)"
-        nowPlayingInfo[MPMediaItemPropertyArtist] = "Metronome"
-
-        if let image = UIImage(named: "sqrLogo") {
-            nowPlayingInfo[MPMediaItemPropertyArtwork] =
-                MPMediaItemArtwork(boundsSize: image.size) { size in
-                    return image
-            }
-        }
-
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+//MARK: - GADBannerViewDelegate
+extension MainViewController: GADBannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        bannerView.isHidden = false
+        
+        bannerView.alpha = 0
+        UIView.animate(withDuration: 1, animations: {
+            bannerView.alpha = 1
+        })
+        
+        print("Received ads")
     }
-
-    func setupMediaPlayerNotifacationView() {
-        
-        let commandCenter = MPRemoteCommandCenter.shared()
-        
-        commandCenter.playCommand.addTarget { [unowned self] event in
-            self.metronome.playMetronome(bpm: self.tempo, countBeat: self.countBeat, timeSignature: self.timeSignature)
-            self.playButton.setImage(UIImage(named: "stop"), for: .normal)
-            return .success
-        }
-        
-        commandCenter.pauseCommand.addTarget { [unowned self] event in
-            self.metronome.stopMetranome()
-            self.playButton.setImage(UIImage(named: "play"), for: .normal)
-            return .success
-        }
-        
-        commandCenter.previousTrackCommand.addTarget { [unowned self] event in
-            print("-1")
-            if tempo > 30 {
-                tempo -= 1
-            }
-            tempoSlider.value -= 1
-            ifPlayMertonome()
-            return .success
-        }
-        
-        commandCenter.nextTrackCommand.addTarget { [unowned self] event in
-            print("+1")
-            if tempo < 360 {
-                tempo += 1
-            }
-            tempoSlider.value += 1
-            ifPlayMertonome()
-            return .success
-        }
-        
+    
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+        bannerView.isHidden = true
+        print("Error ads: \(error)")
     }
-
 }
-                    

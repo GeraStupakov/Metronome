@@ -7,24 +7,17 @@
 
 import UIKit
 import CoreData
-import MediaPlayer
+import GoogleMobileAds
+import AVFoundation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
-        do {
-            print("init session")
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-            try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        Thread.sleep(forTimeInterval: 0.3)
-        
+
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        Thread.sleep(forTimeInterval: 0.4)
+            
         return true
     }
 
@@ -41,7 +34,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
@@ -51,7 +50,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
         */
+                    
         let container = NSPersistentContainer(name: "Metronome")
+        
+        //preload CoreData
+        let appName: String = "Metronome"
+        var persistentStoreDescriptions: NSPersistentStoreDescription
+        
+        let storeUrl = self.getDocumentsDirectory().appendingPathComponent("Metronome.sqlite")
+        
+        if !FileManager.default.fileExists(atPath: (storeUrl.path)) {
+            let seededDataUrl = Bundle.main.url(forResource: "Metronome", withExtension: "sqlite")
+            try! FileManager.default.copyItem(at: seededDataUrl!, to: storeUrl)
+        }
+        
+        let description = NSPersistentStoreDescription()
+        description.shouldInferMappingModelAutomatically = true
+        description.shouldMigrateStoreAutomatically = true
+        description.url = storeUrl
+        
+        container.persistentStoreDescriptions = [description]
+        
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
@@ -70,6 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         return container
     }()
+    
 
     // MARK: - Core Data Saving support
 
