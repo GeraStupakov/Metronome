@@ -38,27 +38,15 @@ class SettingsViewController: UIViewController, SKPaymentTransactionObserver, MF
         }
         
         themeControl.selectedSegmentIndex = ThemeApp.current.rawValue
-        
-        if ThemeApp.current.rawValue == 0 {
-            restorePurchase.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1.0)
-        } else {
-            restorePurchase.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1.0)
-        }
     }
     
     @IBAction func changedThemeControl(_ sender: UISegmentedControl) {
         guard let theme = ThemeApp(rawValue: themeControl.selectedSegmentIndex) else { return }
         theme.setActive()
-        
-        if ThemeApp.current.rawValue == 0 {
-            restorePurchase.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1.0)
-        } else {
-            restorePurchase.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1.0)
-        }
     }
     
     @IBAction func tappedShare(_ sender: UIButton) {
-        guard let url = URL(string: "https://github.com/GeraStupakov/Metronome-Tempo-BPM") else { return }
+        guard let url = URL(string: "https://apps.apple.com/app/metronome-tempo-bpm/id1604296528#?platform=iphone") else { return }
         
         let activityController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         present(activityController, animated: true, completion: nil)
@@ -66,16 +54,16 @@ class SettingsViewController: UIViewController, SKPaymentTransactionObserver, MF
     
     @IBAction func tappedRate(_ sender: UIButton) {
         
-        guard let url = URL(string: "https://itunes.apple.com/app/apple-store/id375380948?action=write-review/") else { return }
+        guard let url = URL(string: "https://apps.apple.com/app/apple-store/id1604296528?action=write-review") else { return }
         
         if #available(iOS 10.0, *) {
             UIApplication.shared.open(url, options: [ : ] , completionHandler: nil)
         } else {
             UIApplication.shared.openURL(url)
-            //guard let scene = view.window?.windowScene else { return }
-            //SKStoreReviewController.requestReview(in: scene)
         }
         
+        //guard let scene = view.window?.windowScene else { return }
+        //SKStoreReviewController.requestReview(in: scene)
     }
     
     @IBAction func tappedPrivacy(_ sender: UIButton) {
@@ -91,11 +79,8 @@ class SettingsViewController: UIViewController, SKPaymentTransactionObserver, MF
     
     @IBAction func tappedSupport(_ sender: UIButton) {
         
-        print("tappedSupport 1")
-        
         guard MFMailComposeViewController.canSendMail() else { return }
         
-        print("tappedSupport 2")
         let composer = MFMailComposeViewController()
         composer.mailComposeDelegate = self
         composer.setToRecipients(["gerastupakov@gmail.com"])
@@ -142,7 +127,6 @@ class SettingsViewController: UIViewController, SKPaymentTransactionObserver, MF
             } else if transaction.transactionState == .failed {
                 if let error = transaction.error {
                     print("Transaction failed due to \(error.localizedDescription)")
-                    removeAdsAndButtons()
                 }
                 SKPaymentQueue.default().finishTransaction(transaction)
             } else if transaction.transactionState == .restored {

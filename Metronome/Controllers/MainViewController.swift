@@ -6,7 +6,7 @@
 
 // AdMob
 // APP ID: ca-app-pub-5666834342456165~7584229016
-//
+// 
 // BANNER ID: ca-app-pub-5666834342456165/3414077384
 
 import UIKit
@@ -41,6 +41,8 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
     var tempo: Int32 = 180 {
         didSet {
             tempoField.text = String(tempo)
+            tempoSlider.value = Float(tempo)
+            ifPlayMertonome()
         }
     }
     
@@ -75,7 +77,9 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
         let accentedClickFile = audio.audioAccentClick
         metronome = Metronome(mainClick: mainClickFile, accentClick: accentedClickFile)
         
-        bannerView.adUnitID = "ca-app-pub-5666834342456165/3414077384"
+        //bannerView.adUnitID = "ca-app-pub-5666834342456165/3414077384" // старый
+        //bannerView.adUnitID = "ca-app-pub-5666834342456165/6765004738" // новый
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" // тестовый
         //GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["D7599159-EEAA-42EC-B531-486E597A9145"]
         
         bannerView.rootViewController = self
@@ -83,14 +87,14 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
         bannerView.isHidden = true
         
         if !UserDefaults.standard.bool(forKey: "ads_removed") {
-            //bannerView.load(GADRequest())
+            bannerView.load(GADRequest())
         } else {
             bannerView.removeFromSuperview()
         }
         
         setupToHideKeyboardOnTapOnView()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleInterruption(notification:)), name: AVAudioSession.interruptionNotification, object: nil)
+        metronome.setupAudioInterruptionListener(button: playButton)
         
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, options: [.mixWithOthers, .allowAirPlay])
@@ -132,7 +136,6 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
             tempo += 1
         }
         tempoSlider.value += 1
-        ifPlayMertonome()
     }
     
     @IBAction func pressedMinusButton(_ sender: UIButton) {
@@ -140,12 +143,10 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
             tempo -= 1
         }
         tempoSlider.value -= 1
-        ifPlayMertonome()
     }
     
     @IBAction func changedTempoSlider(_ sender: UISlider) {
         tempo = Int32(tempoSlider.value)
-        ifPlayMertonome()
     }
     
     @IBAction func changedAudio(_ sender: UIButton) {
@@ -190,13 +191,15 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
             self.tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .automatic)
             self.reindex()
             self.tableView.endUpdates()
-            
+            let topIndex = IndexPath(row: 0, section: 0)
+            self.tableView.scrollToRow(at: topIndex, at: .top, animated: true)
         }
         
         let alertActionCancel = UIAlertAction(title: "Cancel", style: .cancel)
         
         alert.addTextField { alertTextField in
             alertTextField.placeholder = "Enter name"
+            alertTextField.autocapitalizationType = .sentences
             textField = alertTextField
         }
         
@@ -211,30 +214,6 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
     }
     
     //MARK: - Functions
-    @objc func handleInterruption(notification: Notification) {
-        guard let info = notification.userInfo,
-              let typeValue = info[AVAudioSessionInterruptionTypeKey] as? UInt,
-              let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
-            return
-        }
-        if type == .began {
-            // Interruption began, take appropriate actions (save state, update user interface)
-            playButton.setImage(UIImage(named: "play"), for: .normal)
-        } else if type == .ended {
-            guard let optionsValue =
-                    info[AVAudioSessionInterruptionOptionKey] as? UInt else { return }
-            let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
-            if options.contains(.shouldResume) {
-                // Interruption Ended - playback should resume
-                playButton.setImage(UIImage(named: "stop"), for: .normal)
-                do {
-                    try metronome.audioEngine.start()
-                } catch {
-                    print("Error audioEngine start with \(error)")
-                }
-            }
-        }
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! SettingsViewController
@@ -372,16 +351,30 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
             
-            CoreDataManager.shared.context.delete(self.tempoLisrArray[indexPath.row])
-            do {
-                try CoreDataManager.shared.context.save()
-                self.tempoLisrArray.remove(at: indexPath.row)
-                self.reindex()
-                tableView.reloadData()
-            } catch {
-                print(error.localizedDescription)
-            }
+            let editAlertDelete = UIAlertController(title: "Delete?", message: nil, preferredStyle: .alert)
+            editAlertDelete.view.tintColor = UIColor(named: "TextColor")
             
+            editAlertDelete.addAction(UIAlertAction(title: "Yes!", style: .default, handler: { alertAction in
+                
+                CoreDataManager.shared.context.delete(self.tempoLisrArray[indexPath.row])
+                do {
+                    try CoreDataManager.shared.context.save()
+                    self.tempoLisrArray.remove(at: indexPath.row)
+                    self.reindex()
+                    tableView.reloadData()
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
+            }))
+            
+            editAlertDelete.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            self.present(editAlertDelete, animated: true) {
+                editAlertDelete.view.superview?.isUserInteractionEnabled = true
+                editAlertDelete.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+            }
+        
             completionHandler(true)
         }
         
@@ -389,24 +382,49 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completionHandler) in
             
-            var textField = UITextField()
+            var textFieldName = UITextField()
+            var textFieldTempo = UITextField()
             
-            let editAlert = UIAlertController(title: "Edit name?", message: nil, preferredStyle: .alert)
+            let editAlert = UIAlertController(title: "Edit name and tempo?", message: nil, preferredStyle: .alert)
             editAlert.view.tintColor = UIColor(named: "TextColor")
             
-            editAlert.addTextField { editTextField in
-                editTextField.placeholder = "Enter name"
-                textField = editTextField
+            editAlert.addTextField { textField in
+                textField.placeholder = "Enter name"
+                textField.text = self.tempoLisrArray[indexPath.row].name
+                textField.autocapitalizationType = .sentences
+                textField.borderStyle = UITextField.BorderStyle.roundedRect
+                textFieldName = textField
+            }
+            
+            editAlert.addTextField { textField in
+                textField.placeholder = "Enter tempo"
+                textField.text = String(self.tempoLisrArray[indexPath.row].tempo)
+                textField.autocapitalizationType = .sentences
+                textField.borderStyle = UITextField.BorderStyle.roundedRect
+                textField.keyboardType = .numberPad
+                textField.delegate = self
+                textFieldTempo = textField
             }
             
             editAlert.addAction(UIAlertAction(title: "Update", style: .default, handler: { alertAction in
-                if textField.text == "" {
-                    self.tempoLisrArray[indexPath.row].name = self.tempoLisrArray[indexPath.row].name
+                
+                if textFieldName.text == "" {
+                    self.tempoLisrArray[indexPath.row].name = ""
                 } else {
-                    self.tempoLisrArray[indexPath.row].name = textField.text
-                    self.tempoLisrArray[indexPath.row].setValue(textField.text, forKey: "name")
-                    CoreDataManager.shared.saveTempoItems()
+                    self.tempoLisrArray[indexPath.row].name = textFieldName.text
+                    self.tempoLisrArray[indexPath.row].setValue(textFieldName.text, forKey: "name")
                 }
+                
+                if textFieldTempo.text == "" {
+                    self.tempoLisrArray[indexPath.row].tempo = 30
+                } else {
+                    let value = Int32(textFieldTempo.text ?? "30")
+                    self.tempoLisrArray[indexPath.row].tempo = value ?? 30
+                    self.tempoLisrArray[indexPath.row].setValue(value, forKey: "tempo")
+                }
+
+                CoreDataManager.shared.saveTempoItems()
+                
                 self.tableView.reloadRows(at: [indexPath], with: .fade)
             }))
             
@@ -415,6 +433,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             self.present(editAlert, animated: true) {
                 editAlert.view.superview?.isUserInteractionEnabled = true
                 editAlert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+            }
+            
+            for textField in editAlert.textFields! {
+                let container = textField.superview
+                let effectView = container?.superview?.subviews[0]
+                if (effectView != nil) {
+                    container?.backgroundColor = UIColor.clear
+                    effectView?.removeFromSuperview()
+                }
             }
             
             completionHandler(true)
@@ -455,9 +482,10 @@ extension MainViewController: UIPopoverPresentationControllerDelegate, AudioList
         audioName = newAudioName
         
         metronome = Metronome(mainClick: audio.audioMainClick, accentClick: audio.audioAccentClick)
-        if playButton.currentImage == UIImage(named: "stop") {
-            metronome.playMetronome(bpm: tempo, countBeat: countBeat, timeSignature: timeSignature)
-        }
+
+            if playButton.currentImage == UIImage(named: "stop") {
+                metronome.playMetronome(bpm: tempo, countBeat: countBeat, timeSignature: timeSignature)
+            }
     }
     
 }
@@ -467,25 +495,32 @@ extension MainViewController: UITextFieldDelegate {
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         
-        if tempoField.text == "" {
-            tempoField.text = String(tempo)
+        if textField == tempoField {
+            if tempoField.text == "" {
+                tempoField.text = String(tempo)
+            } else {
+                let textfieldValue = Int(textField.text ?? "180")
+                tempo = Int32(textfieldValue!)
+            }
+            
+            if tempo > 360 {
+                tempoField.text = String("360")
+                tempo = 360
+            }
+
+            if tempo < 30 {
+                textField.text = String("30")
+                tempo = 30
+            }
         } else {
             let textfieldValue = Int(textField.text ?? "180")
-            tempo = Int32(textfieldValue!)
+            if textfieldValue! > 360 {
+                textField.text = "360"
+            }
+            if textfieldValue! < 30 {
+                textField.text = "30"
+            }
         }
-        
-        if tempo > 360 {
-            tempoField.text = String("360")
-            tempo = 360
-        }
-        
-        if tempo < 30 {
-            textField.text = String("30")
-            tempo = 30
-        }
-        
-        tempoSlider.value = Float(tempo)
-        ifPlayMertonome()
         
         return true
     }
@@ -494,12 +529,16 @@ extension MainViewController: UITextFieldDelegate {
         
         let numberLimit = 3
         
-        let startingLength = tempoField.text?.count ?? 0
+        let startingLength = textField.text?.count ?? 0
         let lengthToAdd = string.count
         let lengthToReplace = range.length
         let newLength = startingLength + lengthToAdd - lengthToReplace
         
-        return newLength <= numberLimit
+        let aSet = NSCharacterSet(charactersIn:"0123456789").inverted
+        let compSepByCharInSet = string.components(separatedBy: aSet)
+        let numberFiltered = compSepByCharInSet.joined(separator: "")
+        
+        return (newLength <= numberLimit) && (string == numberFiltered)
     }
     
     func setupToHideKeyboardOnTapOnView()

@@ -9,15 +9,22 @@ import UIKit
 import CoreData
 import GoogleMobileAds
 import AVFoundation
+import AppTrackingTransparency
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization { (status) in
+                GADMobileAds.sharedInstance().start(completionHandler: nil)
+            }
+        } else {
+            GADMobileAds.sharedInstance().start(completionHandler: nil)
+        }
+        
         Thread.sleep(forTimeInterval: 0.4)
-            
         return true
     }
 

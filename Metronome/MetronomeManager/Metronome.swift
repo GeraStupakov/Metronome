@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import UIKit
 
 class Metronome {
     
@@ -14,6 +15,9 @@ class Metronome {
     var audioPlayerNode: AVAudioPlayerNode!
     var mainClickAudioFile: AVAudioFile!
     var accentClickAudioFile: AVAudioFile!
+    
+    private var isSuspended = false
+    var changeButton: UIButton!
     
     init(mainClick: URL, accentClick: URL) {
         mainClickAudioFile = try! AVAudioFile(forReading: mainClick)
@@ -128,6 +132,69 @@ class Metronome {
     
     func stopMetranome() {
         audioPlayerNode.stop()
+    }
+    
+    func setupAudioInterruptionListener(button: UIButton) {
+        
+        changeButton = button
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleEngineConfigurationChange(notification:)),
+            name: NSNotification.Name.AVAudioEngineConfigurationChange,
+            object: audioEngine
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleAudioInterruption(notification:)),
+            name: AVAudioSession.interruptionNotification,
+            object: AVAudioSession.sharedInstance()
+        )
+    }
+    
+    @objc func handleEngineConfigurationChange(notification: Notification) {
+        if !isSuspended {
+            do {
+                try self.audioEngine.start()
+            } catch {
+                print("Error restarting audio: \(error)")
+            }
+        }
+    }
+    
+    @objc func handleAudioInterruption(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+              let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
+            return
+        }
+        
+        switch type {
+        case .began:
+            isSuspended = true
+            changeButton.setImage(UIImage(named: "play"), for: .normal)
+        case .ended:
+            guard let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else { return }
+            let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
+            
+            isSuspended = false
+            
+            if options.contains(.shouldResume) {
+                do {
+                    try self.audioEngine.start()
+                    changeButton.setImage(UIImage(named: "stop"), for: .normal)
+                } catch {
+                    print("Error restarting audio: \(error)")
+                }
+            } else {
+                // An interruption ended. Don't resume playback.
+                print("Resume but did not restart engine")
+            }
+            
+        default:
+            break
+        }
     }
         
 }

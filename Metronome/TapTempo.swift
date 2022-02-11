@@ -27,7 +27,7 @@ class TapTempo {
     public var tempo: Int {
         
         guard !samples.isEmpty else {
-            return 0
+            return 30
         }
         
         let averageTimeInterval = samples.reduce(0, +) / Double(samples.count)

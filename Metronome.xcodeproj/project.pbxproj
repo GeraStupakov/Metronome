@@ -29,6 +29,8 @@
 		C24D2A84278EFE2D003FC358 /* Metronome.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = C24D2A83278EFE2D003FC358 /* Metronome.sqlite */; };
 		C25377CF261751F900619BF6 /* TempoSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25377CE261751F900619BF6 /* TempoSlider.swift */; };
 		C254701626664B7D00BCDB7D /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C254701526664B7D00BCDB7D /* CustomButton.swift */; };
+		C25849EB27A32221003DD078 /* DeviceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25849E527A32220003DD078 /* DeviceHelper.swift */; };
+		C25849ED27A32221003DD078 /* NSLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25849E727A32220003DD078 /* NSLayoutHelper.swift */; };
 		C268EB2C2629C262007DDBB2 /* TempoListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268EB2B2629C262007DDBB2 /* TempoListTableView.swift */; };
 		C288AE7E260DFE2E00DF1030 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288AE7D260DFE2E00DF1030 /* MainViewController.swift */; };
 		C29AF7152655207200E18C49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29AF7142655207200E18C49 /* AudioToolbox.framework */; };
@@ -102,6 +104,8 @@
 		C24D2A83278EFE2D003FC358 /* Metronome.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Metronome.sqlite; sourceTree = "<group>"; };
 		C25377CE261751F900619BF6 /* TempoSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoSlider.swift; sourceTree = "<group>"; };
 		C254701526664B7D00BCDB7D /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		C25849E527A32220003DD078 /* DeviceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceHelper.swift; sourceTree = "<group>"; };
+		C25849E727A32220003DD078 /* NSLayoutHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLayoutHelper.swift; sourceTree = "<group>"; };
 		C268EB2B2629C262007DDBB2 /* TempoListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoListTableView.swift; sourceTree = "<group>"; };
 		C288AE7D260DFE2E00DF1030 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C29AF7142655207200E18C49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -198,8 +202,9 @@
 				C20BB54E26553D8D00019D36 /* Metronome.entitlements */,
 				C24D2A4A278EEDCC003FC358 /* CoreData */,
 				C288AE89260EA61D00DF1030 /* Model */,
-				C288AE82260DFE3500DF1030 /* Controllers */,
 				C220BD90277C845B007135A8 /* Views */,
+				C288AE82260DFE3500DF1030 /* Controllers */,
+				C25849E427A321E6003DD078 /* CustomConstraints */,
 				C28DA86F26375F0500765DE6 /* Resources */,
 				C201F3C025F984AC005DAF73 /* Main.storyboard */,
 			);
@@ -263,6 +268,15 @@
 				C24D2A83278EFE2D003FC358 /* Metronome.sqlite */,
 			);
 			name = CoreData;
+			sourceTree = "<group>";
+		};
+		C25849E427A321E6003DD078 /* CustomConstraints */ = {
+			isa = PBXGroup;
+			children = (
+				C25849E527A32220003DD078 /* DeviceHelper.swift */,
+				C25849E727A32220003DD078 /* NSLayoutHelper.swift */,
+			);
+			path = CustomConstraints;
 			sourceTree = "<group>";
 		};
 		C288AE82260DFE3500DF1030 /* Controllers */ = {
@@ -585,6 +599,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C25849EB27A32221003DD078 /* DeviceHelper.swift in Sources */,
 				C2B43B86261D169D0087EF01 /* TempoCell.swift in Sources */,
 				C29CD5702630DAAD0022ED43 /* AudioFiles.swift in Sources */,
 				C268EB2C2629C262007DDBB2 /* TempoListTableView.swift in Sources */,
@@ -600,6 +615,7 @@
 				C201F3BD25F984AC005DAF73 /* SceneDelegate.swift in Sources */,
 				C200EFAF2631E27E00EEBF05 /* MetronomeManager.swift in Sources */,
 				C254701626664B7D00BCDB7D /* CustomButton.swift in Sources */,
+				C25849ED27A32221003DD078 /* NSLayoutHelper.swift in Sources */,
 				C23CF40F2632320E00D249AE /* SettingsViewController.swift in Sources */,
 				C2C524FC2631E7FA00BB5C08 /* AudioTableViewController.swift in Sources */,
 				C29CD55426304A960022ED43 /* AudioCell.swift in Sources */,
@@ -781,14 +797,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Metronome/Metronome.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 8D448H496X;
 				INFOPLIST_FILE = Metronome/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gerastupakov.Metronome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -804,14 +820,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Metronome/Metronome.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 8D448H496X;
 				INFOPLIST_FILE = Metronome/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gerastupakov.Metronome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

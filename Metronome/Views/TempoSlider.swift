@@ -17,8 +17,8 @@ class TempoSlider: UISlider {
         self.maximumValue = 360
     }
     
-    @IBInspectable var trackHeight: CGFloat = 2
-    @IBInspectable var thumbRadius: CGFloat = 30
+    @IBInspectable var trackHeight: CGFloat = 3
+    @IBInspectable var thumbRadius: CGFloat = 36
     
     override func trackRect(forBounds bounds: CGRect) -> CGRect {
         return CGRect(origin: bounds.origin, size: CGSize(width: bounds.width, height: trackHeight))

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="W6A-fW-K85">
-    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -17,11 +17,11 @@
             <objects>
                 <viewController id="byH-Sn-7Ef" userLabel="Settings View Controller" customClass="SettingsViewController" customModule="Metronome" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p1J-vK-bda">
-                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Otg-pL-Re2">
-                                <rect key="frame" x="16" y="0.0" width="672" height="60"/>
+                                <rect key="frame" x="16" y="0.0" width="382" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R62-Z5-6Il">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -40,7 +40,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="J6L-5Y-d1D">
-                                <rect key="frame" x="232" y="310.5" width="240" height="374.5"/>
+                                <rect key="frame" x="87" y="239" width="240" height="364"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qfz-Rh-wUJ">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="63"/>
@@ -69,19 +69,19 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="GTy-Tw-rBK">
-                                        <rect key="frame" x="0.0" y="88" width="240" height="164"/>
+                                        <rect key="frame" x="0.0" y="88" width="240" height="163.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QyV-aE-MEP">
-                                                <rect key="frame" x="0.0" y="0.0" width="240" height="95"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="94.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Remove ads " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdZ-kG-7cc">
-                                                        <rect key="frame" x="71.5" y="0.0" width="97.5" height="25"/>
+                                                        <rect key="frame" x="71.5" y="0.0" width="97.5" height="24.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" name="TextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3aw-sz-oOU">
-                                                        <rect key="frame" x="0.0" y="35" width="240" height="60"/>
+                                                        <rect key="frame" x="0.0" y="34.5" width="240" height="60"/>
                                                         <color key="backgroundColor" name="TapCellColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="406-Bb-DXy"/>
@@ -98,7 +98,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SYv-9R-nky" customClass="CustomButton" customModule="Metronome" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="120" width="240" height="44"/>
+                                                <rect key="frame" x="0.0" y="119.5" width="240" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="Hqy-YK-Bjt"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="c3x-9G-KeQ"/>
@@ -118,22 +118,22 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9ZI-Qf-Ocx">
-                                        <rect key="frame" x="0.0" y="277" width="240" height="97.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9ZI-Qf-Ocx">
+                                        <rect key="frame" x="0.0" y="276.5" width="240" height="87.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do you like the app?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9L1-g3-N35">
-                                                <rect key="frame" x="43" y="0.0" width="154" height="20.5"/>
+                                                <rect key="frame" x="43" y="0.0" width="154" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" name="TextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Kta-cq-k8Y">
-                                                <rect key="frame" x="0.0" y="30.5" width="240" height="67"/>
+                                                <rect key="frame" x="0.0" y="21" width="240" height="66.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="d1u-hS-gfB">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="67"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="66.5"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JyK-gC-3tv">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JyK-gC-3tv">
                                                                 <rect key="frame" x="3" y="0.0" width="44" height="44"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="44" id="Cdm-7Y-cVn"/>
@@ -148,7 +148,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhR-gz-Cpe">
-                                                                <rect key="frame" x="0.0" y="44" width="50" height="23"/>
+                                                                <rect key="frame" x="0.0" y="44" width="50" height="22.5"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="cK1-og-7z9"/>
                                                                 </constraints>
@@ -159,9 +159,9 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uQe-rb-2AV">
-                                                        <rect key="frame" x="63.5" y="0.0" width="50" height="67"/>
+                                                        <rect key="frame" x="63.5" y="0.0" width="50" height="66.5"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3O-EK-YrH">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3O-EK-YrH">
                                                                 <rect key="frame" x="3" y="0.0" width="44" height="44"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="44" id="4aW-OC-nX3"/>
@@ -177,7 +177,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXx-y5-XTX">
-                                                                <rect key="frame" x="0.0" y="44" width="50" height="23"/>
+                                                                <rect key="frame" x="0.0" y="44" width="50" height="22.5"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="1PB-HY-esn"/>
                                                                 </constraints>
@@ -188,9 +188,9 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="933-wq-ATr">
-                                                        <rect key="frame" x="126.5" y="0.0" width="50" height="67"/>
+                                                        <rect key="frame" x="126.5" y="0.0" width="50" height="66.5"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rgS-Dw-cBB">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rgS-Dw-cBB">
                                                                 <rect key="frame" x="3" y="0.0" width="44" height="44"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="44" id="8mj-p2-LFF"/>
@@ -205,7 +205,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Support" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2Z-Tr-YU1">
-                                                                <rect key="frame" x="0.0" y="44" width="50" height="23"/>
+                                                                <rect key="frame" x="0.0" y="44" width="50" height="22.5"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="Od2-8w-ZUx"/>
                                                                 </constraints>
@@ -216,9 +216,9 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iMW-a4-vid">
-                                                        <rect key="frame" x="190" y="0.0" width="50" height="67"/>
+                                                        <rect key="frame" x="190" y="0.0" width="50" height="66.5"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rBw-Lu-Acf">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rBw-Lu-Acf">
                                                                 <rect key="frame" x="3" y="0.0" width="44" height="44"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="44" id="EF5-dj-J3F"/>
@@ -234,7 +234,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PyK-SV-ZZM">
-                                                                <rect key="frame" x="0.0" y="44" width="50" height="23"/>
+                                                                <rect key="frame" x="0.0" y="44" width="50" height="22.5"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="cED-Gr-kEF"/>
                                                                 </constraints>
@@ -254,7 +254,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="o9S-SZ-qkj">
-                                <rect key="frame" x="293" y="956.5" width="118.5" height="34"/>
+                                <rect key="frame" x="148" y="769" width="118.5" height="34"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="METRONOME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOi-Qj-ywJ">
                                         <rect key="frame" x="17" y="0.0" width="84" height="16"/>
@@ -301,11 +301,11 @@
             <objects>
                 <viewController id="W6A-fW-K85" customClass="MainViewController" customModule="Metronome" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5YI-M8-hUB">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TEj-Ra-9Nk" userLabel="Menu Stack View">
-                                <rect key="frame" x="39" y="2" width="756" height="56.5"/>
+                                <rect key="frame" x="39" y="46" width="336" height="56.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ei-hC-TdU" userLabel="InfoButton" customClass="CustomButton" customModule="Metronome" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="6.5" width="44" height="44"/>
@@ -323,7 +323,7 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="FBz-jL-Ib9">
-                                        <rect key="frame" x="298" y="0.0" width="160" height="56.5"/>
+                                        <rect key="frame" x="88" y="0.0" width="160" height="56.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="audio click" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wv-gG-FL8">
                                                 <rect key="frame" x="39.5" y="0.0" width="81" height="20.5"/>
@@ -347,7 +347,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7HC-rJ-rbN" userLabel="AddButton" customClass="CustomButton" customModule="Metronome" customModuleProvider="target">
-                                        <rect key="frame" x="712" y="6.5" width="44" height="44"/>
+                                        <rect key="frame" x="292" y="6.5" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="nCs-l7-KRF"/>
                                             <constraint firstAttribute="height" constant="44" id="rhK-OQ-62p"/>
@@ -363,7 +363,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pyC-5F-ECB" userLabel="Picker Stack View">
-                                <rect key="frame" x="16" y="65.5" width="802" height="160.5"/>
+                                <rect key="frame" x="16" y="109.5" width="382" height="160.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Vd6-x1-1eW">
                                         <rect key="frame" x="0.0" y="0.0" width="90" height="160.5"/>
@@ -385,7 +385,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="KGw-TC-6Ml">
-                                        <rect key="frame" x="351" y="5" width="100" height="150.5"/>
+                                        <rect key="frame" x="141" y="5" width="100" height="150.5"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="300" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pxU-yq-JLo" userLabel="Tempo Field">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="60"/>
@@ -422,7 +422,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Glf-18-EOS">
-                                        <rect key="frame" x="712" y="0.0" width="90" height="160.5"/>
+                                        <rect key="frame" x="292" y="0.0" width="90" height="160.5"/>
                                         <subviews>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xWK-rA-vSy">
                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="140"/>
@@ -443,7 +443,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ay7-3s-ap2" userLabel="Button Stack View">
-                                <rect key="frame" x="26" y="241" width="782" height="90"/>
+                                <rect key="frame" x="26" y="285" width="362" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UdF-3w-Nhv" userLabel="MinusButton" customClass="CustomButton" customModule="Metronome" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="10" width="70" height="70"/>
@@ -458,7 +458,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCw-QR-bSq" userLabel="PlayButton" customClass="CustomButton" customModule="Metronome" customModuleProvider="target">
-                                        <rect key="frame" x="346" y="0.0" width="90" height="90"/>
+                                        <rect key="frame" x="136" y="0.0" width="90" height="90"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="8dn-9E-kTk"/>
                                             <constraint firstAttribute="width" constant="90" id="kJb-fe-pOO"/>
@@ -469,7 +469,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wDW-jO-n5E" userLabel="PlusButton" customClass="CustomButton" customModule="Metronome" customModuleProvider="target">
-                                        <rect key="frame" x="712" y="10" width="70" height="70"/>
+                                        <rect key="frame" x="292" y="10" width="70" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="bjo-zc-n0c"/>
                                             <constraint firstAttribute="height" constant="70" id="tPZ-im-9f6"/>
@@ -483,7 +483,7 @@
                                 </subviews>
                             </stackView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="180" minValue="30" maxValue="360" translatesAutoresizingMaskIntoConstraints="NO" id="tbn-Z8-yOO" userLabel="TempoSlider" customClass="TempoSlider" customModule="Metronome" customModuleProvider="target">
-                                <rect key="frame" x="14" y="366" width="806" height="31"/>
+                                <rect key="frame" x="14" y="410" width="386" height="31"/>
                                 <color key="tintColor" name="TextColor"/>
                                 <color key="thumbTintColor" name="TextColor"/>
                                 <connections>
@@ -491,14 +491,14 @@
                                 </connections>
                             </slider>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="T8h-bx-uQZ" userLabel="Tempo Table View" customClass="TempoListTableView" customModule="Metronome" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="406" width="834" height="788"/>
+                                <rect key="frame" x="0.0" y="450" width="414" height="412"/>
                                 <color key="backgroundColor" name="BackgroundColor"/>
                                 <color key="separatorColor" name="TableText"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" name="BackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pgS-hQ-oSk" userLabel="BannerView" customClass="GADBannerView">
-                                <rect key="frame" x="0.0" y="1144" width="834" height="50"/>
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="pt3-xi-7l2"/>
@@ -511,23 +511,185 @@
                         <constraints>
                             <constraint firstItem="T8h-bx-uQZ" firstAttribute="trailing" secondItem="glu-8y-kW0" secondAttribute="trailing" id="1z2-bl-9t5"/>
                             <constraint firstItem="pyC-5F-ECB" firstAttribute="top" secondItem="TEj-Ra-9Nk" secondAttribute="bottom" constant="7" id="4kr-1Y-PPd"/>
-                            <constraint firstItem="glu-8y-kW0" firstAttribute="trailing" secondItem="tbn-Z8-yOO" secondAttribute="trailing" constant="16" id="4yu-7R-z1C"/>
-                            <constraint firstItem="pyC-5F-ECB" firstAttribute="leading" secondItem="glu-8y-kW0" secondAttribute="leading" constant="16" id="8fJ-Sw-acx"/>
-                            <constraint firstItem="pgS-hQ-oSk" firstAttribute="leading" secondItem="glu-8y-kW0" secondAttribute="leading" id="C1v-rx-aoe"/>
-                            <constraint firstItem="glu-8y-kW0" firstAttribute="trailing" secondItem="pyC-5F-ECB" secondAttribute="trailing" constant="16" id="Cm3-Zb-vBy"/>
+                            <constraint firstItem="glu-8y-kW0" firstAttribute="trailing" secondItem="tbn-Z8-yOO" secondAttribute="trailing" constant="16" id="4yu-7R-z1C" customClass="NSLayoutHelper" customModule="Metronome" customModuleProvider="target">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadMini">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro9_7">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro10_5">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro11">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro12_9">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="pyC-5F-ECB" firstAttribute="leading" secondItem="glu-8y-kW0" secondAttribute="leading" constant="16" id="8fJ-Sw-acx" customClass="NSLayoutHelper" customModule="Metronome" customModuleProvider="target">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadMini">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro9_7">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro10_5">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro11">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro12_9">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="glu-8y-kW0" firstAttribute="trailing" secondItem="pyC-5F-ECB" secondAttribute="trailing" constant="16" id="Cm3-Zb-vBy" customClass="NSLayoutHelper" customModule="Metronome" customModuleProvider="target">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadMini">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro9_7">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro10_5">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro11">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro12_9">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
                             <constraint firstItem="glu-8y-kW0" firstAttribute="trailing" secondItem="TEj-Ra-9Nk" secondAttribute="trailing" constant="39" id="DDb-g3-L2S"/>
-                            <constraint firstItem="pgS-hQ-oSk" firstAttribute="trailing" secondItem="glu-8y-kW0" secondAttribute="trailing" id="GRZ-JN-Wop"/>
-                            <constraint firstItem="T8h-bx-uQZ" firstAttribute="bottom" secondItem="5YI-M8-hUB" secondAttribute="bottom" id="H8B-Zt-pdy"/>
-                            <constraint firstItem="tbn-Z8-yOO" firstAttribute="leading" secondItem="glu-8y-kW0" secondAttribute="leading" constant="16" id="PkQ-6O-QwG"/>
-                            <constraint firstItem="ay7-3s-ap2" firstAttribute="leading" secondItem="glu-8y-kW0" secondAttribute="leading" constant="26" id="UdG-hC-PU1"/>
-                            <constraint firstItem="tbn-Z8-yOO" firstAttribute="top" secondItem="ay7-3s-ap2" secondAttribute="bottom" constant="35" id="V1c-zv-tsR"/>
-                            <constraint firstItem="glu-8y-kW0" firstAttribute="trailing" secondItem="ay7-3s-ap2" secondAttribute="trailing" constant="26" id="Wcy-N9-D6G"/>
+                            <constraint firstItem="T8h-bx-uQZ" firstAttribute="bottom" secondItem="glu-8y-kW0" secondAttribute="bottom" id="H8B-Zt-pdy"/>
+                            <constraint firstItem="glu-8y-kW0" firstAttribute="trailing" secondItem="pgS-hQ-oSk" secondAttribute="trailing" id="Mal-Ma-ZN4"/>
+                            <constraint firstItem="tbn-Z8-yOO" firstAttribute="leading" secondItem="glu-8y-kW0" secondAttribute="leading" constant="16" id="PkQ-6O-QwG" customClass="NSLayoutHelper" customModule="Metronome" customModuleProvider="target">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadMini">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro9_7">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro10_5">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro11">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro12_9">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="ay7-3s-ap2" firstAttribute="leading" secondItem="glu-8y-kW0" secondAttribute="leading" constant="26" id="UdG-hC-PU1" customClass="NSLayoutHelper" customModule="Metronome" customModuleProvider="target">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadMini">
+                                        <real key="value" value="110"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro9_7">
+                                        <real key="value" value="110"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro10_5">
+                                        <real key="value" value="110"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro11">
+                                        <real key="value" value="110"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro12_9">
+                                        <real key="value" value="110"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="tbn-Z8-yOO" firstAttribute="top" secondItem="ay7-3s-ap2" secondAttribute="bottom" constant="35" id="V1c-zv-tsR" customClass="NSLayoutHelper" customModule="Metronome" customModuleProvider="target">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadMini">
+                                        <real key="value" value="55"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro9_7">
+                                        <real key="value" value="55"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro10_5">
+                                        <real key="value" value="55"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro11">
+                                        <real key="value" value="55"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro12_9">
+                                        <real key="value" value="55"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="glu-8y-kW0" firstAttribute="trailing" secondItem="ay7-3s-ap2" secondAttribute="trailing" constant="26" id="Wcy-N9-D6G" customClass="NSLayoutHelper" customModule="Metronome" customModuleProvider="target">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadMini">
+                                        <real key="value" value="110"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro9_7">
+                                        <real key="value" value="110"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro10_5">
+                                        <real key="value" value="110"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro11">
+                                        <real key="value" value="110"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro12_9">
+                                        <real key="value" value="110"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="pgS-hQ-oSk" firstAttribute="leading" secondItem="glu-8y-kW0" secondAttribute="leading" id="YH7-wv-LcU"/>
                             <constraint firstItem="T8h-bx-uQZ" firstAttribute="leading" secondItem="glu-8y-kW0" secondAttribute="leading" id="YQg-N8-59R"/>
-                            <constraint firstItem="pgS-hQ-oSk" firstAttribute="bottom" secondItem="5YI-M8-hUB" secondAttribute="bottom" id="hZW-1G-upl"/>
+                            <constraint firstItem="pgS-hQ-oSk" firstAttribute="bottom" secondItem="glu-8y-kW0" secondAttribute="bottom" id="hZW-1G-upl"/>
                             <constraint firstItem="TEj-Ra-9Nk" firstAttribute="leading" secondItem="glu-8y-kW0" secondAttribute="leading" constant="39" id="hb8-gd-S3P"/>
-                            <constraint firstItem="TEj-Ra-9Nk" firstAttribute="top" secondItem="glu-8y-kW0" secondAttribute="top" constant="2" id="lgA-Wi-bLf"/>
+                            <constraint firstItem="TEj-Ra-9Nk" firstAttribute="top" secondItem="glu-8y-kW0" secondAttribute="top" constant="2" id="lgA-Wi-bLf" customClass="NSLayoutHelper" customModule="Metronome" customModuleProvider="target">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadMini">
+                                        <real key="value" value="40"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro9_7">
+                                        <real key="value" value="40"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro10_5">
+                                        <real key="value" value="40"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro11">
+                                        <real key="value" value="40"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro12_9">
+                                        <real key="value" value="40"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
                             <constraint firstItem="ay7-3s-ap2" firstAttribute="top" secondItem="pyC-5F-ECB" secondAttribute="bottom" constant="15" id="p2m-iz-Wk2"/>
-                            <constraint firstItem="T8h-bx-uQZ" firstAttribute="top" secondItem="tbn-Z8-yOO" secondAttribute="bottom" constant="10" id="xyb-n1-9yD"/>
+                            <constraint firstItem="T8h-bx-uQZ" firstAttribute="top" secondItem="tbn-Z8-yOO" secondAttribute="bottom" constant="10" id="xyb-n1-9yD" customClass="NSLayoutHelper" customModule="Metronome" customModuleProvider="target">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadMini">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro9_7">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro10_5">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro11">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="iPadPro12_9">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
                         </constraints>
                     </view>
                     <connections>
