@@ -70,6 +70,7 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
         CoreDataManager.shared.loadTempoItems(array: &tempoLisrArray)
         
         audio = AudioFiles(name: audioName)
@@ -170,7 +171,7 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
         
         var textField = UITextField()
         
-        let alertActionAdd = UIAlertAction(title: "Add", style: .default) { alertAction in
+        let alertActionAdd = UIAlertAction(title: "Add", style: .default) { [self] alertAction in
             
             let newTempoItem = TempoItem(context: CoreDataManager.shared.context)
             
@@ -180,10 +181,16 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
                 newTempoItem.name = "Unnamed"
             }
             newTempoItem.tempo = self.tempo
+            print(self.tempo)
             newTempoItem.beat = self.countBeat
+            print(self.countBeat)
             newTempoItem.value = self.timeSignature
+            print(self.timeSignature)
             newTempoItem.rowValue = self.selectedRowSignature
+            print(self.selectedRowSignature)
             newTempoItem.rowBeat = self.selectedRowBeat
+            print(self.selectedRowBeat)
+            
             
             self.tempoLisrArray.insert(newTempoItem, at: 0)
             CoreDataManager.shared.saveTempoItems()
@@ -293,14 +300,16 @@ extension MainViewController: UIPickerViewDataSource, UIPickerViewDelegate {
             if let selectBeat = Int32(metronomeManager.countBeatArray[row]) {
                 countBeat = selectBeat
             }
+            
             selectedRowBeat = Int16(row)
             ifPlayMertonome()
         }
-        
+    
         if pickerView == valueMetronomePicker {
             timeSignature = metronomeManager.valueTimeSignatureArray[row]
-            ifPlayMertonome()
+            
             selectedRowSignature = Int16(row)
+            ifPlayMertonome()
         }
     }
     
@@ -331,16 +340,20 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let valueList = tempoLisrArray[indexPath.row].value
         let rowValue = Int(tempoLisrArray[indexPath.row].rowValue)
         let rowBeat = Int(tempoLisrArray[indexPath.row].rowBeat)
-        metronome.playMetronome(bpm: bpmList, countBeat: beatList, timeSignature: valueList)
         
         playButton.setImage(UIImage(named: "stop"), for: .normal)
         tempoSlider.value = Float(bpmList)
-        timeSignature = valueList
-        countBeat = beatList
+        
         tempo = bpmList
+        timeSignature = valueList
+        selectedRowSignature = Int16(rowValue)
+        countBeat = beatList
+        selectedRowBeat = Int16(beatList)
+        
+        metronome.playMetronome(bpm: bpmList, countBeat: beatList, timeSignature: valueList)
+        
         beatMetronomePicker.selectRow(rowBeat, inComponent: 0, animated: true)
         valueMetronomePicker.selectRow(rowValue, inComponent: 0, animated: true)
-        
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

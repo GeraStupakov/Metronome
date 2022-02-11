@@ -128,6 +128,7 @@ class SettingsViewController: UIViewController, SKPaymentTransactionObserver, MF
                 if let error = transaction.error {
                     print("Transaction failed due to \(error.localizedDescription)")
                 }
+                //removeAdsAndButtons()
                 SKPaymentQueue.default().finishTransaction(transaction)
             } else if transaction.transactionState == .restored {
                 removeAdsAndButtons()

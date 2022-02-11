@@ -20,11 +20,12 @@ class TempoListTableView: UITableView, UIDropInteractionDelegate {
         
         self.register(UINib(nibName: "TempoCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
         self.reloadData()
-        
+
         self.dragDelegate = self
         self.dropDelegate = self
         self.dragInteractionEnabled = true
     }
+    
 }
 
 //MARK: - UITableViewDragDelegate & UITableViewDropDelegate
