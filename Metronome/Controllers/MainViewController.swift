@@ -13,6 +13,7 @@ import UIKit
 import CoreData
 import AVFoundation
 import GoogleMobileAds
+import AppTrackingTransparency
 
 class MainViewController: UIViewController, SettingsViewControllerDelegate {
     
@@ -54,6 +55,11 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
         
         UIApplication.shared.windows.forEach { $0.initTheme() }
         
+        //bannerView.adUnitID = "ca-app-pub-5666834342456165/3414077384" // старый
+        //bannerView.adUnitID = "ca-app-pub-5666834342456165/6765004738" // новый
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" // тестовый
+        //GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["D7599159-EEAA-42EC-B531-486E597A9145"]
+        
         tempoField.text = "180"
         tempoField.delegate = self
         tempoField.clearsOnBeginEditing = true
@@ -78,20 +84,9 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
         let accentedClickFile = audio.audioAccentClick
         metronome = Metronome(mainClick: mainClickFile, accentClick: accentedClickFile)
         
-        //bannerView.adUnitID = "ca-app-pub-5666834342456165/3414077384" // старый
-        //bannerView.adUnitID = "ca-app-pub-5666834342456165/6765004738" // новый
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" // тестовый
-        //GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["D7599159-EEAA-42EC-B531-486E597A9145"]
-        
         bannerView.rootViewController = self
         bannerView.delegate = self
         bannerView.isHidden = true
-        
-        if !UserDefaults.standard.bool(forKey: "ads_removed") {
-            bannerView.load(GADRequest())
-        } else {
-            bannerView.removeFromSuperview()
-        }
         
         setupToHideKeyboardOnTapOnView()
         
@@ -102,6 +97,18 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
             print(error.localizedDescription)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if #available(iOS 14, *) {
+                ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                    DispatchQueue.main.async {
+                        self.loadAdMob()
+                    }
+                })
+            } else {
+                self.loadAdMob()
+            }
         }
     }
     
@@ -248,6 +255,15 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
             item.index = Int32(index)
         }
         CoreDataManager.shared.saveTempoItems()
+    }
+    
+    func loadAdMob() {
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        if !UserDefaults.standard.bool(forKey: "ads_removed") {
+            self.bannerView.load(GADRequest())
+        } else {
+            self.bannerView.removeFromSuperview()
+        }
     }
 }
 
