@@ -55,9 +55,8 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
         
         UIApplication.shared.windows.forEach { $0.initTheme() }
         
-        //bannerView.adUnitID = "ca-app-pub-5666834342456165/3414077384" // старый
-        //bannerView.adUnitID = "ca-app-pub-5666834342456165/6765004738" // новый
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" // тестовый
+        bannerView.adUnitID = "ca-app-pub-5666834342456165/3414077384" //старый
+        //bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //тестовый
         //GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["D7599159-EEAA-42EC-B531-486E597A9145"]
         
         tempoField.text = "180"
@@ -188,16 +187,10 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
                 newTempoItem.name = "Unnamed"
             }
             newTempoItem.tempo = self.tempo
-            print(self.tempo)
             newTempoItem.beat = self.countBeat
-            print(self.countBeat)
             newTempoItem.value = self.timeSignature
-            print(self.timeSignature)
             newTempoItem.rowValue = self.selectedRowSignature
-            print(self.selectedRowSignature)
             newTempoItem.rowBeat = self.selectedRowBeat
-            print(self.selectedRowBeat)
-            
             
             self.tempoLisrArray.insert(newTempoItem, at: 0)
             CoreDataManager.shared.saveTempoItems()
