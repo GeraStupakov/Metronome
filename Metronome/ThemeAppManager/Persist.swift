@@ -9,6 +9,7 @@ import Foundation
 
 @propertyWrapper
 struct Persist<T> {
+
     let key: String
     let defaultValue: T
     

@@ -23,5 +23,4 @@ class TempoSlider: UISlider {
     override func trackRect(forBounds bounds: CGRect) -> CGRect {
         return CGRect(origin: bounds.origin, size: CGSize(width: bounds.width, height: trackHeight))
     }
-
 }

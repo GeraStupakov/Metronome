@@ -23,7 +23,7 @@
 		C20390D025FC25B100B79F09 /* Metronome.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20390CF25FC25B100B79F09 /* Metronome.swift */; };
 		C220BDA0277C8F8C007135A8 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C220BD9F277C8F8C007135A8 /* CoreDataManager.swift */; };
 		C2366B3D2784430C008D3384 /* TapTempo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2366B3C2784430C008D3384 /* TapTempo.swift */; };
-		C23CF40F2632320E00D249AE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23CF40E2632320E00D249AE /* SettingsViewController.swift */; };
+		C23CF40F2632320E00D249AE /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23CF40E2632320E00D249AE /* SettingsVC.swift */; };
 		C23DA8FB2600099D00DE0E12 /* Classic_accent.wav in Resources */ = {isa = PBXBuildFile; fileRef = C23DA8F92600099D00DE0E12 /* Classic_accent.wav */; };
 		C23DA8FC2600099D00DE0E12 /* Classic_main.wav in Resources */ = {isa = PBXBuildFile; fileRef = C23DA8FA2600099D00DE0E12 /* Classic_main.wav */; };
 		C24D2A84278EFE2D003FC358 /* Metronome.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = C24D2A83278EFE2D003FC358 /* Metronome.sqlite */; };
@@ -32,7 +32,7 @@
 		C25849EB27A32221003DD078 /* DeviceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25849E527A32220003DD078 /* DeviceHelper.swift */; };
 		C25849ED27A32221003DD078 /* NSLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25849E727A32220003DD078 /* NSLayoutHelper.swift */; };
 		C268EB2C2629C262007DDBB2 /* TempoListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268EB2B2629C262007DDBB2 /* TempoListTableView.swift */; };
-		C288AE7E260DFE2E00DF1030 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288AE7D260DFE2E00DF1030 /* MainViewController.swift */; };
+		C288AE7E260DFE2E00DF1030 /* MetronomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288AE7D260DFE2E00DF1030 /* MetronomeVC.swift */; };
 		C29AF7152655207200E18C49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29AF7142655207200E18C49 /* AudioToolbox.framework */; };
 		C29CD55426304A960022ED43 /* AudioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29CD55226304A960022ED43 /* AudioCell.swift */; };
 		C29CD55526304A960022ED43 /* AudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C29CD55326304A960022ED43 /* AudioCell.xib */; };
@@ -98,7 +98,7 @@
 		C20BB54E26553D8D00019D36 /* Metronome.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Metronome.entitlements; sourceTree = "<group>"; };
 		C220BD9F277C8F8C007135A8 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C2366B3C2784430C008D3384 /* TapTempo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTempo.swift; sourceTree = "<group>"; };
-		C23CF40E2632320E00D249AE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		C23CF40E2632320E00D249AE /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		C23DA8F92600099D00DE0E12 /* Classic_accent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Classic_accent.wav; sourceTree = "<group>"; };
 		C23DA8FA2600099D00DE0E12 /* Classic_main.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Classic_main.wav; sourceTree = "<group>"; };
 		C24D2A83278EFE2D003FC358 /* Metronome.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Metronome.sqlite; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 		C25849E527A32220003DD078 /* DeviceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceHelper.swift; sourceTree = "<group>"; };
 		C25849E727A32220003DD078 /* NSLayoutHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLayoutHelper.swift; sourceTree = "<group>"; };
 		C268EB2B2629C262007DDBB2 /* TempoListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoListTableView.swift; sourceTree = "<group>"; };
-		C288AE7D260DFE2E00DF1030 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		C288AE7D260DFE2E00DF1030 /* MetronomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeVC.swift; sourceTree = "<group>"; };
 		C29AF7142655207200E18C49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C29CD55226304A960022ED43 /* AudioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCell.swift; sourceTree = "<group>"; };
 		C29CD55326304A960022ED43 /* AudioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioCell.xib; sourceTree = "<group>"; };
@@ -197,16 +197,14 @@
 			isa = PBXGroup;
 			children = (
 				C201F3CB25F984AF005DAF73 /* Info.plist */,
-				C201F3BA25F984AC005DAF73 /* AppDelegate.swift */,
-				C201F3BC25F984AC005DAF73 /* SceneDelegate.swift */,
 				C20BB54E26553D8D00019D36 /* Metronome.entitlements */,
+				C201F3C025F984AC005DAF73 /* Main.storyboard */,
+				C265B252284FCC4200DA7C2B /* Application */,
 				C24D2A4A278EEDCC003FC358 /* CoreData */,
-				C288AE89260EA61D00DF1030 /* Model */,
+				C288AE89260EA61D00DF1030 /* Services */,
 				C220BD90277C845B007135A8 /* Views */,
 				C288AE82260DFE3500DF1030 /* Controllers */,
-				C25849E427A321E6003DD078 /* CustomConstraints */,
 				C28DA86F26375F0500765DE6 /* Resources */,
-				C201F3C025F984AC005DAF73 /* Main.storyboard */,
 			);
 			path = Metronome;
 			sourceTree = "<group>";
@@ -279,16 +277,25 @@
 			path = CustomConstraints;
 			sourceTree = "<group>";
 		};
+		C265B252284FCC4200DA7C2B /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				C201F3BA25F984AC005DAF73 /* AppDelegate.swift */,
+				C201F3BC25F984AC005DAF73 /* SceneDelegate.swift */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
 		C288AE82260DFE3500DF1030 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C288AE7D260DFE2E00DF1030 /* MainViewController.swift */,
-				C23CF40E2632320E00D249AE /* SettingsViewController.swift */,
+				C288AE7D260DFE2E00DF1030 /* MetronomeVC.swift */,
+				C23CF40E2632320E00D249AE /* SettingsVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		C288AE89260EA61D00DF1030 /* Model */ = {
+		C288AE89260EA61D00DF1030 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				C220BD91277C8551007135A8 /* MetronomeManager */,
@@ -296,8 +303,9 @@
 				C2AEA0C1263B70DD0093ADC1 /* ThemeAppManager */,
 				C29CD56F2630DAAD0022ED43 /* AudioFiles.swift */,
 				C2366B3C2784430C008D3384 /* TapTempo.swift */,
+				C25849E427A321E6003DD078 /* CustomConstraints */,
 			);
-			name = Model;
+			name = Services;
 			sourceTree = "<group>";
 		};
 		C28DA86F26375F0500765DE6 /* Resources */ = {
@@ -608,7 +616,7 @@
 				C2366B3D2784430C008D3384 /* TapTempo.swift in Sources */,
 				C2AEA0C3263B71070093ADC1 /* Persist.swift in Sources */,
 				C220BDA0277C8F8C007135A8 /* CoreDataManager.swift in Sources */,
-				C288AE7E260DFE2E00DF1030 /* MainViewController.swift in Sources */,
+				C288AE7E260DFE2E00DF1030 /* MetronomeVC.swift in Sources */,
 				C201F3BB25F984AC005DAF73 /* AppDelegate.swift in Sources */,
 				C2AEA0BD263B660C0093ADC1 /* ThemeApp.swift in Sources */,
 				C25377CF261751F900619BF6 /* TempoSlider.swift in Sources */,
@@ -616,7 +624,7 @@
 				C200EFAF2631E27E00EEBF05 /* MetronomeManager.swift in Sources */,
 				C254701626664B7D00BCDB7D /* CustomButton.swift in Sources */,
 				C25849ED27A32221003DD078 /* NSLayoutHelper.swift in Sources */,
-				C23CF40F2632320E00D249AE /* SettingsViewController.swift in Sources */,
+				C23CF40F2632320E00D249AE /* SettingsVC.swift in Sources */,
 				C2C524FC2631E7FA00BB5C08 /* AudioTableViewController.swift in Sources */,
 				C29CD55426304A960022ED43 /* AudioCell.swift in Sources */,
 			);

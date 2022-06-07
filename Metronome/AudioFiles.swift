@@ -44,5 +44,4 @@ struct AudioFiles {
             return Bundle.main.url(forResource: "Classic_accent", withExtension: "wav")!
         }
     }
-    
 }

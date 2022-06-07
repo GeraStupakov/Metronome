@@ -19,6 +19,7 @@ struct CoreDataManager {
     private init() { }
     
     func saveTempoItems() {
+
         do {
             try context.save()
         } catch {
@@ -29,7 +30,6 @@ struct CoreDataManager {
     func loadTempoItems(array: inout [TempoItem]) {
         
         let request: NSFetchRequest<TempoItem> = TempoItem.fetchRequest()
-        
         request.sortDescriptors = [NSSortDescriptor(key: "index", ascending: true)]
         
         do {
@@ -38,5 +38,4 @@ struct CoreDataManager {
             print("Error load context: \(error)")
         }
     }
-
 }

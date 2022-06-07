@@ -13,7 +13,6 @@ class AudioCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,5 +23,4 @@ class AudioCell: UITableViewCell {
             contentView.backgroundColor = UIColor(named: "CellColor")
         }
     }
-    
 }

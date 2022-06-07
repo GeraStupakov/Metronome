@@ -20,7 +20,6 @@ class TempoCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -31,5 +30,4 @@ class TempoCell: UITableViewCell {
             contentView.backgroundColor = UIColor(named: "CellColor")
         }
     }
-    
 }

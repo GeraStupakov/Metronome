@@ -17,7 +17,12 @@ class Metronome {
     var accentClickAudioFile: AVAudioFile!
     
     private var isSuspended = false
+    
     var changeButton: UIButton!
+    
+    var isPlay: Bool {
+        return audioPlayerNode.isPlaying
+    }
     
     init(mainClick: URL, accentClick: URL) {
         mainClickAudioFile = try! AVAudioFile(forReading: mainClick)
@@ -37,6 +42,7 @@ class Metronome {
     }
     
     func generateBuffer(with bpm: Double, with countBeat: UInt32, with timeSignature: UInt32) -> AVAudioPCMBuffer {
+
         //буффер - область памяти, используемая для временного хранения данных ввода-вывода
         //цифровой сигнал, полученный методом импульсно-кодовой модуляции (PCM)
         //Два основных параметра качества PCM сигнала — это частота и разрядность. Частота — это количество измерений за одну секунду, чем их больше — тем с большей точностью передаётся сигнал. Частота измеряется в герцах: 44100 Hz
@@ -112,13 +118,10 @@ class Metronome {
         }
     }
     
-    var isPlay: Bool {
-        return audioPlayerNode.isPlaying
-    }
-    
     func playMetronome(bpm: Int32, countBeat: Int32, timeSignature: Int32) {
         
-        let metranomeBuffer = generateBuffer(with: Double(bpm), with: UInt32(countBeat), with: UInt32(timeSignature)) //создаем буфер из наших аудиофайлов
+        let metranomeBuffer = generateBuffer(with: Double(bpm), with: UInt32(countBeat), with: UInt32(timeSignature))
+        // Cоздаем буфер из наших аудиофайлов
         
         if audioPlayerNode.isPlaying {
             audioPlayerNode.scheduleBuffer(metranomeBuffer, at: nil, options: .interruptsAtLoop, completionHandler: nil)
@@ -131,6 +134,7 @@ class Metronome {
     }
     
     func stopMetranome() {
+
         audioPlayerNode.stop()
     }
     
@@ -196,7 +200,6 @@ class Metronome {
             break
         }
     }
-        
 }
 
 

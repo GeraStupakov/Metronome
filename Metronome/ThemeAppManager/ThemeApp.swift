@@ -44,10 +44,10 @@ extension ThemeApp {
         UIApplication.shared.windows
             .forEach { $0.overrideUserInterfaceStyle = userInterfaceStyle }
     }
-    
 }
 
 extension UIWindow {
+
     func initTheme() {
         guard #available(iOS 13.0, *) else { return }
         overrideUserInterfaceStyle = ThemeApp.current.userInterfaceStyle

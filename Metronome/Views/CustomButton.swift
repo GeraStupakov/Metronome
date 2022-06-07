@@ -16,15 +16,14 @@ class CustomButton: UIButton {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-       if #available(iOS 13.0, *) {
-           if (traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection)) {
-            self.layer.borderColor = UIColor(named: "TextColor")?.cgColor
-           }
-       }
+        if #available(iOS 13.0, *) {
+            if (traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection)) {
+                self.layer.borderColor = UIColor(named: "TextColor")?.cgColor
+            }
+        }
     }
     
     override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
-
         super.endTracking(touch, with: event)
         
         UIView.animateKeyframes(withDuration: 0.5,

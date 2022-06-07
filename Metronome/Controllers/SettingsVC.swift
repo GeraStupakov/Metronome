@@ -1,5 +1,5 @@
 //
-//  SettingsViewController.swift
+//  SettingsVC.swift
 //  Metronome
 //
 //  Created by Георгий Ступаков on 4/23/21.
@@ -13,7 +13,7 @@ protocol SettingsViewControllerDelegate: AnyObject {
     func fetchSettingsToMainVC()
 }
 
-class SettingsViewController: UIViewController, SKPaymentTransactionObserver, MFMailComposeViewControllerDelegate {
+class SettingsVC: UIViewController, SKPaymentTransactionObserver, MFMailComposeViewControllerDelegate {
     
     @IBOutlet weak var adsButton: UIButton!
     @IBOutlet weak var themeControl: UISegmentedControl!
@@ -27,8 +27,16 @@ class SettingsViewController: UIViewController, SKPaymentTransactionObserver, MF
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        versionLabel.text = "METRONOME v.\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String)"
+        
+        configureContentView()
+        
         SKPaymentQueue.default().add(self)
+
+        themeControl.selectedSegmentIndex = ThemeApp.current.rawValue
+    }
+    
+    func configureContentView() {
+        versionLabel.text = "METRONOME v.\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String)"
         
         if !UserDefaults.standard.bool(forKey: "adsStackView_removed") {
             adsButton.layer.cornerRadius = 9
@@ -36,8 +44,6 @@ class SettingsViewController: UIViewController, SKPaymentTransactionObserver, MF
         } else {
             adsStackView.removeFromSuperview()
         }
-        
-        themeControl.selectedSegmentIndex = ThemeApp.current.rawValue
     }
     
     @IBAction func changedThemeControl(_ sender: UISegmentedControl) {
@@ -135,7 +141,6 @@ class SettingsViewController: UIViewController, SKPaymentTransactionObserver, MF
                 SKPaymentQueue.default().finishTransaction(transaction)
             }
         }
-        
     }
     
     func removeAdsAndButtons() {
@@ -144,5 +149,4 @@ class SettingsViewController: UIViewController, SKPaymentTransactionObserver, MF
         adsStackView.removeFromSuperview()
         delegate?.fetchSettingsToMainVC()
     }
-    
 }

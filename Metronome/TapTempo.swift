@@ -66,5 +66,4 @@ class TapTempo {
         
         return tempo
     }
-    
 }

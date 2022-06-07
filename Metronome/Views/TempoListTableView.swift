@@ -25,7 +25,6 @@ class TempoListTableView: UITableView, UIDropInteractionDelegate {
         self.dropDelegate = self
         self.dragInteractionEnabled = true
     }
-    
 }
 
 //MARK: - UITableViewDragDelegate & UITableViewDropDelegate
@@ -34,7 +33,6 @@ extension TempoListTableView: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         return [UIDragItem(itemProvider: NSItemProvider())]
     }
-    
 }
 
 extension TempoListTableView: UITableViewDropDelegate {
@@ -47,7 +45,5 @@ extension TempoListTableView: UITableViewDropDelegate {
         return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
     }
     
-    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-    }
-    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) { }
 }

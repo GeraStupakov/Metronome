@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  MetronomeVC.swift
 //  Metronome
 //
 //  Created by Георгий Ступаков on 3/26/21.
@@ -15,7 +15,7 @@ import AVFoundation
 import GoogleMobileAds
 import AppTrackingTransparency
 
-class MainViewController: UIViewController, SettingsViewControllerDelegate {
+class MetronomeVC: UIViewController, SettingsViewControllerDelegate {
     
     //MARK: - IBOutlets
     @IBOutlet weak var playButton: UIButton!
@@ -54,41 +54,16 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
         super.viewDidLoad()
         
         UIApplication.shared.windows.forEach { $0.initTheme() }
-        
-        bannerView.adUnitID = "ca-app-pub-5666834342456165/3414077384" //старый
-        //bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //тестовый
-        //GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["D7599159-EEAA-42EC-B531-486E597A9145"]
-        
-        tempoField.text = "180"
-        tempoField.delegate = self
-        tempoField.clearsOnBeginEditing = true
-        playButton.setImage(UIImage(named: "play"), for: .normal)
-        selectedAudioButton.setTitle(audioName, for: .normal)
-        
-        beatMetronomePicker.dataSource = self
-        beatMetronomePicker.delegate = self
-        beatMetronomePicker.setValue(UIColor.white, forKey: "textColor")
-        
-        valueMetronomePicker.dataSource = self
-        valueMetronomePicker.delegate = self
-        valueMetronomePicker.setValue(UIColor.white, forKey: "textColor")
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
         CoreDataManager.shared.loadTempoItems(array: &tempoLisrArray)
+        
+        setupBindings()
+        configureContentView()
+        setupToHideKeyboardOnTapOnView()
         
         audio = AudioFiles(name: audioName)
         let mainClickFile = audio.audioMainClick
         let accentedClickFile = audio.audioAccentClick
         metronome = Metronome(mainClick: mainClickFile, accentClick: accentedClickFile)
-        
-        bannerView.rootViewController = self
-        bannerView.delegate = self
-        bannerView.isHidden = true
-        
-        setupToHideKeyboardOnTapOnView()
-        
         metronome.setupAudioInterruptionListener(button: playButton)
         
         do {
@@ -111,9 +86,52 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
         }
     }
     
+    func setupBindings() {
+        
+        tempoField.delegate = self
+        
+        beatMetronomePicker.dataSource = self
+        beatMetronomePicker.delegate = self
+        
+        valueMetronomePicker.dataSource = self
+        valueMetronomePicker.delegate = self
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        bannerView.delegate = self
+    }
+    
+    func configureContentView() {
+        
+        tempoField.text = "180"
+        tempoField.clearsOnBeginEditing = true
+        
+        playButton.setImage(UIImage(named: "play"), for: .normal)
+        
+        selectedAudioButton.setTitle(audioName, for: .normal)
+        
+        beatMetronomePicker.setValue(UIColor.white, forKey: "textColor")
+        
+        valueMetronomePicker.setValue(UIColor.white, forKey: "textColor")
+        
+        bannerView.rootViewController = self
+        bannerView.isHidden = true
+        bannerView.adUnitID = "ca-app-pub-5666834342456165/3414077384" //старый
+        //bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //тестовый
+        //GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["D7599159-EEAA-42EC-B531-486E597A9145"]
+    }
+    
+    func setupToHideKeyboardOnTapOnView() {
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                 action: #selector(MetronomeVC.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
     //MARK: - @IBActions
     @IBAction func pressedPlayButton(_ sender: UIButton) {
-        
         if self.playButton.currentImage == UIImage(named: "play") {
             self.playButton.setImage(UIImage(named: "stop"), for: .normal)
             self.metronome.playMetronome(bpm: self.tempo, countBeat: self.countBeat, timeSignature: self.timeSignature)
@@ -121,7 +139,6 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
             self.playButton.setImage(UIImage(named: "play"), for: .normal)
             self.metronome.stopMetranome()
         }
-        
     }
     
     @IBAction func tapButton(_ sender: UIButton) {
@@ -169,7 +186,7 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
         self.present(popAudioVC, animated: true, completion: nil)
     }
     
-    //MARK: - AlertController
+    //MARK: - AlertControllers
     @IBAction func addTempoInTableView(_ sender: UIButton) {
         
         let alert = UIAlertController(title: "Add tempo to the list?", message: nil, preferredStyle: .alert)
@@ -217,13 +234,11 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
             alert.view.superview?.isUserInteractionEnabled = true
             alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
         }
-        
     }
     
     //MARK: - Functions
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! SettingsViewController
+        let destinationVC = segue.destination as! SettingsVC
         destinationVC.delegate = self
     }
     
@@ -231,8 +246,7 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
         bannerView.removeFromSuperview()
     }
     
-    @objc func alertControllerBackgroundTapped()
-    {
+    @objc func alertControllerBackgroundTapped() {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -242,8 +256,7 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
         }
     }
     
-    func reindex()
-    {
+    func reindex() {
         for (index, item) in tempoLisrArray.enumerated() {
             item.index = Int32(index)
         }
@@ -261,7 +274,7 @@ class MainViewController: UIViewController, SettingsViewControllerDelegate {
 }
 
 // MARK: - CUSTOM UIPickerViews, UIPickerViewDataSource and UIPickerViewDelegate
-extension MainViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+extension MetronomeVC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     //определяем сколько столбцов мы хотим в нашем сборщике
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -313,7 +326,7 @@ extension MainViewController: UIPickerViewDataSource, UIPickerViewDelegate {
             selectedRowBeat = Int16(row)
             ifPlayMertonome()
         }
-    
+        
         if pickerView == valueMetronomePicker {
             timeSignature = metronomeManager.valueTimeSignatureArray[row]
             
@@ -321,11 +334,10 @@ extension MainViewController: UIPickerViewDataSource, UIPickerViewDelegate {
             ifPlayMertonome()
         }
     }
-    
 }
 
 //MARK: - UITableViewDelegate and UITableViewDataSource
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+extension MetronomeVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tempoLisrArray.count
@@ -377,7 +389,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             editAlertDelete.view.tintColor = UIColor(named: "TextColor")
             
             editAlertDelete.addAction(UIAlertAction(title: "Yes!", style: .default, handler: { alertAction in
-                
                 CoreDataManager.shared.context.delete(self.tempoLisrArray[indexPath.row])
                 do {
                     try CoreDataManager.shared.context.save()
@@ -387,7 +398,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 } catch {
                     print(error.localizedDescription)
                 }
-                
             }))
             
             editAlertDelete.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -396,7 +406,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 editAlertDelete.view.superview?.isUserInteractionEnabled = true
                 editAlertDelete.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
             }
-        
+            
             completionHandler(true)
         }
         
@@ -444,7 +454,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                     self.tempoLisrArray[indexPath.row].tempo = value ?? 30
                     self.tempoLisrArray[indexPath.row].setValue(value, forKey: "tempo")
                 }
-
+                
                 CoreDataManager.shared.saveTempoItems()
                 
                 self.tableView.reloadRows(at: [indexPath], with: .fade)
@@ -476,7 +486,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
         let mover = tempoLisrArray.remove(at: sourceIndexPath.row)
         tempoLisrArray.insert(mover, at: destinationIndexPath.row)
         self.reindex()
@@ -485,11 +494,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
-    
 }
 
 // MARK: - AudioListDelegate
-extension MainViewController: UIPopoverPresentationControllerDelegate, AudioListDelegate {
+extension MetronomeVC: UIPopoverPresentationControllerDelegate, AudioListDelegate {
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
@@ -504,16 +512,15 @@ extension MainViewController: UIPopoverPresentationControllerDelegate, AudioList
         audioName = newAudioName
         
         metronome = Metronome(mainClick: audio.audioMainClick, accentClick: audio.audioAccentClick)
-
-            if playButton.currentImage == UIImage(named: "stop") {
-                metronome.playMetronome(bpm: tempo, countBeat: countBeat, timeSignature: timeSignature)
-            }
+        
+        if playButton.currentImage == UIImage(named: "stop") {
+            metronome.playMetronome(bpm: tempo, countBeat: countBeat, timeSignature: timeSignature)
+        }
     }
-    
 }
 
 // MARK: - UITextFieldDelegate
-extension MainViewController: UITextFieldDelegate {
+extension MetronomeVC: UITextFieldDelegate {
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         
@@ -529,7 +536,7 @@ extension MainViewController: UITextFieldDelegate {
                 tempoField.text = String("360")
                 tempo = 360
             }
-
+            
             if tempo < 30 {
                 textField.text = String("30")
                 tempo = 30
@@ -563,24 +570,14 @@ extension MainViewController: UITextFieldDelegate {
         return (newLength <= numberLimit) && (string == numberFiltered)
     }
     
-    func setupToHideKeyboardOnTapOnView()
-    {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(MainViewController.dismissKeyboard))
-        
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard()
-    {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
 }
 
 //MARK: - GADBannerViewDelegate
-extension MainViewController: GADBannerViewDelegate {
+extension MetronomeVC: GADBannerViewDelegate {
+
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
         bannerView.isHidden = false
         
@@ -588,8 +585,6 @@ extension MainViewController: GADBannerViewDelegate {
         UIView.animate(withDuration: 1, animations: {
             bannerView.alpha = 1
         })
-        
-        print("Received ads")
     }
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
