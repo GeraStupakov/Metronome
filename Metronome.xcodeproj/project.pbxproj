@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B055026BD8FBAA5526F56739 /* Pods_Metronome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4296D5F36B6994FFF898AA6 /* Pods_Metronome.framework */; };
 		C200576C278DABE900C47DC9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C200576B278DABE900C47DC9 /* StoreKit.framework */; };
 		C200EFAF2631E27E00EEBF05 /* MetronomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200EFAE2631E27E00EEBF05 /* MetronomeManager.swift */; };
 		C200EFBB2631E76B00EEBF05 /* Logic_accent.wav in Resources */ = {isa = PBXBuildFile; fileRef = C200EFB92631E76B00EEBF05 /* Logic_accent.wav */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		0ED400914613617355BFBC0D /* Pods-Metronome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Metronome.debug.xcconfig"; path = "Target Support Files/Pods-Metronome/Pods-Metronome.debug.xcconfig"; sourceTree = "<group>"; };
 		55B4A3E3D4F9362A455AE43B /* Pods-Metronome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Metronome.release.xcconfig"; path = "Target Support Files/Pods-Metronome/Pods-Metronome.release.xcconfig"; sourceTree = "<group>"; };
+		B4296D5F36B6994FFF898AA6 /* Pods_Metronome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Metronome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C200576B278DABE900C47DC9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C200EFAE2631E27E00EEBF05 /* MetronomeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeManager.swift; sourceTree = "<group>"; };
 		C200EFB92631E76B00EEBF05 /* Logic_accent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Logic_accent.wav; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			files = (
 				C200576C278DABE900C47DC9 /* StoreKit.framework in Frameworks */,
 				C29AF7152655207200E18C49 /* AudioToolbox.framework in Frameworks */,
+				B055026BD8FBAA5526F56739 /* Pods_Metronome.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +248,7 @@
 			children = (
 				C200576B278DABE900C47DC9 /* StoreKit.framework */,
 				C29AF7142655207200E18C49 /* AudioToolbox.framework */,
+				B4296D5F36B6994FFF898AA6 /* Pods_Metronome.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
